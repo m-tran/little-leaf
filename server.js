@@ -3,7 +3,7 @@ const app = express();
 const session = require("express-session");
 const passport = require("passport");
 const db = require("./models");
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3005;
 require("dotenv").config();
 
 app.use(express.json());
