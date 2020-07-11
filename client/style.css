@@ -1,0 +1,32 @@
+html, body{
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+    background-image: url("https://cdn.imgbin.com/1/1/23/imgbin-leaf-background-decoration-material-9ibEQ3WCQWQbRDgFpT1d06Y7a.jpg");
+    height: 100px;
+  background-position: center; 
+  background-repeat: no-repeat;
+  background-size: cover; 
+
+
+  }
+  .content {
+    padding: 20px;
+    min-height: 100%;
+    margin: 0 auto -50px;
+  }
+
+
+  main {
+    flex: 1 0 auto;
+    
+  }
+
+  .footer,.push{
+      height: 100px;
+  }

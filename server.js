@@ -6,16 +6,18 @@ const db = require("./models");
 const PORT = process.env.PORT || 3005;
 require("dotenv").config();
 
+const axios = require("axios");
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("./client"));
 
 app.use(
-  session({
-    secret: process.env.SECRET,
-    resave: true,
-    saveUninitialized: true,
-  })
+    session({
+        secret: process.env.SECRET,
+        resave: true,
+        saveUninitialized: true,
+    })
 );
 
 app.use(passport.initialize());
@@ -30,3 +32,4 @@ app.use(clientRoutes);
 db.sequelize.sync().then(() => {
   app.listen(PORT, () => console.log(`listening at http://localhost:${PORT}`));
 });
+
