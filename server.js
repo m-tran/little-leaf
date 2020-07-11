@@ -11,11 +11,11 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static("./client"));
 
 app.use(
-  session({
-    secret: process.env.SECRET,
-    resave: true,
-    saveUninitialized: true,
-  })
+    session({
+        secret: process.env.SECRET,
+        resave: true,
+        saveUninitialized: true,
+    })
 );
 
 app.use(passport.initialize());
@@ -28,5 +28,5 @@ const clientRoutes = require("./routes/client-routes.js");
 app.use(clientRoutes);
 
 db.sequelize.sync().then(() => {
-  app.listen(PORT, () => console.log(`listening at http://localhost:${PORT}`));
+    app.listen(PORT, () => console.log(`listening at http://localhost:${PORT}`));
 });
