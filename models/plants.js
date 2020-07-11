@@ -1,14 +1,15 @@
 module.exports = (sequelize, DataTypes) => {
-    const Plant = sequelize.define("Plant", {
-        name:{
+    const Plants = sequelize.define("Plant", {
+        water:{
             type: DataTypes.INTEGER,
             allowNull: false,
         },
-        size: {
-            type: DataTypes.INTEGER,
+        reminders: {
+            type: DataTypes.STRING,
             allowNull: false,
-        }
+        },
     });
-    
-    return Plant;
-    }
+
+    return Plants;
+}
+
