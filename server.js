@@ -6,6 +6,8 @@ const db = require("./models");
 const PORT = process.env.PORT || 3005;
 require("dotenv").config();
 
+const axios = require("axios");
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("./client"));
@@ -30,3 +32,11 @@ app.use(clientRoutes);
 db.sequelize.sync().then(() => {
   app.listen(PORT, () => console.log(`listening at http://localhost:${PORT}`));
 });
+
+axios.get(`https://trefle.io/api/plants/123?token=${process.env.KEY}`)
+  .then((res) => {
+    console.log(res);
+  })
+  .catch((err) => {
+    console.log(err);
+  });
