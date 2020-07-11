@@ -13,11 +13,11 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static("./client"));
 
 app.use(
-  session({
-    secret: process.env.SECRET,
-    resave: true,
-    saveUninitialized: true,
-  })
+    session({
+        secret: process.env.SECRET,
+        resave: true,
+        saveUninitialized: true,
+    })
 );
 
 app.use(passport.initialize());
@@ -33,10 +33,3 @@ db.sequelize.sync().then(() => {
   app.listen(PORT, () => console.log(`listening at http://localhost:${PORT}`));
 });
 
-axios.get(`https://trefle.io/api/plants/123?token=${process.env.KEY}`)
-  .then((res) => {
-    console.log(res);
-  })
-  .catch((err) => {
-    console.log(err);
-  });

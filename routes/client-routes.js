@@ -45,7 +45,7 @@ router.get("/search", (req, res) => {
       console.log(res);
     })
     .catch((err) => {
-        console.log(err);
+      console.log(err);
     });
   });
 
