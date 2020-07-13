@@ -5,7 +5,7 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false,
         },
         sunlight: {
-            type: DataTypes.Boolean,
+            type: DataTypes.BOOLEAN,
             allowNull: false,
         }
     });
