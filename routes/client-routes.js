@@ -26,26 +26,30 @@ router.get("/members", isAuthenticated, (req, res) => {
 
 router.get("/search", (req, res) => {
 
-  let searchName = req.body;
+  let searchName = req.query.plant;
 
-  let allPlantsUrl = `https://trefle.io/api/plants?token=${process.env.KEY}`;
+  let updatedSearch = searchName.split(' ').join('_');
+
+  let allPlantsUrl = `https://v0.trefle.io/api/plants?q=${updatedSearch}&token=${process.env.KEY}`;
 
   axios
     .get(allPlantsUrl)
-    .then((res) => {
-      let arr = res.data;
-      let result = arr.filter(item => item["scientific_name"] == searchName);
+    .then((response) => {
 
-      let id = result[0].id;
-      let plantUrl = `https://trefle.io/api/plants/${id}?token=${process.env.KEY}`
+      let arr = response.data;
+
+      let id = arr[0].id;
+      let plantUrl = `https://trefle.io/api/plants/${id}?token=${process.env.KEY}`;
 
       return axios.get(plantUrl);
     })
-    .then((res) => {
-      console.log(res);
+    .then((response) => {
+      console.log(response.data);
+      res.send(response.data);
     })
     .catch((err) => {
       console.log(err);
+      res.send({ err });
     });
   });
 
