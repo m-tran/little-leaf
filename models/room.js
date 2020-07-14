@@ -9,6 +9,12 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false,
         }
     });
+
+    Room.associate = (models) => {
+        Room.belongsTo(models.User, {
+        foreignKey: { allowNull: false },
+        });
+    };
     
     return Room;
-    }
+};

@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-    const Plants = sequelize.define("Plant", {
+    const Plant = sequelize.define("Plant", {
         common_name:{
             type: DataTypes.STRING,
             allowNull: false,
@@ -13,7 +13,13 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false,
         },
     });
+    Plant.associate = (models) => {
+        Plant.belongsTo(models.Room, {
+          foreignKey: { allowNull: false },
+        });
+      };
+    
 
-    return Plants;
+    return Plant;
 }
 
