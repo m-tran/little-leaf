@@ -30,3 +30,9 @@ body {
   .footer,.push{
       height: 100px;
   }
+
+img{
+  height: 200px;
+  width: 200px;
+}
+
