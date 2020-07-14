@@ -40,7 +40,7 @@ module.exports = (sequelize, DataTypes) => {
         },
     });
     Plant.associate = (models) => {
-        Plant.belongsTo(models.Room, {
+        Plant.hasOne(models.Room, {
             foreignKey: { allowNull: false },
         });
     };
