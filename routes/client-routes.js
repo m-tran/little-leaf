@@ -6,6 +6,19 @@ const axios = require("axios");
 
 require("dotenv").config();
 
+router.get("/", (req, res) =>
+  !req.user
+    ? res.sendFile(path.join(__dirname, "../client/landing.html"))
+    : res.sendFile(path.join(__dirname, "../client/dashboard.html"))
+);
+
+router.get("/dashboard", (req, res) =>
+  !req.user
+    ? res.sendFile(path.join(__dirname, "../client/landing.html"))
+    : res.sendFile(path.join(__dirname, "../client/dashboard.html"))
+);
+
+
 router.get("/", (req, res) => {
   if (req.user) {
     res.redirect("/members");
