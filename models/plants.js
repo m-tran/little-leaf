@@ -1,10 +1,10 @@
 module.exports = (sequelize, DataTypes) => {
     const Plant = sequelize.define("Plant", {
-        room_id: {
+        room_id:{
             type: DataTypes.INTEGER,
             allowNull: false,
         },
-        common_name: {
+        commonName:{
             type: DataTypes.STRING,
             allowNull: false,
         },
