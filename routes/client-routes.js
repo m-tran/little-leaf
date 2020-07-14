@@ -6,7 +6,6 @@ const axios = require("axios");
 
 require("dotenv").config();
 
-
 router.get("/", (req, res) =>
   !req.user
     ? res.sendFile(path.join(__dirname, "../client/landing.html"))
