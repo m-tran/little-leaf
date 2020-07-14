@@ -1,12 +1,13 @@
 const express = require("express");
 const router = express.Router();
 const {
-    getProfile,
-    createProfile,
-} = require("../controllers/profile-controller");
+    getPlant,
+    createPlant,
+} = require("../routes/controllers/plant-controllers");
 
-router.post("/profile/new", createProfile);
+router.post("/plant/new", createPlant);
 
-router.get("/profile", getProfile);
+router.get("/plant", getPlant);
+
 
 module.exports = router;
