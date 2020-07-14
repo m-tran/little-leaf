@@ -26,14 +26,17 @@ module.exports = (sequelize, DataTypes) => {
         },
         prune_frequency: {
             type: DataTypes.INTEGER,
+            defaultValue: 56,
         },
         rotate_frequency: {
             type: DataTypes.INTEGER,
             allowNull: false,
+            defaultValue: 56,
         },
         repot_frequency: {
             type: DataTypes.INTEGER,
             allowNull: false,
+            defaultValue: 365,
         },
     });
     Plant.associate = (models) => {
