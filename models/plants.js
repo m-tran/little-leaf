@@ -1,10 +1,10 @@
 module.exports = (sequelize, DataTypes) => {
     const Plant = sequelize.define("Plant", {
         room_id:{
-            type: DataTypes.INT,
+            type: DataTypes.INTEGER,
             allowNull: false,
         },
-        common_name:{
+        commonName:{
             type: DataTypes.STRING,
             allowNull: false,
         },
@@ -21,24 +21,24 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false,
         },
     prune: {
-        type: DataTypes.Boolean,
+        type: DataTypes.BOOLEAN,
         allowNull: false,
     },
-prune_frequency: {
+    prune_frequency: {
     type: DataTypes.INTEGER,
-},
-rotate_frequency: {
+    },
+    rotate_frequency: {
     type: DataTypes.INTEGER,
     allowNull: false,
-},
-repot_frequency: {
+    },
+    repot_frequency: {
     type: DataTypes.INTEGER,
     allowNull: false,
 },
     });
     Plant.associate = (models) => {
         Plant.belongsTo(models.Room, {
-          foreignKey: { allowNull: false },
+        foreignKey: { allowNull: false },
         });
       };
     
