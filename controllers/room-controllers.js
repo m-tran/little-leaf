@@ -23,12 +23,23 @@ module.exports = {
     }
   },
 
-  getRoom: async (req, res) => {
+  getAllRooms: async (req, res) => {
     db.Room.findMany({
       where: {
         id: req.user.id,
       },
       include: [db.User],
-    }).then((userRooms) => res.send(userRooms));
+    }).then((Rooms) => res.send(Rooms));
   },
+
+  getRoom: async (req, res) => {
+    db.Room.findOne({
+      where: {
+        id: req.params.id,
+      },
+      include: [db.User],
+    }).then((Room) => res.send(Room));
+  },
+
+
 };

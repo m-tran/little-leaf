@@ -29,7 +29,7 @@ module.exports = {
   getPlant: async (req, res) => {
     db.Plant.findOne({
       where: {
-        id: req.bodyid,
+        id: req.body.id,
       },
       include: [db.Plant],
     }).then((Plant) => res.send(Plant));
@@ -44,5 +44,13 @@ module.exports = {
     }).then((Plants) => res.send(Plants));
   },
 
-
+  deletePlant: async (req,res) => {    
+    db.Plants.destory({
+      where: { id: req.params.id },
+    })
+    .then(deletedPlant => {
+      console.log(`Has the plant been deleted? 1 means yes, 0 means no: ${deletedPlant}`);
+    });
+  }
+  
 };
