@@ -7,11 +7,16 @@ const {
     deletePlant,
   } = require("../controllers/plant-controller");
 
-router.get("/plant/all", getAllPlants);
-
-// Get all plants
+  // Get all plants
 // Route: http://localhost:3000/logs/user
 // Type: GET
+
+router.get("/plant/all", getAllPlants);
+
+// Get one plant
+// Route: http://localhost:3000/logs/user
+// Type: GET
+
 
 router.get("/plant/find/:id", getPlant);
 

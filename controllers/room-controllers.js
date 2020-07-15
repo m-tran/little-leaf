@@ -41,5 +41,18 @@ module.exports = {
     }).then((Room) => res.send(Room));
   },
 
+  deleteRoom: async (req,res) => {    
+    db.Room.destory({
+      where: { id: req.params.id },
+    }),
+    Room.hasMany(models.Plants, {
+      onDelete: "cascade",
+    })
+    .then(deletedPlant => {
+      console.log(`Has the plant been deleted? 1 means yes, 0 means no: ${deletedPlant}`);
+    });
+  }
+
 
 };
+
