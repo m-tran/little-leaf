@@ -28,10 +28,10 @@ module.exports = {
       try {
         const user = await db.User.findOne({
           where: { id: req.user.id },
-          include: [db.Profile, db.Log],
+          include: [db.User,],
         });
 
-        res.send({ email: user.email, profile: user.Profile, log: user.Logs });
+        res.send({ email: user.email, firstName: user.firstName, lastName: user.lastName});
       } catch (err) {
         res.send({ err_msg: err });
       }
