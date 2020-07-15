@@ -27,6 +27,15 @@ module.exports = {
   },
 
   getPlant: async (req, res) => {
+    db.Plant.findOne({
+      where: {
+        id: req.bodyid,
+      },
+      include: [db.Plant],
+    }).then((Plant) => res.send(Plant));
+  },
+
+  getAllPlant: async (req, res) => {
     db.Plant.findMany({
       where: {
         id: req.room.id,
@@ -34,4 +43,6 @@ module.exports = {
       include: [db.Room],
     }).then((Plants) => res.send(Plants));
   },
+
+
 };
