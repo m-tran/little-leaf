@@ -29,7 +29,7 @@ module.exports = {
   getPlant: async (req, res) => {
     db.Plant.findOne({
       where: {
-        id: req.bodyid,
+        id: req.body.id,
       },
       include: [db.Plant],
     }).then((Plant) => res.send(Plant));
