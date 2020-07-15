@@ -52,4 +52,5 @@ module.exports = {
       console.log(`Has the plant been deleted? 1 means yes, 0 means no: ${deletedPlant}`);
     });
   }
+  
 };
