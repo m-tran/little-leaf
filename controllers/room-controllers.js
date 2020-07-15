@@ -35,7 +35,7 @@ module.exports = {
   getRoom: async (req, res) => {
     db.Room.findOne({
       where: {
-        id: req.body.id,
+        id: req.params.id,
       },
       include: [db.User],
     }).then((Room) => res.send(Room));
