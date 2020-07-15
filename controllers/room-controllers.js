@@ -8,7 +8,6 @@ module.exports = {
         name: req.body.name,
         size: req.body.size,
         numPlants: req.body.numPlants,
-        enoughPlants: req.body.enoughPlants,
         sunlight: req.body.sunlight,
           // foreign ID to link user
           userId: req.user.id,
@@ -48,8 +47,8 @@ module.exports = {
     Room.hasMany(models.Plants, {
       onDelete: "cascade",
     })
-    .then(deletedPlant => {
-      console.log(`Has the plant been deleted? 1 means yes, 0 means no: ${deletedPlant}`);
+    .then(deletedRoom => {
+      console.log(`Has the room been deleted? 1 means yes, 0 means no: ${deletedRoom}`);
     });
   }
 
