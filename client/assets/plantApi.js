@@ -1,18 +1,15 @@
 $(document).ready(function () {
 
 
-
-
-
     $.ajax({
       type: "POST",
       url: "/plant/new",
     }).then((plant) => {
     console.log(plant);
-    waterFrequency = plant.water_frequency;
-    pruneFrequency = plant.prune_frequency;
-    rotateFrequency = plant.rotate_frequency;
-    createdDate = plant.createdAt;
+    const waterFrequency = plant.water_frequency;
+    const pruneFrequency = plant.prune_frequency;
+    const rotateFrequency = plant.rotate_frequency;
+    const createdDate = plant.createdAt;
     });
 
     

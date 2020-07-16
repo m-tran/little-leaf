@@ -21,16 +21,14 @@ module.exports = {
         const pruneFrequency = 2;
         const rotateFrequency = 2;
       console.log("starting timer");
-        // var dayInMilliseconds = 1000 * 60 * 60 * 24;
-        var dayInMilliseconds = 1000 * 30
-       
+        var dayInMilliseconds = 1000 * 60 * 60 * 24;
 
-         let  = setInterval(() => waterPlant(req.user.email), dayInMilliseconds * waterFrequency); //should be req.user.email
+         let interval  = setInterval(() => waterPlant(req.user.email), dayInMilliseconds * waterFrequency); //should be req.user.email
     
-       
-         let interval2 = setInterval(() => prunePlant("jhanlon289@gmail.com"), dayInMilliseconds * pruneFrequency );
+  
+        let interval2 = setInterval(() => prunePlant(req.user.emai), dayInMilliseconds * pruneFrequency );
     
-        // setInterval(repotPlant("ocskier@gmail.com"), dayInMilliseconds * rotateFrequency );
+        let internval3 =  setInterval(() => repotPlant(req.user.emai), dayInMilliseconds * rotateFrequency );
     
 
         res.send("true"); //should be new plant
@@ -40,7 +38,8 @@ module.exports = {
     // } else {
     //   res.redirect("/");
     // }
-  },
+  }
+},
 
   getPlant: async (req, res) => {
     db.Plant.findOne({
