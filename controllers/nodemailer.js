@@ -55,8 +55,8 @@ const waterPlant = (email) => {
         text: 'Cut off the dead leafs',
         html: 'Embedded image: <img src="cid:unique2@kreata.ee"/>',
         attachments: [{
-          filename: 'growth.png',
-          path: "./controllers/pics/growth.png",
+          filename: 'harvest.png',
+          path: "./controllers/pics/harvest.png",
             cid: 'unique2@kreata.ee' //same cid value as in the html img src
         }]
       
