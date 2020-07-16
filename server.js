@@ -10,7 +10,7 @@ const axios = require("axios");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static("./client"));
+// app.use(express.static("./client"));
 
 app.use(
     session({
@@ -23,11 +23,15 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-const apiRoutes = require("./routes/api-routes.js");
-app.use(apiRoutes);
+// const apiRoutes = require("./routes/api-routes.js");
+// app.use(apiRoutes);
 
-const clientRoutes = require("./routes/client-routes.js");
-app.use(clientRoutes);
+// const clientRoutes = require("./routes/client-routes.js");
+// app.use(clientRoutes);
+
+const plantRoutes = require("./routes/plant-routes.js");
+app.use(plantRoutes);
+
 
 db.sequelize.sync().then(() => {
   app.listen(PORT, () => console.log(`listening at http://localhost:${PORT}`));

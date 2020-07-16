@@ -5,7 +5,7 @@ const {
     getPlant,
     getAllPlants,
     deletePlant,
-  } = require("../controllers/plant-controller");
+  } = require("../controllers/plant-controllers");
 
   // Get all plants
 // Route: http://localhost:3000/logs/user

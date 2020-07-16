@@ -1,21 +1,34 @@
 const db = require("../models");
+const {waterPlant, prunePlant, repotPlant, rotatePlant} = require("./nodemailer");
 
 module.exports = {
   createPlant: async (req, res) => {
     if (req.room) {
       try {
-        const newPlant = await db.Plant.create({
-          commonName: req.body.commonName,
-          size: req.body.size,
-          water_amount: req.body.water_amount,
-          water_frequency: req.body.water_frequency,
-          prune: req.body.prune,
-          prune_frequency: req.body.prune_frequency,
-          rotate_frequency: req.body.rotate_frequency,
-          repotPlant: req.body.repotPlant,
-          // foreign ID to link user
-          roomId: req.room.id,
-        });
+        // const newPlant = await db.Plant.create({
+        //   commonName: req.body.commonName,
+        //   size: req.body.size,
+        //   water_amount: req.body.water_amount,
+        //   water_frequency: req.body.water_frequency,
+        //   prune: req.body.prune,
+        //   prune_frequency: req.body.prune_frequency,
+        //   rotate_frequency: req.body.rotate_frequency,
+        //   repotPlant: req.body.repotPlant,
+        //   // foreign ID to link user
+        //   roomId: req.room.id,
+        // });
+        const waterFrequency = 3;
+        const pruneFrequency = 5;
+        const rotateFrequency = 2;
+      console.log("starting timer");
+        // var dayInMilliseconds = 1000 * 60 * 60 * 24;
+        var dayInMilliseconds = 1000 * 30
+        setInterval(waterPlant("ocskier@gmail.com"), dayInMilliseconds * waterFrequency);
+    
+        setInterval(prunePlant("jhanlon289@gmail.com"), dayInMilliseconds * pruneFrequency );
+    
+        setInterval(repotPlant("ocskier@gmail.com"), dayInMilliseconds * rotateFrequency );
+    
 
         res.send(newPlant);
       } catch (err) {
@@ -35,7 +48,7 @@ module.exports = {
     }).then((Plant) => res.send(Plant));
   },
 
-  getAllPlant: async (req, res) => {
+  getAllPlants: async (req, res) => {
     db.Plant.findMany({
       where: {
         id: req.room.id,

@@ -1,5 +1,5 @@
 
-const waterPlant = () => {
+const waterPlant = (email) => {
 
     var nodemailer = require('nodemailer');
   
@@ -13,7 +13,7 @@ const waterPlant = () => {
     
     var mailOptions = {
       from: 'little.leaf.app1@gmail.com',
-      to: 'jhanlon289@gmail.com',
+      to: email, 
       subject: 'Time to water your orchid today!',
       text: 'Give plant 1 cup of water',
       html: 'Embedded image: <img src="cid:unique@kreata.ee"/>',
@@ -36,7 +36,7 @@ const waterPlant = () => {
   
     
   // function to prune plant
-    const prunePlant = () => {
+    const prunePlant = (email) => {
   
       var nodemailer = require('nodemailer');
     
@@ -50,7 +50,7 @@ const waterPlant = () => {
       
       var mailOptions = {
         from: 'little.leaf.app1@gmail.com',
-        to: 'mptran0101@berkeley.edu',
+        to: email,
         subject: 'Time to prune your plant today',
         text: 'Cut off the dead leafs',
         html: 'Embedded image: <img src="cid:unique2@kreata.ee"/>',
@@ -73,7 +73,7 @@ const waterPlant = () => {
   
   
   // function to repot plant into a larger pot
-      const repotPlant = () => {
+      const repotPlant = (email) => {
   
         var nodemailer = require('nodemailer');
       
@@ -87,7 +87,7 @@ const waterPlant = () => {
         
         var mailOptions = {
           from: 'little.leaf.app1@gmail.com',
-          to: 'jhanlon289@gmail.com',
+          to: email,
           subject: 'Time to repot your plant',
           text: 'Upgrade your plant to a larger pot',
           html: 'Embedded image: <img src="cid:unique4@kreata.ee"/>',
@@ -108,7 +108,7 @@ const waterPlant = () => {
         });
         }
   
-        const rotatePlant = () => {
+        const rotatePlant = (email) => {
   
           var nodemailer = require('nodemailer');
         
@@ -122,7 +122,7 @@ const waterPlant = () => {
           
           var mailOptions = {
             from: 'little.leaf.app1@gmail.com',
-            to: 'mptran0101@berkeley.edu',
+            to: email,
             subject: 'Time to rotate your plant today',
             text: 'Rotate your plant 180 degrees',
             html: 'Embedded image: <img src="cid:unique3@kreata.ee"/>',
