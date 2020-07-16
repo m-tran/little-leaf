@@ -1,18 +1,19 @@
 const express = require("express");
 const router = express.Router();
 const {
-  getRoom,
-  getAllRooms,
-  createRoom,
-  deleteRoom,
-} = require("../controllers/profile-controller");
+    getRoom,
+    // getAllRooms,
+    createRoom,
+    // deleteRoom,
+} = require("../controllers/room-controllers");
 
-router.post("/profile/new", createRoom);
+router.post("/profile/room/new", createRoom);
 
 router.get("/room/:id", getRoom);
 
-router.get("/profile", getAllRooms);
 
-router.delete("/room/delete/:id", deleteRoom);
+// router.get("/profile/rooms", getAllRooms);
+
+// router.delete("/profile/room/delete/:id", deleteRoom);
 
 module.exports = router;

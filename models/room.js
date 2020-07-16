@@ -23,7 +23,7 @@ module.exports = (sequelize, DataTypes) => {
     });
 
     Room.associate = (models) => {
-        Room.hasOne(models.User, {
+        Room.belongsTo(models.User, {
         foreignKey: { allowNull: false },
         });
     };
