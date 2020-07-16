@@ -60,7 +60,7 @@ module.exports = {
   },
 
   deletePlant: async (req,res) => {    
-    db.Plants.destory({
+    db.Plants.destroy({
       where: { id: req.params.id },
     })
     .then(deletedPlant => {

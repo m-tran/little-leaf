@@ -10,6 +10,6 @@ router.post("/user/new", createUser);
 
 router.get("/user/find/:id", getUser);
 
-router.get("/user/delete/:id", deleteUser);
+router.delete("/user/delete/:id", deleteUser);
 
 module.exports = router;

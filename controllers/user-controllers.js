@@ -18,26 +18,28 @@ module.exports = {
             res.send(err);
         }
     },
-    onDelete: 'cascade',
+    
     getUser: async (req, res) => {
         db.User.findOne({
             where: {
-                id: req.body.id,
+                id: req.params.id,
             },
         }).then((userProfile) => res.send(userProfile))
             .catch((err) => { res.send(err) });
     },
 
-    deleteUser: async (req,res) => {    
-        db.User.destory({
-          where: { id: req.params.id },
+    deleteUser: async (req, res) => {
+        db.User.destroy({
+            where: { 
+                id: req.params.id 
+            },
         }),
         User.hasMany(models.Rooms, {
-          onDelete: "cascade",
+            onDelete: "cascade",
         })
         .then(deletedUser => {
-          console.log(`Has the user been deleted? 1 means yes, 0 means no: ${deletedUser}`);
+            console.log(`Has the user been deleted? 1 means yes, 0 means no: ${deletedUser}`);
         });
-      }
+    }
 
 };

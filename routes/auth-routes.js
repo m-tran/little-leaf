@@ -6,7 +6,7 @@ const {
   register,
   logout,
   getUser,
-} = require("../controllers/auth-controller");
+} = require("../controllers/auth-controllers");
 
 // Login route
 // Route: http://localhost:3000/auth/login
