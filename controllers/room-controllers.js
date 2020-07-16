@@ -29,14 +29,14 @@ module.exports = {
   //   }).then((Rooms) => res.send(Rooms));
   // },
 
-  // getRoom: async (req, res) => {
-  //   db.Room.findOne({
-  //     where: {
-  //       id: req.params.id,
-  //     },
-  //     include: [db.User],
-  //   }).then((Room) => res.send(Room));
-  // },
+  getRoom: async (req, res) => {
+    db.Room.findOne({
+      where: {
+        id: req.params.id,
+      },
+      include: [db.User],
+    }).then((Room) => res.send(Room));
+  },
 
   // deleteRoom: async (req,res) => {    
   //   db.Room.destory({

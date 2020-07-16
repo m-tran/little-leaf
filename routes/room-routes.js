@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const {
-    // getRoom,
+    getRoom,
     // getAllRooms,
     createRoom,
     // deleteRoom,
@@ -9,7 +9,7 @@ const {
 
 router.post("/profile/room/new", createRoom);
 
-// router.get("/profile/room/:id", getRoom);
+router.get("/profile/room/:id", getRoom);
 
 // router.get("/profile/rooms", getAllRooms);
 
