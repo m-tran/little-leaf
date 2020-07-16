@@ -12,10 +12,6 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.INTEGER,
             allowNull: false,
         },
-        enoughPlants:{
-            type: DataTypes.BOOLEAN,
-            allowNull: false,
-        },
         sunlight: {
             type: DataTypes.BOOLEAN,
             allowNull: false,
@@ -23,7 +19,7 @@ module.exports = (sequelize, DataTypes) => {
     });
 
     Room.associate = (models) => {
-        Room.belongsTo(models.User, {
+        Room.hasOne(models.User, {
         foreignKey: { allowNull: false },
         });
     };

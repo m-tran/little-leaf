@@ -1,12 +1,32 @@
 const express = require("express");
 const router = express.Router();
 const {
-    getProfile,
-    createProfile,
-} = require("../controllers/profile-controller");
+    createPlant,
+    getPlant,
+    getAllPlants,
+    deletePlant,
+  } = require("../controllers/plant-controller");
 
-router.post("/profile/new", createProfile);
+  // Get all plants
+// Route: http://localhost:3000/logs/user
+// Type: GET
 
-router.get("/profile", getProfile);
+router.get("/plant/all", getAllPlants);
+
+// Get one plant
+// Route: http://localhost:3000/logs/user
+// Type: GET
+
+
+router.get("/plant/find/:id", getPlant);
+
+// Create a new plant
+// Route: http://localhost:3000/logs/new
+// Type: POST
+
+router.post("/plant/new", createPlant);
+
+
+router.delete("/plant/delete/:id", deletePlant);
 
 module.exports = router;
