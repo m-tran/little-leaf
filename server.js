@@ -27,8 +27,11 @@ app.use(apiRoutes);
 const clientRoutes = require("./routes/client-routes.js");
 app.use(clientRoutes);
 
-const profileRoutes = require("./routes/profile-routes.js");
+const profileRoutes = require("./routes/user-routes.js");
 app.use(profileRoutes);
+
+const roomRoutes = require("./routes/room-routes.js");
+app.use(roomRoutes);
 
 db.sequelize.sync().then(() => {
   app.listen(PORT, () => console.log(`listening at http://localhost:${PORT}`));
