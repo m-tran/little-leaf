@@ -6,7 +6,9 @@ const db = require("./models");
 const PORT = process.env.PORT || 3005;
 require("dotenv").config();
 
+
 const axios = require("axios");
+
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -42,6 +44,12 @@ app.use(roomRoutes);
 const plantRoutes = require("./routes/plant-routes.js");
 app.use(plantRoutes);
 
+
+const profileRoutes = require("./routes/user-routes.js");
+app.use(profileRoutes);
+
+const roomRoutes = require("./routes/room-routes.js");
+app.use(roomRoutes);
 
 db.sequelize.sync().then(() => {
   app.listen(PORT, () => console.log(`listening at http://localhost:${PORT}`));
