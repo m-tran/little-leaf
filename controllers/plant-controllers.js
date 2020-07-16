@@ -1,29 +1,45 @@
 const db = require("../models");
+const {waterPlant, prunePlant, repotPlant, rotatePlant} = require("./nodemailer");
 
 module.exports = {
   createPlant: async (req, res) => {
     if (req.body) {
       try {
-        const newPlant = await db.Plant.create({
-          commonName: req.body.commonName,
-          size: req.body.size,
-          water_amount: req.body.water_amount,
-          water_frequency: req.body.water_frequency,
-          prune: req.body.prune,
-          prune_frequency: req.body.prune_frequency,
-          rotate_frequency: req.body.rotate_frequency,
-          repotPlant: req.body.repotPlant,
-          // foreign ID to link user
-          roomId: req.room.id,
-        });
+        // const newPlant = await db.Plant.create({
+        //   commonName: req.body.commonName,
+        //   size: req.body.size,
+        //   water_amount: req.body.water_amount,
+        //   water_frequency: req.body.water_frequency,
+        //   prune: req.body.prune,
+        //   prune_frequency: req.body.prune_frequency,
+        //   rotate_frequency: req.body.rotate_frequency,
+        //   repotPlant: req.body.repotPlant,
+        //   // foreign ID to link user
+        //   roomId: req.room.id,
+        // });
+        const waterFrequency = 3;
+        const pruneFrequency = 2;
+        const rotateFrequency = 2;
+      console.log("starting timer");
+        // var dayInMilliseconds = 1000 * 60 * 60 * 24;
+        var dayInMilliseconds = 1000 * 30
+       
 
-        res.send(newPlant);
+         let  = setInterval(() => waterPlant(req.user.email), dayInMilliseconds * waterFrequency); //should be req.user.email
+    
+       
+         let interval2 = setInterval(() => prunePlant("jhanlon289@gmail.com"), dayInMilliseconds * pruneFrequency );
+    
+        // setInterval(repotPlant("ocskier@gmail.com"), dayInMilliseconds * rotateFrequency );
+    
+
+        res.send("true"); //should be new plant
       } catch (err) {
         res.send(err);
       }
-    } else {
-      res.redirect("/");
-    }
+    // } else {
+    //   res.redirect("/");
+    // }
   },
 
   getPlant: async (req, res) => {
@@ -35,7 +51,7 @@ module.exports = {
     }).then((Plant) => res.send(Plant));
   },
 
-  getAllPlant: async (req, res) => {
+  getAllPlants: async (req, res) => {
     db.Plant.findMany({
       where: {
         id: req.room.id,

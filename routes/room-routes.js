@@ -9,7 +9,8 @@ const {
 
 router.post("/profile/room/new", createRoom);
 
-router.get("/profile/room/:id", getRoom);
+router.get("/room/:id", getRoom);
+
 
 // router.get("/profile/rooms", getAllRooms);
 
