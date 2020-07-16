@@ -19,7 +19,7 @@ const waterPlant = (email) => {
       html: 'Embedded image: <img src="cid:unique@kreata.ee"/>',
       attachments: [{
           filename: 'growth.png',
-          path: "./assets/growth.png",
+          path: "./controllers/pics/growth.png",
           cid: 'unique@kreata.ee' //same cid value as in the html img src
       }]
     
@@ -55,8 +55,8 @@ const waterPlant = (email) => {
         text: 'Cut off the dead leafs',
         html: 'Embedded image: <img src="cid:unique2@kreata.ee"/>',
         attachments: [{
-            filename: 'harvest.png',
-            path: "./assets/harvest.png",
+          filename: 'growth.png',
+          path: "./controllers/pics/growth.png",
             cid: 'unique2@kreata.ee' //same cid value as in the html img src
         }]
       

@@ -8,9 +8,9 @@ require("dotenv").config();
 
 const axios = require("axios");
 
-app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-// app.use(express.static("./client"));
+app.use(express.json());
+app.use(express.static("./client"));
 
 app.use(
     session({
@@ -28,6 +28,16 @@ app.use(passport.session());
 
 // const clientRoutes = require("./routes/client-routes.js");
 // app.use(clientRoutes);
+
+const authRoutes = require("./routes/auth-routes.js");
+app.use(authRoutes);
+
+const userRoutes = require("./routes/profile-routes.js");
+app.use(userRoutes);
+
+const roomRoutes = require("./routes/room-routes.js");
+app.use(roomRoutes);
+
 
 const plantRoutes = require("./routes/plant-routes.js");
 app.use(plantRoutes);

@@ -3,7 +3,7 @@ const {waterPlant, prunePlant, repotPlant, rotatePlant} = require("./nodemailer"
 
 module.exports = {
   createPlant: async (req, res) => {
-    if (req.room) {
+    // if (req.room) {
       try {
         // const newPlant = await db.Plant.create({
         //   commonName: req.body.commonName,
@@ -18,25 +18,28 @@ module.exports = {
         //   roomId: req.room.id,
         // });
         const waterFrequency = 3;
-        const pruneFrequency = 5;
+        const pruneFrequency = 2;
         const rotateFrequency = 2;
       console.log("starting timer");
         // var dayInMilliseconds = 1000 * 60 * 60 * 24;
         var dayInMilliseconds = 1000 * 30
-        setInterval(waterPlant("ocskier@gmail.com"), dayInMilliseconds * waterFrequency);
+       
+
+         let  = setInterval(() => waterPlant(req.user.email), dayInMilliseconds * waterFrequency); //should be req.user.email
     
-        setInterval(prunePlant("jhanlon289@gmail.com"), dayInMilliseconds * pruneFrequency );
+       
+         let interval2 = setInterval(() => prunePlant("jhanlon289@gmail.com"), dayInMilliseconds * pruneFrequency );
     
-        setInterval(repotPlant("ocskier@gmail.com"), dayInMilliseconds * rotateFrequency );
+        // setInterval(repotPlant("ocskier@gmail.com"), dayInMilliseconds * rotateFrequency );
     
 
-        res.send(newPlant);
+        res.send("true"); //should be new plant
       } catch (err) {
         res.send(err);
       }
-    } else {
-      res.redirect("/");
-    }
+    // } else {
+    //   res.redirect("/");
+    // }
   },
 
   getPlant: async (req, res) => {
