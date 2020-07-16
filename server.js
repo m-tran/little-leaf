@@ -6,8 +6,6 @@ const db = require("./models");
 const PORT = process.env.PORT || 3005;
 require("dotenv").config();
 
-const axios = require("axios");
-
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("./client"));
@@ -28,6 +26,9 @@ app.use(apiRoutes);
 
 const clientRoutes = require("./routes/client-routes.js");
 app.use(clientRoutes);
+
+const profileRoutes = require("./routes/profile-routes.js");
+app.use(profileRoutes);
 
 db.sequelize.sync().then(() => {
   app.listen(PORT, () => console.log(`listening at http://localhost:${PORT}`));

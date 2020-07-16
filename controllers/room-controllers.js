@@ -9,8 +9,8 @@ module.exports = {
         size: req.body.size,
         numPlants: req.body.numPlants,
         sunlight: req.body.sunlight,
-          // foreign ID to link user
-          userId: req.user.id,
+        // foreign ID to link user
+        userId: req.user.id,
         });
 
         res.send(newRoom);

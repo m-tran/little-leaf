@@ -8,13 +8,13 @@ require("dotenv").config();
 
 router.get("/", (req, res) =>
   !req.user
-    ? res.sendFile(path.join(__dirname, "../client/landing.html"))
+    ? res.sendFile(path.join(__dirname, "../client/members.html"))
     : res.sendFile(path.join(__dirname, "../client/dashboard.html"))
 );
 
 router.get("/dashboard", (req, res) =>
   !req.user
-    ? res.sendFile(path.join(__dirname, "../client/landing.html"))
+    ? res.sendFile(path.join(__dirname, "../client/members.html"))
     : res.sendFile(path.join(__dirname, "../client/dashboard.html"))
 );
 

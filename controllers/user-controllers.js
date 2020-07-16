@@ -1,33 +1,52 @@
 const db = require("../models");
 
 module.exports = {
-    createProfile: async (req, res) => {
-        if (req.user) {
-            try {
-                const newUser = await db.User.create({
-                    first_name: req.body.first_name,
-                    last_name: req.body.last_name,
-                    email: req.body.address,
-                    password: req.body.passowrd,
-                    // foreign ID to link user
-                    UserId: req.user.id,
-                });
+    // createProfile: async (req, res) => {
+    //     console.log("test");
+    //     if (req.body) {
+    //         console.log("activate fxn");
+    //         try {
+    //             const newUser = await db.Users.create({
+    //                 email: req.body.email,
+    //                 password: req.body.password,
+    //                 first_name: req.body.first_name,
+    //                 last_name: req.body.last_name,
+    //                 // foreign ID to link user
+    //                 UserId: req.body.id,
+    //             });
 
-                res.send(newUser);
-            } catch (err) {
-                res.send(err);
-            }
-        } else {
-            res.redirect("/");
+    //             res.send(newUser);
+    //         } catch (err) {
+    //             console.log("err");
+    //             res.send(err);
+    //         }
+    //     } else {
+    //         console.log("here");
+    //         res.redirect("/");
+    //     }
+    // },
+    createProfile: async (req, res) => {
+        try {
+            const newProfile = await db.Users.create({
+                first_name: req.body.first_name,
+                last_name: req.body.last_name,
+                email: req.body.email,
+                password: req.body.password
+            });
+            res.send(newProfile);
+        } catch (err) {
+            console.log("err");
+            res.send(err);
         }
     },
 
     getProfile: async (req, res) => {
-        db.User.findOne({
+        db.Users.findOne({
             where: {
-                id: req.user.id,
+                id: req.body.id,
             },
-            include: [db.User],
-        }).then((userProfile) => res.send(userProfile));
+            include: [db.Users],
+        }).then((userProfile) => res.send(userProfile))
+            .catch((err) => { res.send(err) });
     },
 };
