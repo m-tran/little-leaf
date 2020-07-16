@@ -10,6 +10,6 @@ router.post("/profile/new", createProfile);
 
 router.get("/profile", getProfile);
 
-router.get("/profile", deleteProfile);
+// router.delete("/profile", deleteProfile);
 
 module.exports = router;

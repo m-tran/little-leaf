@@ -2,7 +2,7 @@ const db = require("../models");
 
 module.exports = {
   createPlant: async (req, res) => {
-    if (req.room) {
+    if (req.body) {
       try {
         const newPlant = await db.Plant.create({
           commonName: req.body.commonName,
