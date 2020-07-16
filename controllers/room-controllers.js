@@ -8,6 +8,7 @@ module.exports = {
         name: req.body.name,
         size: req.body.size,
         numPlants: req.body.numPlants,
+        enoughPlants: req.body.size/req.body.numPlants > 30.0 ? false : true,
         sunlight: req.body.sunlight,
         // foreign ID to link user
         UserId: req.body.id,
