@@ -12,6 +12,10 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.INTEGER,
             allowNull: false,
         },
+        enoughPlants:{
+            type: DataTypes.BOOLEAN,
+            allowNull: false,
+        },
         sunlight: {
             type: DataTypes.BOOLEAN,
             allowNull: false,
