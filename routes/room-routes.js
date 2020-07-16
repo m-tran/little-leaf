@@ -1,10 +1,10 @@
 const express = require("express");
 const router = express.Router();
 const {
-  getRoom,
-  getAllRooms,
-  createRoom,
-  deleteRoom,
+    getRoom,
+    getAllRooms,
+    createRoom,
+    deleteRoom,
 } = require("../controllers/profile-controller");
 
 router.post("/profile/new", createRoom);
