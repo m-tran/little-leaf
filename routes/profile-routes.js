@@ -4,7 +4,7 @@ const {
   getProfile,
   createProfile,
   deleteProfile,
-} = require("../controllers/profile-controller");
+} = require("../controllers/user-controllers");
 
 router.post("/profile/new", createProfile);
 
