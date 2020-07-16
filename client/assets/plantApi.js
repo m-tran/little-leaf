@@ -1,8 +1,9 @@
 $(document).ready(function () {
 
-
-
 const waterFrequency = "";
+const pruneFrequency = "";
+const rotateFrequency = "";
+const createdDate = "";
 
     $.ajax({
       type: "GET",
