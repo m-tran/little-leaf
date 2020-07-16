@@ -5,18 +5,18 @@ module.exports = {
   createPlant: async (req, res) => {
     if (req.body) {
       try {
-        // const newPlant = await db.Plant.create({
-        //   commonName: req.body.commonName,
-        //   size: req.body.size,
-        //   water_amount: req.body.water_amount,
-        //   water_frequency: req.body.water_frequency,
-        //   prune: req.body.prune,
-        //   prune_frequency: req.body.prune_frequency,
-        //   rotate_frequency: req.body.rotate_frequency,
-        //   repotPlant: req.body.repotPlant,
-        //   // foreign ID to link user
-        //   roomId: req.room.id,
-        // });
+        const newPlant = await db.Plant.create({
+          commonName: req.body.commonName,
+          size: req.body.size,
+          water_amount: req.body.water_amount,
+          water_frequency: req.body.water_frequency,
+          prune: req.body.prune,
+          prune_frequency: req.body.prune_frequency,
+          rotate_frequency: req.body.rotate_frequency,
+          repotPlant: req.body.repotPlant,
+          // foreign ID to link user
+          roomId: req.room.id,
+        });
         const waterFrequency = 3;
         const pruneFrequency = 2;
         const rotateFrequency = 2;

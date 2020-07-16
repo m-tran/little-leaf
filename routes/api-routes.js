@@ -18,15 +18,7 @@ router.post("/api/signup", (req, res) => {
     .catch((err) => res.status(401).json(err));
 });
 
-router.post("/plant/schedule", (req, res) => {
-  db.Plants.create({
-    water: req.body.text,
-    reminders: req.body.text,
-  })
-  .then((schedule) => {
-    res.send(schedule);
-  });
-});
+
 
 router.get("/logout", (req, res) => {
   req.logout();

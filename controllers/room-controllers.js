@@ -21,14 +21,14 @@ module.exports = {
     }
   },
 
-  // getAllRooms: async (req, res) => {
-  //   db.Room.findMany({
-  //     where: {
-  //       id: req.user.id,
-  //     },
-  //     include: [db.User],
-  //   }).then((Rooms) => res.send(Rooms));
-  // },
+  getAllRooms: async (req, res) => {
+    db.Room.findMany({
+      where: {
+        id: req.user.id,
+      },
+      include: [db.User],
+    }).then((Rooms) => res.send(Rooms));
+  },
 
   getRoom: async (req, res) => {
     db.Room.findOne({
@@ -39,17 +39,17 @@ module.exports = {
     }).then((Room) => res.send(Room));
   },
 
-  // deleteRoom: async (req,res) => {    
-  //   db.Room.destory({
-  //     where: { id: req.params.id },
-  //   }),
-  //   Room.hasMany(models.Plants, {
-  //     onDelete: "cascade",
-  //   })
-  //   .then(deletedRoom => {
-  //     console.log(`Has the room been deleted? 1 means yes, 0 means no: ${deletedRoom}`);
-  //   });
-  // }
+  deleteRoom: async (req,res) => {    
+    db.Room.destory({
+      where: { id: req.params.id },
+    }),
+    Room.hasMany(models.Plants, {
+      onDelete: "cascade",
+    })
+    .then(deletedRoom => {
+      console.log(`Has the room been deleted? 1 means yes, 0 means no: ${deletedRoom}`);
+    });
+  }
 
 
 };
