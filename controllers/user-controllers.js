@@ -1,7 +1,7 @@
 const db = require("../models");
 
 module.exports = {
-    createProfile: async (req, res) => {
+    createUser: async (req, res) => {
         if (req.user) {
             try {
                 const newUser = await db.User.create({
@@ -22,12 +22,18 @@ module.exports = {
         }
     },
 
-    getProfile: async (req, res) => {
+    getUser: async (req, res) => {
         db.User.findOne({
             where: {
                 id: req.user.id,
             },
             include: [db.User],
-        }).then((userProfile) => res.send(userProfile));
+        }).then((user) => res.send(user));
+    },
+
+   deleteUser: async (req, res) => {
+        User.hasOne(models.Profile, {
+            onDelete: "cascade",
+        });
     },
 };

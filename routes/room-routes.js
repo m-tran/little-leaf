@@ -5,13 +5,13 @@ const {
   getAllRooms,
   createRoom,
   deleteRoom,
-} = require("../controllers/profile-controller");
+} = require("../controllers/room-controllers");
 
-router.post("/profile/new", createRoom);
+router.post("/room/new", createRoom);
 
 router.get("/room/:id", getRoom);
 
-router.get("/profile", getAllRooms);
+router.get("/room/all", getAllRooms);
 
 router.delete("/room/delete/:id", deleteRoom);
 

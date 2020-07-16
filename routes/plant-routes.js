@@ -25,7 +25,7 @@ router.get("/plant/find/:id", getPlant);
 // Route: http://localhost:3000/logs/new
 // Type: POST
 
-router.route("/plant/new").post(createPlant);
+router.post("/plant/new", createPlant);
 
 
 router.delete("/plant/delete/:id", deletePlant);
