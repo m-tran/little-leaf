@@ -22,8 +22,8 @@ module.exports = {
         }
     },
 
-    getUser: async (req, res) => {
-        db.Profile.findOne({
+    getProfile: async (req, res) => {
+        db.User.findOne({
             where: {
                 id: req.user.id,
             },
