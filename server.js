@@ -13,11 +13,11 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static("./client"));
 
 app.use(
-    session({
-        secret: process.env.SECRET,
-        resave: true,
-        saveUninitialized: true,
-    })
+  session({
+    secret: process.env.SECRET,
+    resave: true,
+    saveUninitialized: true,
+  })
 );
 
 app.use(passport.initialize());
