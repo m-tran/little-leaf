@@ -32,22 +32,22 @@ module.exports = {
 
   var dayInMilliseconds = 1000 * 60 * 60 * 24;
   const waterTimer = setInterval(
-    () => waterPlant(req.user.email), dayInMilliseconds * water_frequency
+    () => waterPlant(req.user.email, req.plant.commonName), dayInMilliseconds * water_frequency
   );
   waterSchedule.push({ id: count, interval: waterTimer });
 
   const pruneTimer = setInterval(
-    () => prunePlant(req.user.email), dayInMilliseconds * prune_frequency
+    () => prunePlant(req.user.email, req.plant.commonName), dayInMilliseconds * prune_frequency
   );
   pruneSchedule.push({ id: count, interval: pruneTimer });
 
   const rotateTimer = setInterval(
-    () => rotatePlant(req.user.email), dayInMilliseconds * rotate_frequency
+    () => rotatePlant(req.user.email, req.plant.commonName), dayInMilliseconds * rotate_frequency
   );
   rotateSchedule.push({ id: count, interval: rotateTimer });
 
   const repotTimer = setInterval(
-    () => repotPlant(req.user.email), dayInMilliseconds * repot_frequency
+    () => repotPlant(req.user.email, req.plant.commonName), dayInMilliseconds * repot_frequency
   );
   repotSchedule.push({ id: count, interval: repotTimer });
 
