@@ -4,6 +4,8 @@
 
 * App that helps you give the best care to your house plants. Creates a schedule and sends reminders for when you need to water, prune, rotate your plants.
 
+![layout](assets/img/layout.png)
+
 ## Application Requirements
 
 * Must use a Node and Express server
