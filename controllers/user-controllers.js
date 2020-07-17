@@ -2,7 +2,7 @@ const db = require("../models");
 
 module.exports = {
 
-    createProfile: async (req, res) => {
+    createUser: async (req, res) => {
         try {
             const newProfile = await db.User.create({
                 first_name: req.body.first_name,
@@ -18,13 +18,28 @@ module.exports = {
             res.send(err);
         }
     },
-
-    getProfile: async (req, res) => {
+    
+    getUser: async (req, res) => {
         db.User.findOne({
             where: {
-                id: req.body.id,
+                id: req.params.id,
             },
         }).then((userProfile) => res.send(userProfile))
             .catch((err) => { res.send(err) });
     },
+
+    deleteUser: async (req, res) => {
+        db.User.destroy({
+            where: { 
+                id: req.params.id 
+            },
+        }),
+        User.hasMany(models.Rooms, {
+            onDelete: "cascade",
+        })
+        .then(deletedUser => {
+            console.log(`Has the user been deleted? 1 means yes, 0 means no: ${deletedUser}`);
+        });
+    }
+
 };

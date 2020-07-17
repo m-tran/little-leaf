@@ -1,4 +1,5 @@
 const db = require("../models");
+const {waterPlant, prunePlant, repotPlant, rotatePlant} = require("./nodemailer");
 
 module.exports = {
   createPlant: async (req, res) => {
@@ -16,15 +17,29 @@ module.exports = {
           // foreign ID to link user
           roomId: req.room.id,
         });
+        const waterFrequency = 3;
+        const pruneFrequency = 2;
+        const rotateFrequency = 2;
+      console.log("starting timer");
+        var dayInMilliseconds = 1000 * 60 * 60 * 24;
 
-        res.send(newPlant);
+         let interval  = setInterval(() => waterPlant(req.user.email), dayInMilliseconds * waterFrequency); //should be req.user.email
+    
+  
+        let interval2 = setInterval(() => prunePlant(req.user.emai), dayInMilliseconds * pruneFrequency );
+    
+        let internval3 =  setInterval(() => repotPlant(req.user.emai), dayInMilliseconds * rotateFrequency );
+    
+
+        res.send("true"); //should be new plant
       } catch (err) {
         res.send(err);
       }
-    } else {
-      res.redirect("/");
-    }
-  },
+    // } else {
+    //   res.redirect("/");
+    // }
+  }
+},
 
   getPlant: async (req, res) => {
     db.Plant.findOne({
@@ -35,7 +50,7 @@ module.exports = {
     }).then((Plant) => res.send(Plant));
   },
 
-  getAllPlant: async (req, res) => {
+  getAllPlants: async (req, res) => {
     db.Plant.findMany({
       where: {
         id: req.room.id,
@@ -45,7 +60,7 @@ module.exports = {
   },
 
   deletePlant: async (req,res) => {    
-    db.Plants.destory({
+    db.Plants.destroy({
       where: { id: req.params.id },
     })
     .then(deletedPlant => {

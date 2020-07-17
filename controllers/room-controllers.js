@@ -21,35 +21,43 @@ module.exports = {
     }
   },
 
-  // getAllRooms: async (req, res) => {
-  //   db.Room.findMany({
-  //     where: {
-  //       id: req.user.id,
-  //     },
-  //     include: [db.User],
-  //   }).then((Rooms) => res.send(Rooms));
-  // },
+  getAllRooms: async (req, res) => {
+    try {
+      const allRooms = await db.Room.findAll({
+        where: {
+          UserId: req.body.id,
+        },
+      });
+      res.send(allRooms);
+    } catch (err) {
+      res.send({ err_message: err });
+    }
+  },
 
-  // getRoom: async (req, res) => {
-  //   db.Room.findOne({
-  //     where: {
-  //       id: req.params.id,
-  //     },
-  //     include: [db.User],
-  //   }).then((Room) => res.send(Room));
-  // },
+  getRoom: async (req, res) => {
+    db.Room.findOne({
+      where: {
+        id: req.params.id,
+      },
+      include: [db.User],
+    }).then((Room) => res.send(Room));
+  },
 
-  // deleteRoom: async (req,res) => {    
-  //   db.Room.destory({
-  //     where: { id: req.params.id },
-  //   }),
-  //   Room.hasMany(models.Plants, {
-  //     onDelete: "cascade",
-  //   })
-  //   .then(deletedRoom => {
-  //     console.log(`Has the room been deleted? 1 means yes, 0 means no: ${deletedRoom}`);
-  //   });
-  // }
+  deleteRoom: async (req,res) => {    
+    db.Room.destroy({
+      where: { 
+        id: req.params.id,
+        UserId: req.body.id,
+      },
+    }),
+    Room.hasMany(models.Plants, {
+      onDelete: "cascade",
+    })
+    .then(deletedRoom => {
+      console.log(`Has the room been deleted? 1 means yes, 0 means no: ${deletedRoom}`);
+      res.send("deleted");
+    });
+  }
 
 
 };

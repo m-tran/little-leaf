@@ -1,11 +1,12 @@
 const express = require("express");
 const router = express.Router();
+
 const {
     createPlant,
     getPlant,
     getAllPlants,
     deletePlant,
-  } = require("../controllers/plant-controller");
+  } = require("../controllers/plant-controllers");
 
   // Get all plants
 // Route: http://localhost:3000/logs/user

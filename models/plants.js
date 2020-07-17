@@ -10,11 +10,11 @@ module.exports = (sequelize, DataTypes) => {
         },
         size: {
             type: DataTypes.INTEGER,
-            allowNull: false,
         },
         water_amount: {
             type: DataTypes.INTEGER,
             allowNull: false,
+            defaultValue: 0.5,
         },
         water_frequency: {
             type: DataTypes.INTEGER,
@@ -23,6 +23,7 @@ module.exports = (sequelize, DataTypes) => {
         prune: {
             type: DataTypes.BOOLEAN,
             allowNull: false,
+            defaultValue: true,
         },
         prune_frequency: {
             type: DataTypes.INTEGER,
