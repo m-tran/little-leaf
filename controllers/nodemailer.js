@@ -14,7 +14,7 @@ const waterPlant = (email, plantName) => {
     var mailOptions = {
       from: 'little.leaf.app1@gmail.com',
       to: email, 
-      subject: `Time to water your ${plantName} today!`,
+      subject: `Time to water your ${plantName} plant today!`,
       text: 'Give plant 1 cup of water',
       html: 'Embedded image: <img src="cid:unique@kreata.ee"/>',
       attachments: [{
@@ -52,7 +52,7 @@ const waterPlant = (email, plantName) => {
         from: 'little.leaf.app1@gmail.com',
         to: email,
         subject: `Time to prune your ${plantName} plant today`,
-        text: 'Cut off the dead leafs',
+        text: 'How to prune your plant',
         html: 'Embedded image: <img src="cid:unique2@kreata.ee"/>',
         attachments: [{
           filename: 'harvest.png',
@@ -88,7 +88,7 @@ const waterPlant = (email, plantName) => {
         var mailOptions = {
           from: 'little.leaf.app1@gmail.com',
           to: email,
-          subject: `Time to repot your ${plantName}`,
+          subject: `Time to repot your ${plantName} plant`,
           text: 'Upgrade your plant to a larger pot',
           html: 'Embedded image: <img src="cid:unique4@kreata.ee"/>',
           attachments: [{
