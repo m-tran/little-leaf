@@ -6,10 +6,10 @@ const {
   deleteUser,
 } = require("../controllers/user-controllers");
 
-router.post("/profile/new", createUser);
+router.post("/user/new", createUser);
 
-router.get("/profile", getUser);
+router.get("/user/find/:id", getUser);
 
-// router.delete("/profile", deleteProfile);
+router.delete("/user/delete/:id", deleteUser);
 
 module.exports = router;
