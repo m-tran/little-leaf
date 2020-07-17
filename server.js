@@ -25,8 +25,6 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-// const apiRoutes = require("./routes/api-routes.js");
-// app.use(apiRoutes);
 
 // const clientRoutes = require("./routes/client-routes.js");
 // app.use(clientRoutes);
@@ -39,7 +37,6 @@ app.use(userRoutes);
 
 const roomRoutes = require("./routes/room-routes.js");
 app.use(roomRoutes);
-
 
 const plantRoutes = require("./routes/plant-routes.js");
 app.use(plantRoutes);

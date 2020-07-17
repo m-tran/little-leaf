@@ -13,33 +13,33 @@ module.exports = {
           prune: req.body.prune,
           prune_frequency: req.body.prune_frequency,
           rotate_frequency: req.body.rotate_frequency,
-          repotPlant: req.body.repotPlant,
+          repot_frequency: req.body.repot_frequency,
           // foreign ID to link user
           roomId: req.room.id,
         });
-        const waterFrequency = 3;
-        const pruneFrequency = 2;
-        const rotateFrequency = 2;
+      
       console.log("starting timer");
         var dayInMilliseconds = 1000 * 60 * 60 * 24;
 
-         let interval  = setInterval(() => waterPlant(req.user.email), dayInMilliseconds * waterFrequency); //should be req.user.email
+         let interval  = setInterval(() => waterPlant(req.user.email), dayInMilliseconds * water_frequency); //should be req.user.email
     
   
-        let interval2 = setInterval(() => prunePlant(req.user.emai), dayInMilliseconds * pruneFrequency );
+        let interval2 = setInterval(() => prunePlant(req.user.email), dayInMilliseconds * prune_frequency );
     
-        let internval3 =  setInterval(() => repotPlant(req.user.emai), dayInMilliseconds * rotateFrequency );
+        let internval3 =  setInterval(() => repotPlant(req.user.email), dayInMilliseconds * repot_frequency );
+
+        let internval4 =  setInterval(() => rotatePlant(req.user.email), dayInMilliseconds * rotate_frequency );
     
 
-        res.send("true"); //should be new plant
+        res.send(newPlant); //should be new plant
       } catch (err) {
         res.send(err);
       }
-    // } else {
-    //   res.redirect("/");
-    // }
-  }
-},
+    } else {
+      res.redirect("/");
+    }
+  },
+
 
   getPlant: async (req, res) => {
     db.Plant.findOne({
