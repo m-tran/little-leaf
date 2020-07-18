@@ -6,18 +6,17 @@ const axios = require("axios");
 
 require("dotenv").config();
 
-router.get("/", (req, res) =>
-  !req.user
-    ? res.sendFile(path.join(__dirname, "../client/members.html"))
-    : res.sendFile(path.join(__dirname, "../client/dashboard.html"))
-);
+// router.get("/", (req, res) =>
+//   !req.user
+//     ? res.sendFile(path.join(__dirname, "../client/members.html"))
+//     : res.sendFile(path.join(__dirname, "../client/dashboard.html"))
+// );
 
 router.get("/dashboard", (req, res) =>
-  !req.user
-    ? res.sendFile(path.join(__dirname, "../client/members.html"))
-    : res.sendFile(path.join(__dirname, "../client/dashboard.html"))
+  !req.user ?
+  res.sendFile(path.join(__dirname, "../client/members.html")) :
+  res.sendFile(path.join(__dirname, "../client/dashboard.html"))
 );
-
 
 router.get("/", (req, res) => {
   if (req.user) {
@@ -38,7 +37,6 @@ router.get("/members", isAuthenticated, (req, res) => {
 });
 
 router.get("/search", (req, res) => {
-
   let searchName = req.query.plant;
 
   // let updatedSearch = searchName.split(' ').join('_');
@@ -48,7 +46,6 @@ router.get("/search", (req, res) => {
   axios
     .get(allPlantsUrl)
     .then((response) => {
-
       let arr = response.data;
 
       let id = arr[0].id;
@@ -62,8 +59,10 @@ router.get("/search", (req, res) => {
     })
     .catch((err) => {
       console.log(err);
-      res.send({ err });
+      res.send({
+        err
+      });
     });
-  });
+});
 
 module.exports = router;
