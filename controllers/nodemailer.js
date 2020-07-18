@@ -1,5 +1,5 @@
 
-const waterPlant = (email) => {
+const waterPlant = (email, plantName) => {
 
     var nodemailer = require('nodemailer');
   
@@ -14,7 +14,7 @@ const waterPlant = (email) => {
     var mailOptions = {
       from: 'little.leaf.app1@gmail.com',
       to: email, 
-      subject: 'Time to water your orchid today!',
+      subject: `Time to water your ${plantName} plant today!`,
       text: 'Give plant 1 cup of water',
       html: 'Embedded image: <img src="cid:unique@kreata.ee"/>',
       attachments: [{
@@ -36,7 +36,7 @@ const waterPlant = (email) => {
   
     
   // function to prune plant
-    const prunePlant = (email) => {
+    const prunePlant = (email, plantName) => {
   
       var nodemailer = require('nodemailer');
     
@@ -51,8 +51,8 @@ const waterPlant = (email) => {
       var mailOptions = {
         from: 'little.leaf.app1@gmail.com',
         to: email,
-        subject: 'Time to prune your plant today',
-        text: 'Cut off the dead leafs',
+        subject: `Time to prune your ${plantName} plant today`,
+        text: 'How to prune your plant',
         html: 'Embedded image: <img src="cid:unique2@kreata.ee"/>',
         attachments: [{
           filename: 'harvest.png',
@@ -73,7 +73,7 @@ const waterPlant = (email) => {
   
   
   // function to repot plant into a larger pot
-      const repotPlant = (email) => {
+      const repotPlant = (email, plantName) => {
   
         var nodemailer = require('nodemailer');
       
@@ -88,7 +88,7 @@ const waterPlant = (email) => {
         var mailOptions = {
           from: 'little.leaf.app1@gmail.com',
           to: email,
-          subject: 'Time to repot your plant',
+          subject: `Time to repot your ${plantName} plant`,
           text: 'Upgrade your plant to a larger pot',
           html: 'Embedded image: <img src="cid:unique4@kreata.ee"/>',
           attachments: [{
@@ -108,7 +108,7 @@ const waterPlant = (email) => {
         });
         }
   
-        const rotatePlant = (email) => {
+        const rotatePlant = (email, plantName) => {
   
           var nodemailer = require('nodemailer');
         
@@ -123,7 +123,7 @@ const waterPlant = (email) => {
           var mailOptions = {
             from: 'little.leaf.app1@gmail.com',
             to: email,
-            subject: 'Time to rotate your plant today',
+            subject: `Time to rotate your ${plantName} plant today`,
             text: 'Rotate your plant 180 degrees',
             html: 'Embedded image: <img src="cid:unique3@kreata.ee"/>',
             attachments: [{

@@ -4,6 +4,9 @@
 
 * App that helps you give the best care to your house plants. Creates a schedule and sends reminders for when you need to water, prune, rotate your plants.
 
+
+![layout](https://github.com/m-tran/little-leaf/blob/master/client/assets/img/layout.png?raw=true)
+
 ## Application Requirements
 
 * Must use a Node and Express server
