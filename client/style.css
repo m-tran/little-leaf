@@ -3,7 +3,7 @@ html, body{
     margin: 0;
 }
 
-body {
+body:not(.plants) {
     display: flex;
     min-height: 100vh;
     flex-direction: column;
@@ -34,6 +34,13 @@ body {
 img{
   height: 200px;
   width: 200px;
+}
+
+/* plant page styling */
+#search {
+  border: 1px solid black;
+  border-radius: 25px;
+  padding: 0 1rem 0 1rem;
 }
 
 /* li{
