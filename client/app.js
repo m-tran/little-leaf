@@ -1,93 +1,72 @@
-// import { Strategy } from "passport-local";
+var count = 0;
+var answer = "";
 
-const start = document.getElementById('start');
-const quiz = document.getElementById("quiz");
-const question = document.getElementById("question");
-const qImg = document.getElementById("qImg");
-const choiceA = document.getElementById("A");
-const choiceB = document.getElementById("B");
-const choiceC = document.getElementById("C");
-const counter = document.getElementById("counter");
+$("#btnSubmit").on("click", function () {
+    if (count <= 6) {
+        answer = "small";
+    } else if (count > 6 && count <= 10) {
+        answer = "medium";
+    } else if (count > 10 && count <= 16) {
+        answer = "large";
+    }
+    console.log(answer);
+});
 
+// for (var i = 0; i < question.length; i++) {
+//   array.push(question[i].value);
+// }
+// console.log(array);
 
-let questions = [
-    {
-        question: 'What size is your room?',
-        imgSrc: './assets/img/plantroom.jpg',
-        choiceA: 'Small',
-        choiceB: 'Medium',
-        choiceC: 'Large',
-    },
-    {
-        question: 'What are you looking for?',
-        imgSrc: './assets/img/plants.jpg',
-        choiceA: 'Improve air quality',
-        choiceB: 'Sleep assitance',
-    },
-    {
-        question: 'Do you prefer:',
-        imgSrc: './assets/img/maintenance.jpg',
-        choiceA: 'High Maintenance',
-        choiceB: 'Low maintenance',
-    },
-];
+// // function question1() {
+// $("#answer").on("click", function () {
+//   for (var j = 0; j < array.length; j++) {
+//     if (array[j] == "option1") {
+//       console.log(array[j]);
+//       count++;
+//       console.log(count);
+//     }
+//     else if (array[j] == "option2") {
+//       count += 2;
+//       console.log(count);
+//     }
+//   }
+// });
 
-const lastQuestion = questions.length - 1;
-let runningQuestion = 0;
-let count = 0;
-let score = 0;
-
-function renderQuestion() {
-    let q = questions[runningQuestion];
-
-    question.innerHTML = "<p>" + q.question + "</p>";
-    qImg.innerHTML = "<img src=" + q.imgSrc + ">";
-    choiceA.innerHTML = q.choiceA;
-    choiceB.innerHTML = q.choiceB;
-    choiceC.innerHTML = q.choiceC;
-}
-
-start.addEventListener("click", startQuiz);
-
-// start quiz
-function startQuiz() {
-    start.style.display = "none";
-    renderQuestion();
-    quiz.style.display = "block";
-}
-
-$('#A').on('click', function () {
+$("#opt1").on("click", function () {
     count++;
     console.log(count);
-
 });
-$('#B').on('click', function () {
+$("#opt2").on("click", function () {
     count += 2;
     console.log(count);
-
-}); $('#C').on('click', function () {
+});
+$("#opt3").on("click", function () {
     count += 3;
     console.log(count);
-
+});
+$("#opt4").on("click", function () {
+    count += 4;
+    console.log(count);
 });
 
+$("#opt5").on("click", function () {
+    count++;
+    console.log(count);
+});
+$("#opt6").on("click", function () {
+    count += 2;
+    console.log(count);
+});
+$("#opt7").on("click", function () {
+    count += 3;
+    console.log(count);
+});
+$("#opt8").on("click", function () {
+    count += 4;
+    console.log(count);
+});
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+$("#opt9").on("click", function () {
+    count++;
+    console.log(count);
+});
