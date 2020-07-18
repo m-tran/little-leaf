@@ -39,9 +39,9 @@ router.get("/members", isAuthenticated, (req, res) => {
 
 router.get("/search", (req, res) => {
 
-  let searchName = req.params.plant;
+  let searchName = req.query.plant;
 
-  let updatedSearch = searchName.split(' ').join('_');
+  // let updatedSearch = searchName.split(' ').join('_');
 
   let allPlantsUrl = `https://v0.trefle.io/api/plants?q=${updatedSearch}&token=${process.env.KEY}`;
 
@@ -52,7 +52,7 @@ router.get("/search", (req, res) => {
       let arr = response.data;
 
       let id = arr[0].id;
-      let plantUrl = `https://trefle.io/api/plants/${id}?token=${process.env.KEY}`;
+      let plantUrl = `https://trefle.io/api/v1/plants/${id}?token=${process.env.KEY}`;
 
       return axios.get(plantUrl);
     })

@@ -32,6 +32,9 @@ app.use(passport.session());
 const authRoutes = require("./routes/auth-routes.js");
 app.use(authRoutes);
 
+const clientRoutes = require("./routes/client-routes.js");
+app.use(clientRoutes);
+
 const userRoutes = require("./routes/user-routes.js");
 app.use(userRoutes);
 

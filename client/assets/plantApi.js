@@ -8,11 +8,14 @@ $(document).ready(function () {
     });
 
     function renderPlantResults(plantSearch) {
+        console.log(plantSearch);
+        let updatedSearch = plantSearch.split(' ').join('_');
+        console.log(updatedSearch);
         $.ajax({
             type: "GET",
-            url: "/search",
+            url: "http://localhost:3005/search",
             data: {
-                plant: plantSearch, 
+                plant: updatedSearch, 
             },
         }).then((res) => {
             return console.log(res);
