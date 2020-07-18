@@ -1,7 +1,7 @@
 $(document).ready(function () {
 
     $("#search").on("keydown", function (e) {
-        if (e.keyCode === 13) {  //checks whether the pressed key is "Enter"
+        if (e.keyCode === 13) { //checks whether the pressed key is "Enter"
             loadSearch(e);
         }
     });
@@ -18,7 +18,7 @@ $(document).ready(function () {
         let updatedSearch = plantSearch.split(' ').join('_');
         $.ajax({
             type: "GET",
-            url: "http://localhost:3005/search",
+            url: "/search",
             data: {
                 plant: updatedSearch,
             },
@@ -26,7 +26,7 @@ $(document).ready(function () {
             for (let i = 0; i < 5; i++) {
                 searchResults.push(res[i].scientific_name);
                 $("#results")
-                .append(`
+                    .append(`
                 <div class="card horizontal" data-id=${i}>
                     <div class="card-stacked">
                         <div class="card-content">
