@@ -9,8 +9,11 @@ let repotSchedule = [];
 let count = 0;
 
 module.exports = {
+  
   createPlant: async (req, res) => {
+    console.log("it hits");
       try {
+        console.log("it tried");
         const newPlant = await db.Plant.create({
           commonName: req.body.commonName,
           size: req.body.size,
@@ -21,37 +24,41 @@ module.exports = {
           rotate_frequency: req.body.rotate_frequency,
           repot_frequency: req.body.repot_frequency,
           // foreign ID to link user
-          roomId: req.room.id,
+          RoomId: req.body.id,
         });
-      
-  console.log("starting timer");
-  count++;
-  const Plant1 = { commonName: req.body.commonName, water_amount: req.body.water_amount, water_frequency: req.body.water_frequency, prune: req.body.prune, prune_frequency: req.body.prune_frequency, rotate_frequency: req.body.rotate_frequency, repot_frequency: req.body.repot_frequency, roomid: req.room.id, id: count };
-  userPlants.push(Plant1);
-  res.send(userPlants);
-
-  var dayInMilliseconds = 1000 * 60 * 60 * 24;
-  const waterTimer = setInterval(
-    () => waterPlant(req.user.email, req.plant.commonName), dayInMilliseconds * water_frequency
-  );
-  waterSchedule.push({ id: count, interval: waterTimer });
-
-  const pruneTimer = setInterval(
-    () => prunePlant(req.user.email, req.plant.commonName), dayInMilliseconds * prune_frequency
-  );
-  pruneSchedule.push({ id: count, interval: pruneTimer });
-
-  const rotateTimer = setInterval(
-    () => rotatePlant(req.user.email, req.plant.commonName), dayInMilliseconds * rotate_frequency
-  );
-  rotateSchedule.push({ id: count, interval: rotateTimer });
-
-  const repotTimer = setInterval(
-    () => repotPlant(req.user.email, req.plant.commonName), dayInMilliseconds * repot_frequency
-  );
-  repotSchedule.push({ id: count, interval: repotTimer });
 
         res.send(newPlant); //should be new plant
+        
+        const plantIntervals = await(() => {
+          count++;
+
+          const Plant1 = { commonName: req.body.commonName, water_amount: req.body.water_amount, water_frequency: req.body.water_frequency, prune: req.body.prune, prune_frequency: req.body.prune_frequency, rotate_frequency: req.body.rotate_frequency, repot_frequency: req.body.repot_frequency, roomid: req.room.id, id: count };
+          userPlants.push(Plant1);
+          // res.send(userPlants);
+  
+          var dayInMilliseconds = 1000 * 60 * 60 * 24;
+          const waterTimer = setInterval(
+            () => waterPlant(req.user.email, req.plant.commonName), dayInMilliseconds * water_frequency
+          );
+          waterSchedule.push({ id: count, interval: waterTimer });
+  
+          const pruneTimer = setInterval(
+            () => prunePlant(req.user.email, req.plant.commonName), dayInMilliseconds * prune_frequency
+          );
+          pruneSchedule.push({ id: count, interval: pruneTimer });
+  
+          const rotateTimer = setInterval(
+            () => rotatePlant(req.user.email, req.plant.commonName), dayInMilliseconds * rotate_frequency
+          );
+          rotateSchedule.push({ id: count, interval: rotateTimer });
+  
+          const repotTimer = setInterval(
+            () => repotPlant(req.user.email, req.plant.commonName), dayInMilliseconds * repot_frequency
+          );
+          repotSchedule.push({ id: count, interval: repotTimer });
+
+        });
+
       } catch (err) {
         res.send(err);
       }
