@@ -43,7 +43,7 @@ router.get("/search", (req, res) => {
 
   // let updatedSearch = searchName.split(' ').join('_');
 
-  let allPlantsUrl = `https://v0.trefle.io/api/plants?q=${updatedSearch}&token=${process.env.KEY}`;
+  let allPlantsUrl = `https://v0.trefle.io/api/plants?q=${searchName}&token=${process.env.KEY}`;
 
   axios
     .get(allPlantsUrl)
