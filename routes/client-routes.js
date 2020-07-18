@@ -47,21 +47,19 @@ router.get("/search", (req, res) => {
 
   axios
     .get(allPlantsUrl)
+    // .then((response) => {
+
+    //   let arr = response.data;
+
+    //   let id = arr[0].id;
+    //   let plantUrl = `https://trefle.io/api/v1/plants/${id}?token=${process.env.KEY}`;
+
+    //   return axios.get(plantUrl);
+    // })
     .then((response) => {
-
-      let arr = response.data;
-
-      let id = arr[0].id;
-      let plantUrl = `https://trefle.io/api/v1/plants/${id}?token=${process.env.KEY}`;
-
-      return axios.get(plantUrl);
-    })
-    .then((response) => {
-      console.log(response.data);
       res.send(response.data);
     })
     .catch((err) => {
-      console.log(err);
       res.send({ err });
     });
   });

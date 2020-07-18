@@ -1,24 +1,41 @@
 $(document).ready(function () {
 
-    $(document).on("click", ".renderPlants", function (e) {
-        e.preventDefault();
+    $("#search").on("keydown", function (e) {
+        if (e.keyCode === 13) {  //checks whether the pressed key is "Enter"
+            loadSearch(e);
+        }
+    });
+
+    function loadSearch(e) {
         let search = $("#search").val();
         renderPlantResults(search);
         $("#search").val("");
-    });
+    }
 
     function renderPlantResults(plantSearch) {
-        console.log(plantSearch);
+        $("#results").html("");
+        let searchResults = [];
         let updatedSearch = plantSearch.split(' ').join('_');
-        console.log(updatedSearch);
         $.ajax({
             type: "GET",
             url: "http://localhost:3005/search",
             data: {
-                plant: updatedSearch, 
+                plant: updatedSearch,
             },
         }).then((res) => {
-            return console.log(res);
+            for (let i = 0; i < 5; i++) {
+                searchResults.push(res[i].scientific_name);
+                $("#results")
+                .append(`
+                <div class="card horizontal" data-id=${i}>
+                    <div class="card-stacked">
+                        <div class="card-content">
+                            ${res[i].scientific_name}
+                        </div>
+                    </div>
+                </div>`);
+            }
+            return console.log(searchResults);
         });
     }
 
