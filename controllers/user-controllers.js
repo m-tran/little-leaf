@@ -10,7 +10,7 @@ module.exports = {
                 email: req.body.email,
                 password: req.body.password,
                 // foreign ID to link user
-                UserId: req.body.id,
+
             });
             res.send(newProfile);
         } catch (err) {
@@ -18,28 +18,30 @@ module.exports = {
             res.send(err);
         }
     },
-    
+
     getUser: async (req, res) => {
         db.User.findOne({
-            where: {
-                id: req.params.id,
-            },
-        }).then((userProfile) => res.send(userProfile))
-            .catch((err) => { res.send(err) });
+                where: {
+                    id: req.params.id,
+                },
+            }).then((userProfile) => res.send(userProfile))
+            .catch((err) => {
+                res.send(err)
+            });
     },
 
     deleteUser: async (req, res) => {
         db.User.destroy({
-            where: { 
-                id: req.params.id 
-            },
-        }),
-        User.hasMany(models.Rooms, {
-            onDelete: "cascade",
-        })
-        .then(deletedUser => {
-            console.log(`Has the user been deleted? 1 means yes, 0 means no: ${deletedUser}`);
-        });
+                where: {
+                    id: req.params.id
+                },
+            }),
+            User.hasMany(models.Rooms, {
+                onDelete: "cascade",
+            })
+            .then(deletedUser => {
+                console.log(`Has the user been deleted? 1 means yes, 0 means no: ${deletedUser}`);
+            });
     }
 
 };
