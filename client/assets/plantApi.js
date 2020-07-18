@@ -1,7 +1,16 @@
-// $(document).ready(function () {
-//     $.get("/api/all", function (data) {
+$(document).ready(function () {
 
-//         console.log
 
-//     });
-// });
+    $.ajax({
+      type: "POST",
+      url: "/plant/new",
+    }).then((plant) => {
+    console.log(plant);
+    const waterFrequency = plant.water_frequency;
+    const pruneFrequency = plant.prune_frequency;
+    const rotateFrequency = plant.rotate_frequency;
+    const createdDate = plant.createdAt;
+    });
+
+    
+  }) 

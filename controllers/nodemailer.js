@@ -1,5 +1,5 @@
 
-const waterPlant = () => {
+const waterPlant = (email, plantName) => {
 
     var nodemailer = require('nodemailer');
   
@@ -13,13 +13,13 @@ const waterPlant = () => {
     
     var mailOptions = {
       from: 'little.leaf.app1@gmail.com',
-      to: 'jhanlon289@gmail.com',
-      subject: 'Time to water your orchid today!',
+      to: email, 
+      subject: `Time to water your ${plantName} plant today!`,
       text: 'Give plant 1 cup of water',
       html: 'Embedded image: <img src="cid:unique@kreata.ee"/>',
       attachments: [{
           filename: 'growth.png',
-          path: "./assets/growth.png",
+          path: "./controllers/pics/growth.png",
           cid: 'unique@kreata.ee' //same cid value as in the html img src
       }]
     
@@ -36,7 +36,7 @@ const waterPlant = () => {
   
     
   // function to prune plant
-    const prunePlant = () => {
+    const prunePlant = (email, plantName) => {
   
       var nodemailer = require('nodemailer');
     
@@ -50,13 +50,13 @@ const waterPlant = () => {
       
       var mailOptions = {
         from: 'little.leaf.app1@gmail.com',
-        to: 'mptran0101@berkeley.edu',
-        subject: 'Time to prune your plant today',
-        text: 'Cut off the dead leafs',
+        to: email,
+        subject: `Time to prune your ${plantName} plant today`,
+        text: 'How to prune your plant',
         html: 'Embedded image: <img src="cid:unique2@kreata.ee"/>',
         attachments: [{
-            filename: 'harvest.png',
-            path: "./assets/harvest.png",
+          filename: 'harvest.png',
+          path: "./controllers/pics/harvest.png",
             cid: 'unique2@kreata.ee' //same cid value as in the html img src
         }]
       
@@ -73,7 +73,7 @@ const waterPlant = () => {
   
   
   // function to repot plant into a larger pot
-      const repotPlant = () => {
+      const repotPlant = (email, plantName) => {
   
         var nodemailer = require('nodemailer');
       
@@ -87,8 +87,8 @@ const waterPlant = () => {
         
         var mailOptions = {
           from: 'little.leaf.app1@gmail.com',
-          to: 'jhanlon289@gmail.com',
-          subject: 'Time to repot your plant',
+          to: email,
+          subject: `Time to repot your ${plantName} plant`,
           text: 'Upgrade your plant to a larger pot',
           html: 'Embedded image: <img src="cid:unique4@kreata.ee"/>',
           attachments: [{
@@ -108,7 +108,7 @@ const waterPlant = () => {
         });
         }
   
-        const rotatePlant = () => {
+        const rotatePlant = (email, plantName) => {
   
           var nodemailer = require('nodemailer');
         
@@ -122,8 +122,8 @@ const waterPlant = () => {
           
           var mailOptions = {
             from: 'little.leaf.app1@gmail.com',
-            to: 'mptran0101@berkeley.edu',
-            subject: 'Time to rotate your plant today',
+            to: email,
+            subject: `Time to rotate your ${plantName} plant today`,
             text: 'Rotate your plant 180 degrees',
             html: 'Embedded image: <img src="cid:unique3@kreata.ee"/>',
             attachments: [{
