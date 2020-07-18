@@ -3,7 +3,7 @@ html, body{
     margin: 0;
 }
 
-body {
+body:not(.plants) {
     display: flex;
     min-height: 100vh;
     flex-direction: column;
@@ -35,3 +35,79 @@ img{
   height: 200px;
   width: 200px;
 }
+
+/* plant page styling */
+#search {
+  border: 1px solid black;
+  border-radius: 25px;
+  padding: 0 1rem 0 1rem;
+}
+
+/* li{
+  text-decoration: none;
+  list-style: none;
+}
+
+.survey h3{
+margin: 10px;
+cursor: pointer;
+}
+
+.survey li:hover{
+  background: cornflowerblue;
+  width: 150px;
+  margin: 0 auto;
+  padding: 4px;
+  border-radius: 3px;
+  transition: 0.3s ease;
+  box-shadow: 1px 1px 7px rgba(0,0, 0, 0.4);
+
+}
+
+.end {
+  background: cornflowerblue;
+  width: 300px;
+  margin: 0 auto;
+  padding: 4px;
+  border-radius: 3px;
+  box-shadow: 1px 1px 7px rgba(0,0, 0, 0.4);
+}
+
+.end h1{
+  margin: 5px;
+}
+
+.end p {
+  padding: 10px;
+}
+
+.end a {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 5px;
+  border-radius: 4px;
+  background: rgb(61,61,61);
+  outline: none;
+}
+
+.end a:hover {
+  box-shadow: 1px 1px 7px rgba(0,0, 0, 0.404);
+  transition: 0.3s;
+
+}
+
+.q1 {
+  display: block;
+}
+
+.q2{
+  display: none;
+}
+
+.q3{
+  display: none;
+}
+
+.end{
+  display: none;
+} */

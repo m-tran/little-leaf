@@ -39,7 +39,7 @@ router.get("/members", isAuthenticated, (req, res) => {
 
 router.get("/search", (req, res) => {
 
-  let searchName = req.query.plant;
+  let searchName = req.params.plant;
 
   let updatedSearch = searchName.split(' ').join('_');
 
