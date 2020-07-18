@@ -4,8 +4,12 @@ $(document).ready(function () {
     let resultLinks = [];
 
     $("#search").on("keydown", function (e) {
+<<<<<<< HEAD
         if (e.keyCode === 13) {  //checks whether the pressed key is "Enter"
             $("#results").html("");    
+=======
+        if (e.keyCode === 13) { //checks whether the pressed key is "Enter"
+>>>>>>> 315ab94a252d627a4b204ed8527ffafc9714bf49
             loadSearch(e);
         }
     });
@@ -21,7 +25,7 @@ $(document).ready(function () {
         let updatedSearch = plantSearch.split(' ').join('_');
         $.ajax({
             type: "GET",
-            url: "http://localhost:3005/search",
+            url: "/search",
             data: {
                 plant: updatedSearch,
             },
@@ -32,8 +36,13 @@ $(document).ready(function () {
                 searchResults.push(res[i].scientific_name);
                 resultLinks.push(res[i].link);
                 $("#results")
+<<<<<<< HEAD
                 .append(`
                 <div class="card horizontal" id="selectPlant" data-id=${i}>
+=======
+                    .append(`
+                <div class="card horizontal" data-id=${i}>
+>>>>>>> 315ab94a252d627a4b204ed8527ffafc9714bf49
                     <div class="card-stacked">
                         <div class="card-content">
                             ${res[i].common_name}

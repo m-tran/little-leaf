@@ -6,17 +6,8 @@ const axios = require("axios");
 
 require("dotenv").config();
 
-// router.get("/", (req, res) =>
-//   !req.user
-//     ? res.sendFile(path.join(__dirname, "../client/members.html"))
-//     : res.sendFile(path.join(__dirname, "../client/dashboard.html"))
-// );
 
-router.get("/dashboard", (req, res) =>
-  !req.user ?
-  res.sendFile(path.join(__dirname, "../client/members.html")) :
-  res.sendFile(path.join(__dirname, "../client/dashboard.html"))
-);
+// All routes will redirect to member page if authenticated, signup otherwise
 
 router.get("/", (req, res) => {
   if (req.user) {
@@ -25,6 +16,7 @@ router.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "../client/signup.html"));
 });
 
+// client side route to login page
 router.get("/login", (req, res) => {
   if (req.user) {
     res.redirect("/members");
@@ -32,10 +24,17 @@ router.get("/login", (req, res) => {
   res.sendFile(path.join(__dirname, "../client/login.html"));
 });
 
+// client side route to members page
 router.get("/members", isAuthenticated, (req, res) => {
   res.sendFile(path.join(__dirname, "../client/members.html"));
 });
 
+// client side route to myplants page
+router.get("/myplants", isAuthenticated, (req, res) => {
+  res.sendFile(path.join(__dirname, "../client/plants.html"));
+});
+
+// client side route to search page
 router.get("/search", (req, res) => {
   let searchName = req.query.plant;
 
