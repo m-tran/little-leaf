@@ -11,7 +11,7 @@ const {
 
 router.post("/plant/new/:RoomId", createPlant);
 
-router.get("/plant/all", getAllPlants);
+router.get("/plant/all/:RoomId", getAllPlants);
 
 
 router.get("/plant/find/:id", getPlant);

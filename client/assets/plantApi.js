@@ -126,6 +126,13 @@ $(document).ready(function () {
                                 <span>Large</span>
                             </label>
                         </p>
+                        <p>What ?</p>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <textarea id="roomId" class="materialize-textarea"></textarea>
+                                <label for="roomId">Enter Room</label>
+                            </div>
+                        </div>
                     </form>
                 </div>
             </div>
