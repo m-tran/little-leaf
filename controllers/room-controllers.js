@@ -51,7 +51,7 @@ module.exports = {
         where: {
           id: req.params.id,
         },
-        // include: [db.User],
+        include: [db.Plant],
       }).then((Room) => res.send(Room)).catch((err) => res.send(err))
     }else {
       res.send("error");
