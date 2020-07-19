@@ -18,6 +18,13 @@ $(document).ready(function () {
         renderSelectedPlant(id);
     });
 
+    $(document).on("click", "#addPlant", function (e) {
+        e.preventDefault();
+        index = $(this).attr("data-id");
+        id = resultId[index];
+        createAddPlantOptions();
+    })
+
     function loadSearch(e) {
         let search = $("#search").val();
         renderPlantResults(search);
@@ -50,7 +57,7 @@ $(document).ready(function () {
                             <br>
                             <br>
                             <a class="waves-effect waves-light btn" id="selectPlant" data-id=${i}>view details</a>
-                            <a class="waves-effect waves-light btn"><i class="material-icons left">add</i>add plant</a>
+                            <a class="waves-effect waves-light btn" id="addPlant" data-id=${i}><i class="material-icons left">add</i>add plant</a>
                         </div>
                     </div>
                 </div>`);
@@ -86,6 +93,60 @@ $(document).ready(function () {
         });
     }
 
+    function createAddPlantOptions() {
+        $("#results")
+        .append(`
+        <div class="card horizontal">
+            <div class="card-stacked">
+                <div class="card-content">
+                    <form action="addPlant">
+                        <p>What room are you adding this to?</p>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <textarea id="roomId" class="materialize-textarea"></textarea>
+                                <label for="roomId">Enter Room</label>
+                            </div>
+                        </div>
+                        <p>What is the plant size?</p>
+                        <p>
+                            <label>
+                                <input name="size" type="radio" checked/>
+                                <span>Small</span>
+                            </label>
+                        </p>
+                        <p>
+                            <label>
+                                <input name="size" type="radio" checked/>
+                                <span>Medium</span>
+                            </label>
+                        </p>
+                        <p>
+                            <label>
+                                <input name="size" type="radio" checked/>
+                                <span>Large</span>
+                            </label>
+                        </p>
+                    </form>
+                </div>
+            </div>
+        </div>`);
+    }
+
+    function addPlant(room, name, size, frequency, prune) {
+        $.ajax({
+            type: "POST",
+            url: `/plant/new/${room}`,
+            data: { 
+                commonName: name,
+                size: size,
+                water_frequency: frequency,
+                prune: prune,
+            }
+        }).then((res) => {
+            console.log(res);
+        });
+    }
+
     // $.ajax({
     //     type: "POST",
     //     url: "/plant/new",
@@ -96,6 +157,5 @@ $(document).ready(function () {
     //     const rotateFrequency = plant.rotate_frequency;
     //     const createdDate = plant.createdAt;
     // });
-
 
 });
