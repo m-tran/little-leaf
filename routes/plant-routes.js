@@ -9,7 +9,7 @@ const {
 } = require("../controllers/plant-controllers");
 
 
-router.post("/plant/new", createPlant);
+router.post("/plant/new/:RoomId", createPlant);
 
 router.get("/plant/all", getAllPlants);
 
