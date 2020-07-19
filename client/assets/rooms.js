@@ -112,7 +112,7 @@ $(document).ready(function () {
                     `<div class="col s12 m2">
                 <div class="card horizontal">
                   <div class="card-image">
-                    <img src="https://lorempixel.com/100/190/nature/6">
+                    <img src="https://cdn.vox-cdn.com/thumbor/QRC-K6S73KSM0XVNvrQhicj9g_E=/0x0:2000x1333/1200x800/filters:focal(840x507:1160x827)/cdn.vox-cdn.com/uploads/chorus_image/image/65377475/BT7B0071.7.jpg">
                   </div>
                   <div class="card-stacked">
                     <div class="card-content">
