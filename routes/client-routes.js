@@ -16,6 +16,14 @@ router.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "../client/signup.html"));
 });
 
+router.get("/myrooms", (req, res) => {
+  if (!req.user) {
+    res.redirect("/");
+  } else {
+    res.sendFile(path.join(__dirname, "../client/rooms.html"));
+  }
+});
+
 // client side route to login page
 router.get("/login", (req, res) => {
   if (req.user) {
@@ -23,6 +31,13 @@ router.get("/login", (req, res) => {
   }
   res.sendFile(path.join(__dirname, "../client/login.html"));
 });
+
+router.get("/register", (req, res) => {
+  if (req.user) {
+    res.redirect("/members");
+  }
+  res.sendFile(path.join(__dirname, "../client/signup.html"));
+})
 
 // client side route to members page
 router.get("/members", isAuthenticated, (req, res) => {
