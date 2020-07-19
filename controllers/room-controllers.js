@@ -3,8 +3,7 @@ const db = require("../models");
 module.exports = {
 
   createRoom: async (req, res) => { 
-    console.log(req.user);
-    if(req.user){
+    if(req.user) {
       try {
         const newRoom = await db.Room.create({
           name: req.body.name,
@@ -14,7 +13,9 @@ module.exports = {
           sunlight: req.body.sunlight,
           // foreign ID to link user
           UserId: req.user.id,
-        })
+        }, 
+
+        )
         res.send(newRoom);
       } catch (err) {
         console.log("err");
@@ -27,40 +28,53 @@ module.exports = {
   },
 
   getAllRooms: async (req, res) => {
-    try {
-      const allRooms = await db.Room.findAll({
-        where: {
-          UserId: req.user.id,
-        },
-      });
-      res.send(allRooms);
-    } catch (err) {
-      res.send({ err_message: err });
+    if(req.user) {
+      try {
+        const allRooms = await db.Room.findAll({
+          where: {
+            UserId: req.user.id,
+          },
+        });
+        res.send(allRooms);
+      } catch (err) {
+        res.send({ err_message: err });
+      }
+    } else {
+      res.send("error");
     }
+ 
   },
 
   getRoom: async (req, res) => {
-    db.Room.findOne({
-      where: {
-        id: req.params.id,
-      },
-      // include: [db.User],
-    }).then((Room) => res.send(Room));
+    if(req.user) {
+      db.Room.findOne({
+        where: {
+          id: req.params.id,
+        },
+        // include: [db.User],
+      }).then((Room) => res.send(Room)).catch((err) => res.send(err))
+    }else {
+      res.send("error");
+    }
+  
   },
 
-  deleteRoom: async (req,res) => {    
-    db.Room.destroy({
-      where: { 
-        id: req.params.id,
-        UserId: req.body.id,
-      },
-    })
-    .then(deletedRoom => {
-      console.log(`Has the room been deleted? 1 means yes, 0 means no: ${deletedRoom}`);
-      res.send("deleted");
-    });
-  }
-
+  deleteRoom: async (req,res) => {  
+    if(req.user) {
+      db.Room.destroy({
+        where: { 
+          id: req.params.id,
+          UserId: req.body.id,
+        },
+      })
+      .then(deletedRoom => {
+        console.log(`Has the room been deleted? 1 means yes, 0 means no: ${deletedRoom}`);
+        res.send("deleted");
+      }).catch((err) => res.send(err))
+    }  else {
+      res.send("error");
+    }
+  },
 
 };
 

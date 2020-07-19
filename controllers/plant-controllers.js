@@ -11,7 +11,7 @@ let newPlant;
 
 module.exports = {
   createPlant: async (req, res) => {
-   if(req.room){
+   if(req.user){
       try {
         newPlant = await db.Plant.create({
           commonName: req.body.commonName,
@@ -23,7 +23,7 @@ module.exports = {
           rotate_frequency: req.body.rotate_frequency,
           repot_frequency: req.body.repot_frequency,
           // foreign ID to link user
-          // RoomId: req.body.id,
+          RoomId: req.params.RoomId,
           // UserID: req.user.id,
         });
         plantIntervals(req, res);
@@ -40,7 +40,7 @@ module.exports = {
 
 
   getPlant: async (req, res) => {
-    // if(req.room){
+    if(req.user){
       try {
         const onePlant = await db.Plant.findOne({
           where: {
@@ -52,7 +52,7 @@ module.exports = {
       } catch (err) {
         res.send({ err_message: err})
       }
-    // } else res.send("error");
+    } else res.send("error");
    
   },
 
@@ -111,8 +111,8 @@ const plantIntervals = ((req, res) => {
   userPlants.push(Plant1);
   // res.send(userPlants);
 
-  var dayInMilliseconds = 1000 * 30;
-  // var dayInMilliseconds = 1000 * 60 * 60 * 24;
+
+  var dayInMilliseconds = 1000 * 60 * 60 * 24;
   const waterTimer = setInterval(
     () => waterPlant(req.user.email, newPlant.commonName), dayInMilliseconds * newPlant.water_frequency
   );
