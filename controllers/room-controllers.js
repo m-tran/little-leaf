@@ -11,7 +11,7 @@ module.exports = {
         enoughPlants: req.body.size/req.body.numPlants > 30.0 ? false : true,
         sunlight: req.body.sunlight,
         // foreign ID to link user
-        UserId: req.body.id,
+        // UserId: req.user.id, //or should this be req.body.id ???
       });
 
       res.send(newRoom);
@@ -25,7 +25,7 @@ module.exports = {
     try {
       const allRooms = await db.Room.findAll({
         where: {
-          UserId: req.body.id,
+          UserId: req.user.id,
         },
       });
       res.send(allRooms);
@@ -49,9 +49,6 @@ module.exports = {
         id: req.params.id,
         UserId: req.body.id,
       },
-    }),
-    Room.hasMany(models.Plants, {
-      onDelete: "cascade",
     })
     .then(deletedRoom => {
       console.log(`Has the room been deleted? 1 means yes, 0 means no: ${deletedRoom}`);
