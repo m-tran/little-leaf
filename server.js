@@ -33,14 +33,12 @@ app.use(authRoutes);
 const clientRoutes = require("./routes/client-routes.js");
 app.use(clientRoutes);
 
-const userRoutes = require("./routes/user-routes.js");
-app.use(userRoutes);
-
 const roomRoutes = require("./routes/room-routes.js");
 app.use(roomRoutes);
 
 const plantRoutes = require("./routes/plant-routes.js");
 app.use(plantRoutes);
+
 
 db.sequelize.sync().then(() => {
   app.listen(PORT, () => console.log(`listening at http://localhost:${PORT}`));

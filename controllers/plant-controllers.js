@@ -1,5 +1,5 @@
 const db = require("../models");
-const {waterPlant, prunePlant, repotPlant, rotatePlant} = require("./nodemailer");
+const { waterPlant, prunePlant, repotPlant, rotatePlant } = require("./nodemailer");
 
 let userPlants = [];
 let waterSchedule = [];
@@ -8,12 +8,12 @@ let pruneSchedule = [];
 let repotSchedule = [];
 let count = 0;
 let newPlant;
-module.exports = {
 
+module.exports = {
   createPlant: async (req, res) => {
-    console.log(req.user)
+    if (req.user) {
       try {
-         newPlant = await db.Plant.create({
+        newPlant = await db.Plant.create({
           commonName: req.body.commonName,
           size: req.body.size,
           water_amount: req.body.size * .25,
@@ -23,63 +23,84 @@ module.exports = {
           rotate_frequency: req.body.rotate_frequency,
           repot_frequency: req.body.repot_frequency,
           // foreign ID to link user
-          RoomId: req.body.id,
+          RoomId: req.params.RoomId,
+          // UserID: req.user.id,
         });
         plantIntervals(req, res);
         res.send(newPlant);
-      }catch (error) {
+      } catch (error) {
         console.log('That did not go well')
         throw error
       }
+    } else {
+      res.redirect('/');
+    }
   },
 
 
 
   getPlant: async (req, res) => {
-    db.Plant.findOne({
-      where: {
-        id: req.body.id,
-      },
-      include: [db.Plant],
-    }).then((Plant) => res.send(Plant));
+    if (req.user) {
+      try {
+        const onePlant = await db.Plant.findOne({
+          where: {
+            id: req.params.id
+          },
+          // include: [db.Plant],
+        });
+        res.send(onePlant);
+      } catch (err) {
+        res.send({ err_message: err })
+      }
+    } else res.send("error");
   },
 
   getAllPlants: async (req, res) => {
-    db.Plant.findMany({
-      where: {
-        id: req.room.id,
+    if (req.user){
+    try {
+      const allPlants = await db.Plant.findAll({ where: { RoomId: req.params.RoomId,
       },
-      include: [db.Room],
-    }).then((Plants) => res.send(Plants));
+      });
+      res.send(allPlants);
+    } catch (err) {
+      res.send({ err_message: err})
+    }
+    } else {
+      res.redirect('/');
+    }
   },
 
-  deletePlant: async (req,res) => {    
-    db.Plants.destroy({
-      where: { id: req.params.id },
-    })
-    .then(deletedPlant => {
-      console.log(`Has the plant been deleted? 1 means yes, 0 means no: ${deletedPlant}`);
-    }).then(() => {
-      console.log(req.body.id);
-      const intervalToStop = waterSchedule.find((obj) => obj.id == req.body.id);
-      clearInterval(intervalToStop.interval);
-      console.log(intervalToStop);
-
-      const intervalToStop2 = pruneSchedule.find((obj) => obj.id == req.body.id);
-      clearInterval(intervalToStop2.interval);
-      console.log(intervalToStop2);
-
-      const intervalToStop3 = rotateSchedule.find((obj) => obj.id == req.body.id);
-      clearInterval(intervalToStop3.interval);
-      console.log(intervalToStop3);
-
-      const intervalToStop4 = repotSchedule.find((obj) => obj.id == req.body.id);
-      clearInterval(intervalToStop4.interval);
-      console.log(intervalToStop4);
-      res.send("yay!!");
-    })
-  }
+  deletePlant: async (req, res) => {
+    if (req.user){
+      db.Plants.destroy({
+        where: { id: req.params.id },
+      })
+        .then(deletedPlant => {
+          console.log(`Has the plant been deleted? 1 means yes, 0 means no: ${deletedPlant}`);
+        }).then(() => {
+          console.log(req.body.id);
+          const intervalToStop = waterSchedule.find((obj) => obj.id == req.body.id);
+          clearInterval(intervalToStop.interval);
+          console.log(intervalToStop);
   
+          const intervalToStop2 = pruneSchedule.find((obj) => obj.id == req.body.id);
+          clearInterval(intervalToStop2.interval);
+          console.log(intervalToStop2);
+  
+          const intervalToStop3 = rotateSchedule.find((obj) => obj.id == req.body.id);
+          clearInterval(intervalToStop3.interval);
+          console.log(intervalToStop3);
+  
+          const intervalToStop4 = repotSchedule.find((obj) => obj.id == req.body.id);
+          clearInterval(intervalToStop4.interval);
+          console.log(intervalToStop4);
+          res.send("yay!!");
+        })
+    } else {
+      res.send("error");
+    }
+  }
+
 };
 
 
@@ -90,25 +111,25 @@ const plantIntervals = ((req, res) => {
   userPlants.push(Plant1);
   // res.send(userPlants);
 
-  var dayInMilliseconds = 1000 * 30;
-  // var dayInMilliseconds = 1000 * 60 * 60 * 24;
+
+  var dayInMilliseconds = 86400000;
   const waterTimer = setInterval(
-    () => waterPlant(req.user.email, newPlant.commonName), dayInMilliseconds * newPlant.water_frequency
+    () => waterPlant(req.user.email, newPlant.commonName), (dayInMilliseconds * newPlant.water_frequency)
   );
   waterSchedule.push({ id: count, interval: waterTimer });
 
   const pruneTimer = setInterval(
-    () => prunePlant(req.user.email, newPlant.commonName), dayInMilliseconds * newPlant.prune_frequency
+    () => prunePlant(req.user.email, newPlant.commonName), (dayInMilliseconds * newPlant.prune_frequency)
   );
   pruneSchedule.push({ id: count, interval: pruneTimer });
 
   const rotateTimer = setInterval(
-    () => rotatePlant(req.user.email, newPlant.commonName), dayInMilliseconds * newPlant.rotate_frequency
+    () => rotatePlant(req.user.email, newPlant.commonName), (dayInMilliseconds * newPlant.rotate_frequency)
   );
   rotateSchedule.push({ id: count, interval: rotateTimer });
 
   const repotTimer = setInterval(
-    () => repotPlant(req.user.email, newPlant.commonName), dayInMilliseconds * newPlant.repot_frequency
+    () => repotPlant(req.user.email, newPlant.commonName), (dayInMilliseconds * newPlant.repot_frequency)
   );
   repotSchedule.push({ id: count, interval: repotTimer });
 
