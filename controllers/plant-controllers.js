@@ -56,22 +56,6 @@ module.exports = {
   },
 
   getAllPlants: async (req, res) => {
-<<<<<<< HEAD
-    console.log("hi")
-    if (req.room) {
-      console.log(req.room)
-      try {
-        console.log("hi")
-        const allPlants = await db.Plant.findAll({
-          where: {
-            RoomId: req.room.id,
-          },
-        });
-        res.send(allPlants);
-      } catch (err) {
-        res.send({ err_message: err })
-      }
-=======
     if (req.user){
     try {
       const allPlants = await db.Plant.findAll({ where: { RoomId: req.params.RoomId,
@@ -81,7 +65,6 @@ module.exports = {
     } catch (err) {
       res.send({ err_message: err})
     }
->>>>>>> b8fc8c0d04e57ec5d8bcc8a759d9796e780d7791
     } else {
       res.redirect('/');
     }
