@@ -42,6 +42,10 @@ app.use(roomRoutes);
 const plantRoutes = require("./routes/plant-routes.js");
 app.use(plantRoutes);
 
+// This was a test to demonstrate params vs query
+const logRoutes = require("./routes/log-routes");
+app.use(logRoutes);
+
 db.sequelize.sync().then(() => {
   app.listen(PORT, () => console.log(`listening at http://localhost:${PORT}`));
 });
