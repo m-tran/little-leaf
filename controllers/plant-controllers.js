@@ -1,5 +1,5 @@
 const db = require("../models");
-const {waterPlant, prunePlant, repotPlant, rotatePlant} = require("./nodemailer");
+const { waterPlant, prunePlant, repotPlant, rotatePlant } = require("./nodemailer");
 
 let userPlants = [];
 let waterSchedule = [];
@@ -11,7 +11,7 @@ let newPlant;
 
 module.exports = {
   createPlant: async (req, res) => {
-   if(req.user){
+    if (req.user) {
       try {
         newPlant = await db.Plant.create({
           commonName: req.body.commonName,
@@ -28,11 +28,11 @@ module.exports = {
         });
         plantIntervals(req, res);
         res.send(newPlant);
-      }catch (error) {
+      } catch (error) {
         console.log('That did not go well')
         throw error
       }
-    } else { 
+    } else {
       res.redirect('/');
     }
   },
@@ -40,7 +40,7 @@ module.exports = {
 
 
   getPlant: async (req, res) => {
-    if(req.user){
+    if (req.user) {
       try {
         const onePlant = await db.Plant.findOne({
           where: {
@@ -50,7 +50,7 @@ module.exports = {
         });
         res.send(onePlant);
       } catch (err) {
-        res.send({ err_message: err})
+        res.send({ err_message: err })
       }
     } else res.send("error");
   },
@@ -69,34 +69,34 @@ module.exports = {
       res.redirect('/');
     }
   },
-  
-  deletePlant: async (req,res) => {    
+
+  deletePlant: async (req, res) => {
     db.Plants.destroy({
       where: { id: req.params.id },
     })
-    .then(deletedPlant => {
-      console.log(`Has the plant been deleted? 1 means yes, 0 means no: ${deletedPlant}`);
-    }).then(() => {
-      console.log(req.body.id);
-      const intervalToStop = waterSchedule.find((obj) => obj.id == req.body.id);
-      clearInterval(intervalToStop.interval);
-      console.log(intervalToStop);
+      .then(deletedPlant => {
+        console.log(`Has the plant been deleted? 1 means yes, 0 means no: ${deletedPlant}`);
+      }).then(() => {
+        console.log(req.body.id);
+        const intervalToStop = waterSchedule.find((obj) => obj.id == req.body.id);
+        clearInterval(intervalToStop.interval);
+        console.log(intervalToStop);
 
-      const intervalToStop2 = pruneSchedule.find((obj) => obj.id == req.body.id);
-      clearInterval(intervalToStop2.interval);
-      console.log(intervalToStop2);
+        const intervalToStop2 = pruneSchedule.find((obj) => obj.id == req.body.id);
+        clearInterval(intervalToStop2.interval);
+        console.log(intervalToStop2);
 
-      const intervalToStop3 = rotateSchedule.find((obj) => obj.id == req.body.id);
-      clearInterval(intervalToStop3.interval);
-      console.log(intervalToStop3);
+        const intervalToStop3 = rotateSchedule.find((obj) => obj.id == req.body.id);
+        clearInterval(intervalToStop3.interval);
+        console.log(intervalToStop3);
 
-      const intervalToStop4 = repotSchedule.find((obj) => obj.id == req.body.id);
-      clearInterval(intervalToStop4.interval);
-      console.log(intervalToStop4);
-      res.send("yay!!");
-    })
+        const intervalToStop4 = repotSchedule.find((obj) => obj.id == req.body.id);
+        clearInterval(intervalToStop4.interval);
+        console.log(intervalToStop4);
+        res.send("yay!!");
+      })
   }
-  
+
 };
 
 
