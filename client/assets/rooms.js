@@ -139,21 +139,19 @@ $(document).ready(function () {
 
 });
 
-// const addRoom = (name, size, numPlant) => {
-//     const roomData = {
-//         name,
-//         size,
-//         numPlant
-//     }
-//     console.log(roomData);
+const addRoom = (name, size, numPlant) => {
+    const roomData = {
+        name,
+        size,
+        numPlant
+    }
+    console.log(roomData);
 
-// }
+}
 
-// return new Promise((resolve, reject) => {
-//     $.ajax({
-//         type: "POST",
-//         url: "/room/new",
-//         data: userData,
-//     }).then((res) => resolve(res));
-// });
+// $.ajax({
+//     type: "POST",
+//     url: "/room/new",
+//     data: roomData,
+// }).then((res) => console.log(res));
 
