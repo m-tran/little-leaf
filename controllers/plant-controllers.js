@@ -8,12 +8,12 @@ let pruneSchedule = [];
 let repotSchedule = [];
 let count = 0;
 let newPlant;
-module.exports = {
 
+module.exports = {
   createPlant: async (req, res) => {
-    console.log(req.user)
+   if(req.room){
       try {
-         newPlant = await db.Plant.create({
+        newPlant = await db.Plant.create({
           commonName: req.body.commonName,
           size: req.body.size,
           water_amount: req.body.size * .25,
@@ -23,7 +23,8 @@ module.exports = {
           rotate_frequency: req.body.rotate_frequency,
           repot_frequency: req.body.repot_frequency,
           // foreign ID to link user
-          RoomId: req.body.id,
+          // RoomId: req.body.id,
+          // UserID: req.user.id,
         });
         plantIntervals(req, res);
         res.send(newPlant);
@@ -31,21 +32,36 @@ module.exports = {
         console.log('That did not go well')
         throw error
       }
+    } else { 
+      res.redirect('/');
+    }
   },
 
 
 
   getPlant: async (req, res) => {
-    db.Plant.findOne({
-      where: {
-        id: req.params.id,
-      },
-      include: [db.Plant],
-    }).then((Plant) => res.send(Plant));
+    // if(req.room){
+      try {
+        const onePlant = await db.Plant.findOne({
+          where: {
+            id: req.params.id
+          },
+          // include: [db.Plant],
+        });
+        res.send(onePlant);
+      } catch (err) {
+        res.send({ err_message: err})
+      }
+    // } else res.send("error");
+   
   },
 
   getAllPlants: async (req, res) => {
+    console.log("hi")
+    if (req.room){
+      console.log(req.room)
     try {
+      console.log("hi")
       const allPlants = await db.Plant.findAll({ where: { RoomId: req.room.id,
       },
       });
@@ -53,8 +69,11 @@ module.exports = {
     } catch (err) {
       res.send({ err_message: err})
     }
+    } else {
+      res.redirect('/');
+    }
   },
-   
+  
   deletePlant: async (req,res) => {    
     db.Plants.destroy({
       where: { id: req.params.id },

@@ -1,9 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
     const Plant = sequelize.define("Plant", {
-        // room_id:{
-        //     type: DataTypes.INTEGER,
-        //     allowNull: false,
-        // },
         commonName:{
             type: DataTypes.STRING,
             allowNull: false,
@@ -43,9 +39,8 @@ module.exports = (sequelize, DataTypes) => {
     Plant.associate = (models) => {
         Plant.belongsTo(models.Room, {
             foreignKey: { allowNull: false },
-        });
+        });   
     };
-
 
     return Plant;
 }
