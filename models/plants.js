@@ -27,12 +27,10 @@ module.exports = (sequelize, DataTypes) => {
         },
         rotate_frequency: {
             type: DataTypes.INTEGER,
-            allowNull: false,
             defaultValue: 56,
         },
         repot_frequency: {
             type: DataTypes.INTEGER,
-            allowNull: false,
             defaultValue: 365,
         },
     });
