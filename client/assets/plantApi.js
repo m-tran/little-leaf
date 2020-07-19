@@ -41,12 +41,16 @@ $(document).ready(function () {
                 resultId.push(res[i].id);
                 $("#results")
                 .append(`
-                <div class="card horizontal" id="selectPlant" data-id=${i}>
+                <div class="card horizontal">
                     <div class="card-stacked">
                         <div class="card-content">
                             ${res[i].common_name}
                             <br>
                             <i>${res[i].scientific_name}</i>
+                            <br>
+                            <br>
+                            <a class="waves-effect waves-light btn" id="selectPlant" data-id=${i}>view details</a>
+                            <a class="waves-effect waves-light btn"><i class="material-icons left">add</i>add plant</a>
                         </div>
                     </div>
                 </div>`);
@@ -67,12 +71,15 @@ $(document).ready(function () {
             console.log(res);
             $("#results")
                 .append(`
-                <div class="card horizontal" id="selectPlant">
+                <div class="card horizontal">
                     <div class="card-stacked">
                         <div class="card-content">
                             ${res.common_name}
                             <br>
                             <i>${res.scientific_name}</i>
+                            <br>
+                            <br>
+                            <a class="waves-effect waves-light btn"><i class="material-icons left">add</i>add plant</a>
                         </div>
                     </div>
                 </div>`);
