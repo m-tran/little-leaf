@@ -43,6 +43,13 @@ img{
   padding: 0 1rem 0 1rem;
 }
 
+.logo {
+  /* filter: invert(1); */
+  height: 70px;
+  width: 70px;
+}
+
+
 /* li{
   text-decoration: none;
   list-style: none;
