@@ -20,10 +20,10 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.BOOLEAN,
             allowNull: false,
         },
-        UserId: {
-            type: DataTypes.INTEGER,
-            allowNull: false,
-        }
+        // UserId: {
+        //     type: DataTypes.INTEGER,
+        //     allowNull: false,
+        // }
     });
 
     Room.associate = (models) => {
@@ -32,8 +32,8 @@ module.exports = (sequelize, DataTypes) => {
         });
     }
     Room.associate = (models) => {
-            Room.hasMany(models.Plant, {
-            onDelete: "cascade",
+        Room.hasMany(models.Plant, {
+        onDelete: "cascade",
             });
         
     };
