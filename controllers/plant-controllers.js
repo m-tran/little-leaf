@@ -38,21 +38,23 @@ module.exports = {
   getPlant: async (req, res) => {
     db.Plant.findOne({
       where: {
-        id: req.body.id,
+        id: req.params.id,
       },
       include: [db.Plant],
     }).then((Plant) => res.send(Plant));
   },
 
   getAllPlants: async (req, res) => {
-    db.Plant.findMany({
-      where: {
-        id: req.room.id,
+    try {
+      const allPlants = await db.Plant.findAll({ where: { RoomId: req.room.id,
       },
-      include: [db.Room],
-    }).then((Plants) => res.send(Plants));
+      });
+      res.send(allPlants);
+    } catch (err) {
+      res.send({ err_message: err})
+    }
   },
-
+   
   deletePlant: async (req,res) => {    
     db.Plants.destroy({
       where: { id: req.params.id },
