@@ -1,9 +1,12 @@
-const count = 0;
-const answer = "";
+$(document).ready(function () {
 
-$('#start').on('click', function () {
-    $('#questions').append(
-        `<div class="row">
+    const name = $('#roomName');
+    const size = $('#roomSize');
+    const numPlant = $('#plantNum');
+
+    $('#start').on('click', function () {
+        $('#questions').append(
+            `<div class="row">
         <div class="col s12 m6">
             <div class="card green lighten-5">
                 <div class="card-content white-text">
@@ -87,29 +90,29 @@ $('#start').on('click', function () {
         <i class="material-icons right"></i>
     </button>
        `
-    );
-    $("#btnSubmit").on("click", function () {
-        function getInputValue() {
+        );
+        $("#btnSubmit").on("click", function () {
+            function getInputValue() {
 
 
 
-            let roomSize = document.getElementById('roomSize').value;
-            let plantNum = document.getElementById('plantNum').value;
-            if (roomSize <= 100 && plantNum <= 1) {
-                console.log('small room');
+                let roomSize = document.getElementById('roomSize').value;
+                let plantNum = document.getElementById('plantNum').value;
+                if (roomSize <= 100 && plantNum <= 1) {
+                    console.log('small room');
 
-            } else if (roomSize > 101 && roomSize < 300 && plantNum >= 1 && plantNum <= 3) {
-                console.log('medium room + 2 plants');
+                } else if (roomSize > 101 && roomSize < 300 && plantNum >= 1 && plantNum <= 3) {
+                    console.log('medium room + 2 plants');
 
-            } else if (roomSize > 301 && plantNum >= 3) {
-                console.log('large room');
+                } else if (roomSize > 301 && plantNum >= 3) {
+                    console.log('large room');
 
-            }
-            $('#newRoom').append(
-                `<div class="col s12 m2">
+                }
+                $('#newRoom').append(
+                    `<div class="col s12 m2">
                 <div class="card horizontal">
                   <div class="card-image">
-                    <img src="https://lorempixel.com/100/190/nature/6">
+                    <img src="https://cdn.vox-cdn.com/thumbor/QRC-K6S73KSM0XVNvrQhicj9g_E=/0x0:2000x1333/1200x800/filters:focal(840x507:1160x827)/cdn.vox-cdn.com/uploads/chorus_image/image/65377475/BT7B0071.7.jpg">
                   </div>
                   <div class="card-stacked">
                     <div class="card-content">
@@ -123,27 +126,34 @@ $('#start').on('click', function () {
                   </div>
                 </div>
               </div>`
-            );
+                );
 
-            $("#questions").empty();
-        }
-        getInputValue();
-
-
-        // if (count <= 6) {
-        //     answer = "small";
-        // } else if (count > 6 && count <= 10) {
-        //     answer = "medium";
-        // } else if (count > 10 && count <= 16) {
-        //     answer = "large";
-        // }
-        // console.log(answer);
-    });
+                $("#questions").empty();
+            }
+            getInputValue();
+        });
 
 
-})
+    })
 
 
+});
 
+// const addRoom = (name, size, numPlant) => {
+//     const roomData = {
+//         name,
+//         size,
+//         numPlant
+//     }
+//     console.log(roomData);
 
+// }
+
+// return new Promise((resolve, reject) => {
+//     $.ajax({
+//         type: "POST",
+//         url: "/room/new",
+//         data: userData,
+//     }).then((res) => resolve(res));
+// });
 
