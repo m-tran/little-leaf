@@ -6,7 +6,7 @@ const {
     getPlant,
     getAllPlants,
     deletePlant,
-  } = require("../controllers/plant-controllers");
+} = require("../controllers/plant-controllers");
 
 
 router.post("/plant/new", createPlant);

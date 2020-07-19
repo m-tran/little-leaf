@@ -52,8 +52,8 @@ router.get("/search", (req, res) => {
 });
 
 router.get("/search/plant", (req,res) => {
-  let searchLink = req.query.link;
-  let plantUrl = `${searchLink}?token=${process.env.KEY}`;
+  let searchId = req.query.id;
+  let plantUrl = `https://v0.trefle.io/api/plants/${searchId}?token=${process.env.KEY}`;
   
   axios
     .get(plantUrl)
