@@ -8,11 +8,12 @@ let pruneSchedule = [];
 let repotSchedule = [];
 let count = 0;
 let newPlant;
-module.exports = {
 
+module.exports = {
   createPlant: async (req, res) => {
+    console.log(req.user);
       try {
-         newPlant = await db.Plant.create({
+        newPlant = await db.Plant.create({
           commonName: req.body.commonName,
           size: req.body.size,
           water_amount: req.body.size * .25,
@@ -22,7 +23,8 @@ module.exports = {
           rotate_frequency: req.body.rotate_frequency,
           repot_frequency: req.body.repot_frequency,
           // foreign ID to link user
-          RoomId: req.body.id,
+          RoomId: req.room.id,
+          UserID: req.user.id,
         });
         plantIntervals(req, res);
         res.send(newPlant);
@@ -35,19 +37,19 @@ module.exports = {
 
 
   getPlant: async (req, res) => {
-    if(req.room){
+    // if(req.room){
       try {
         const onePlant = await db.Plant.findOne({
           where: {
-            id: req.plant.id
+            id: req.params.id
           },
-          include: [db.Plant, ],
+          include: [db.Plant],
         });
         res.send(onePlant);
       } catch (err) {
         res.send({ err_message: err})
       }
-    } else res.send("error");
+    // } else res.send("error");
    
   },
 
