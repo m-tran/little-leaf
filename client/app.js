@@ -95,14 +95,6 @@ $('#start').on('click', function () {
 
             let roomSize = document.getElementById('roomSize').value;
             let plantNum = document.getElementById('plantNum').value;
-            // let opt1 = document.getElementById('opt1');
-            // let opt2 = document.getElementById('opt2');
-            // let count = 0;
-            // $("#opt1").on("click", function () {
-            //     count++;
-            //     console.log(count);
-            // });
-
             if (roomSize <= 100 && plantNum <= 1) {
                 console.log('small room');
 
@@ -114,7 +106,7 @@ $('#start').on('click', function () {
 
             }
             $('#newRoom').append(
-                `<div class="col s12 m7">
+                `<div class="col s12 m2">
                 <div class="card horizontal">
                   <div class="card-image">
                     <img src="https://lorempixel.com/100/190/nature/6">
@@ -122,7 +114,7 @@ $('#start').on('click', function () {
                   <div class="card-stacked">
                     <div class="card-content">
                       <p>${roomName.value}</p>
-                      <p> size:  ${roomSize.value}</p> 
+                      <p> size:  ${roomSize}</p> 
                       <p>number of plants:  ${plantNum}</p>
                     </div>
                     <div class="card-action">
