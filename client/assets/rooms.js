@@ -1,5 +1,26 @@
 $(document).ready(function () {
 
+    // getRooms().then((allRooms) => {
+    //     renderRooms(allRooms);
+    // });
+
+    // $("#btnSubmit").on("click", () => {
+    //     const roomText = $("#newRoom").val();
+    //     $("#newRoom").val("");
+
+    //     $.ajax({
+    //         type: "POST",
+    //         url: "/rooms",
+    //         data: { text: roomText },
+    //     }).then(() => {
+    //         getRooms]()
+    //             .then((allRooms) => renderTodos(allRooms))
+    //             .catch((err) => console.log(err));
+    //     });
+    // });
+
+
+
     const name = $('#roomName');
     const size = $('#roomSize');
     const numPlant = $('#plantNum');
@@ -139,15 +160,64 @@ $(document).ready(function () {
 
 });
 
-const addRoom = (name, size, numPlant) => {
-    const roomData = {
-        name,
-        size,
-        numPlant
-    }
-    console.log(roomData);
+// const getRooms = () => {
+//     return new Promise((resolve, reject) => {
+//         $.ajax({
+//             type: "GET",
+//             url: "/room",
+//         })
+//             .then((res) => {
+//                 resolve(res);
+//             })
+//             .catch((err) => reject(err));
+//     });
+// };
 
-}
+// const renderRooms = (arr) => {
+//     $("#card-container").html("");
+//     arr.forEach(() => {
+
+//         $('#newRoom').append(
+//             `<div class="col s12 m2">
+//         <div class="card horizontal">
+//           <div class="card-image">
+//             <img src="https://cdn.vox-cdn.com/thumbor/QRC-K6S73KSM0XVNvrQhicj9g_E=/0x0:2000x1333/1200x800/filters:focal(840x507:1160x827)/cdn.vox-cdn.com/uploads/chorus_image/image/65377475/BT7B0071.7.jpg">
+//           </div>
+//           <div class="card-stacked">
+//             <div class="card-content">
+//               <p>${roomName.value}</p>
+//               <p> size:  ${roomSize}</p> 
+//               <p>number of plants:  ${plantNum}</p>
+//             </div>
+//             <div class="card-action">
+//               <a href="./plants.html">view schedule</a>
+//             </div>
+//           </div>
+//         </div>
+//       </div>`
+//         );
+//     });
+// };
+
+
+
+// $(document).on("click", "#plants", function () {
+//     window.location.href = `/plant/all`;
+// });
+
+// $(document).on("click", "#rooms", function () {
+//     window.location.href = `/rooms`;
+});
+
+// const addRoom = (name, size, numPlant) => {
+//     const roomData = {
+//         name,
+//         size,
+//         numPlant
+//     }
+//     console.log(roomData);
+
+// }
 
 // $.ajax({
 //     type: "POST",
