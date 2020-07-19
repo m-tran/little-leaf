@@ -88,68 +88,68 @@ $('#start').on('click', function () {
     </button>
        `
     );
+    $("#btnSubmit").on("click", function () {
+        function getInputValue() {
+
+
+
+            let roomSize = document.getElementById('roomSize').value;
+            let plantNum = document.getElementById('plantNum').value;
+            // let opt1 = document.getElementById('opt1');
+            // let opt2 = document.getElementById('opt2');
+            // let count = 0;
+            // $("#opt1").on("click", function () {
+            //     count++;
+            //     console.log(count);
+            // });
+
+            if (roomSize <= 100 && plantNum <= 1) {
+                console.log('small room');
+
+            } else if (roomSize > 101 && roomSize < 300 && plantNum >= 1 && plantNum <= 3) {
+                console.log('medium room + 2 plants');
+
+            } else if (roomSize > 301 && plantNum >= 3) {
+                console.log('large room');
+
+            }
+            $('#newRoom').append(
+                `<div class="col s12 m7">
+                <div class="card horizontal">
+                  <div class="card-image">
+                    <img src="https://lorempixel.com/100/190/nature/6">
+                  </div>
+                  <div class="card-stacked">
+                    <div class="card-content">
+                      <p>${roomName.value}</p>
+                      <p> size:  ${roomSize.value}</p> 
+                      <p>number of plants:  ${plantNum}</p>
+                    </div>
+                    <div class="card-action">
+                      <a href="./plants.html">view schedule</a>
+                    </div>
+                  </div>
+                </div>
+              </div>`
+            );
+
+            $("#questions").empty();
+        }
+        getInputValue();
+
+
+        // if (count <= 6) {
+        //     answer = "small";
+        // } else if (count > 6 && count <= 10) {
+        //     answer = "medium";
+        // } else if (count > 10 && count <= 16) {
+        //     answer = "large";
+        // }
+        // console.log(answer);
+    });
+
 
 })
-
-$("#btnSubmit").on("click", function () {
-    function getInputValue() {
-
-
-
-        let roomSize = document.getElementById('roomSize').value;
-        let plantNum = document.getElementById('plantNum').value;
-        // let opt1 = document.getElementById('opt1');
-        // let opt2 = document.getElementById('opt2');
-        // let count = 0;
-        // $("#opt1").on("click", function () {
-        //     count++;
-        //     console.log(count);
-        // });
-
-        if (roomSize <= 100 && plantNum <= 1) {
-            console.log('small room');
-
-        } else if (roomSize > 101 && roomSize < 300 && plantNum >= 1 && plantNum <= 3) {
-            console.log('medium room + 2 plants');
-
-        } else if (roomSize > 301 && plantNum >= 3) {
-            console.log('large room');
-
-        }
-        $('#newRoom').append(
-            `<div class="col s12 m7">
-            <div class="card horizontal">
-              <div class="card-image">
-                <img src="https://lorempixel.com/100/190/nature/6">
-              </div>
-              <div class="card-stacked">
-                <div class="card-content">
-                  <p>${roomName.value}</p>
-                  <p> size:  ${roomSize.value}</p> 
-                  <p>number of plants:  ${plantNum}</p>
-                </div>
-                <div class="card-action">
-                  <a href="./plants.html">view schedule</a>
-                </div>
-              </div>
-            </div>
-          </div>`
-        );
-
-
-    }
-    getInputValue();
-
-
-    // if (count <= 6) {
-    //     answer = "small";
-    // } else if (count > 6 && count <= 10) {
-    //     answer = "medium";
-    // } else if (count > 10 && count <= 16) {
-    //     answer = "large";
-    // }
-    // console.log(answer);
-});
 
 
 
