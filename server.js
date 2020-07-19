@@ -33,8 +33,8 @@ app.use(authRoutes);
 const clientRoutes = require("./routes/client-routes.js");
 app.use(clientRoutes);
 
-const userRoutes = require("./routes/user-routes.js");
-app.use(userRoutes);
+// const userRoutes = require("./routes/user-routes.js");
+// app.use(userRoutes);
 
 const roomRoutes = require("./routes/room-routes.js");
 app.use(roomRoutes);
