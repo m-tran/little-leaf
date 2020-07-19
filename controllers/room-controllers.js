@@ -3,8 +3,9 @@ const db = require("../models");
 module.exports = {
 
   createRoom: async (req, res) => { 
-    console.log(req.user);
-    if(req.user){
+    console.log(req.user)
+
+    if(req.user) {
       try {
         const newRoom = await db.Room.create({
           name: req.body.name,
@@ -14,7 +15,9 @@ module.exports = {
           sunlight: req.body.sunlight,
           // foreign ID to link user
           UserId: req.user.id,
-        })
+        }, 
+
+        )
         res.send(newRoom);
       } catch (err) {
         console.log("err");
