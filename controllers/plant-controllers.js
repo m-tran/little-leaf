@@ -11,7 +11,7 @@ let newPlant;
 
 module.exports = {
   createPlant: async (req, res) => {
-    console.log(req.user);
+   if(req.room){
       try {
         newPlant = await db.Plant.create({
           commonName: req.body.commonName,
@@ -23,8 +23,8 @@ module.exports = {
           rotate_frequency: req.body.rotate_frequency,
           repot_frequency: req.body.repot_frequency,
           // foreign ID to link user
-          RoomId: req.room.id,
-          UserID: req.user.id,
+          // RoomId: req.body.id,
+          // UserID: req.user.id,
         });
         plantIntervals(req, res);
         res.send(newPlant);
@@ -32,6 +32,9 @@ module.exports = {
         console.log('That did not go well')
         throw error
       }
+    } else { 
+      res.redirect('/');
+    }
   },
 
 
@@ -43,7 +46,7 @@ module.exports = {
           where: {
             id: req.params.id
           },
-          include: [db.Plant],
+          // include: [db.Plant],
         });
         res.send(onePlant);
       } catch (err) {
