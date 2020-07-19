@@ -53,16 +53,12 @@ module.exports = {
         res.send({ err_message: err})
       }
     } else res.send("error");
-   
   },
 
   getAllPlants: async (req, res) => {
-    console.log("hi")
-    if (req.room){
-      console.log(req.room)
+    if (req.user){
     try {
-      console.log("hi")
-      const allPlants = await db.Plant.findAll({ where: { RoomId: req.room.id,
+      const allPlants = await db.Plant.findAll({ where: { RoomId: req.params.RoomId,
       },
       });
       res.send(allPlants);
