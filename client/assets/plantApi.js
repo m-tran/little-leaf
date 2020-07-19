@@ -1,12 +1,21 @@
 $(document).ready(function () {
 
     let searchResults = [];
-    let resultLinks = [];
+    let resultId = [];
+    let id;
+    let index;
 
     $("#search").on("keydown", function (e) {
         if (e.keyCode === 13) { //checks whether the pressed key is "Enter"
             loadSearch(e);
         }
+    });
+
+    $(document).on("click", "#selectPlant", function (e) {
+        e.preventDefault();
+        index = $(this).attr("data-id");
+        id = resultId[index];
+        renderSelectedPlant(id);
     });
 
     function loadSearch(e) {
@@ -26,10 +35,10 @@ $(document).ready(function () {
             },
         }).then((res) => {
             searchResults = [];
-            resultLinks = [];
+            resultId = [];
             for (let i = 0; i < 5; i++) {
                 searchResults.push(res[i].scientific_name);
-                resultLinks.push(res[i].link);
+                resultId.push(res[i].id);
                 $("#results")
                 .append(`
                 <div class="card horizontal" id="selectPlant" data-id=${i}>
@@ -52,10 +61,21 @@ $(document).ready(function () {
             type: "GET",
             url: "http://localhost:3005/search/plant",
             data: {
-                link: selected;
+                id: selected,
             }
         }).then((res) => {
             console.log(res);
+            $("#results")
+                .append(`
+                <div class="card horizontal" id="selectPlant">
+                    <div class="card-stacked">
+                        <div class="card-content">
+                            ${res.common_name}
+                            <br>
+                            <i>${res.scientific_name}</i>
+                        </div>
+                    </div>
+                </div>`);
         });
     }
 
