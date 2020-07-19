@@ -4,15 +4,17 @@ const session = require("express-session");
 const passport = require("passport");
 const db = require("./models");
 const PORT = process.env.PORT || 3005;
+const cors = require('cors');
+const path = require('path');
+
 require("dotenv").config();
 
-
-const axios = require("axios");
-
+app.use(cors());
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(express.static("./client"));
+// app.use(express.static("./client"));
+app.use(express.static(path.join(__dirname, "./client")));
 
 app.use(
   session({
@@ -25,12 +27,11 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-
-// const clientRoutes = require("./routes/client-routes.js");
-// app.use(clientRoutes);
-
 const authRoutes = require("./routes/auth-routes.js");
 app.use(authRoutes);
+
+const clientRoutes = require("./routes/client-routes.js");
+app.use(clientRoutes);
 
 const userRoutes = require("./routes/user-routes.js");
 app.use(userRoutes);

@@ -7,76 +7,54 @@ let rotateSchedule = [];
 let pruneSchedule = [];
 let repotSchedule = [];
 let count = 0;
-
+let newPlant;
 module.exports = {
+
   createPlant: async (req, res) => {
+    console.log(req.user)
       try {
-        const newPlant = await db.Plant.create({
+         newPlant = await db.Plant.create({
           commonName: req.body.commonName,
           size: req.body.size,
-          water_amount: req.body.water_amount,
+          water_amount: req.body.size * .25,
           water_frequency: req.body.water_frequency,
           prune: req.body.prune,
           prune_frequency: req.body.prune_frequency,
           rotate_frequency: req.body.rotate_frequency,
           repot_frequency: req.body.repot_frequency,
           // foreign ID to link user
-          roomId: req.room.id,
+          RoomId: req.body.id,
         });
-      
-  console.log("starting timer");
-  count++;
-  const Plant1 = { commonName: req.body.commonName, water_amount: req.body.water_amount, water_frequency: req.body.water_frequency, prune: req.body.prune, prune_frequency: req.body.prune_frequency, rotate_frequency: req.body.rotate_frequency, repot_frequency: req.body.repot_frequency, roomid: req.room.id, id: count };
-  userPlants.push(Plant1);
-  res.send(userPlants);
-
-  var dayInMilliseconds = 1000 * 60 * 60 * 24;
-  const waterTimer = setInterval(
-    () => waterPlant(req.user.email, req.plant.commonName), dayInMilliseconds * water_frequency
-  );
-  waterSchedule.push({ id: count, interval: waterTimer });
-
-  const pruneTimer = setInterval(
-    () => prunePlant(req.user.email, req.plant.commonName), dayInMilliseconds * prune_frequency
-  );
-  pruneSchedule.push({ id: count, interval: pruneTimer });
-
-  const rotateTimer = setInterval(
-    () => rotatePlant(req.user.email, req.plant.commonName), dayInMilliseconds * rotate_frequency
-  );
-  rotateSchedule.push({ id: count, interval: rotateTimer });
-
-  const repotTimer = setInterval(
-    () => repotPlant(req.user.email, req.plant.commonName), dayInMilliseconds * repot_frequency
-  );
-  repotSchedule.push({ id: count, interval: repotTimer });
-
-        res.send(newPlant); //should be new plant
-      } catch (err) {
-        res.send(err);
+        plantIntervals(req, res);
+        res.send(newPlant);
+      }catch (error) {
+        console.log('That did not go well')
+        throw error
       }
-
   },
+
 
 
   getPlant: async (req, res) => {
     db.Plant.findOne({
       where: {
-        id: req.body.id,
+        id: req.params.id,
       },
       include: [db.Plant],
     }).then((Plant) => res.send(Plant));
   },
 
   getAllPlants: async (req, res) => {
-    db.Plant.findMany({
-      where: {
-        id: req.room.id,
+    try {
+      const allPlants = await db.Plant.findAll({ where: { RoomId: req.room.id,
       },
-      include: [db.Room],
-    }).then((Plants) => res.send(Plants));
+      });
+      res.send(allPlants);
+    } catch (err) {
+      res.send({ err_message: err})
+    }
   },
-
+   
   deletePlant: async (req,res) => {    
     db.Plants.destroy({
       where: { id: req.params.id },
@@ -106,3 +84,34 @@ module.exports = {
   
 };
 
+
+const plantIntervals = ((req, res) => {
+  count++;
+
+  const Plant1 = { commonName: req.body.commonName, water_frequency: req.body.water_frequency, prune_frequency: req.body.prune_frequency, rotate_frequency: req.body.rotate_frequency, repot_frequency: req.body.repot_frequency, id: count };
+  userPlants.push(Plant1);
+  // res.send(userPlants);
+
+  var dayInMilliseconds = 1000 * 30;
+  // var dayInMilliseconds = 1000 * 60 * 60 * 24;
+  const waterTimer = setInterval(
+    () => waterPlant(req.user.email, newPlant.commonName), dayInMilliseconds * newPlant.water_frequency
+  );
+  waterSchedule.push({ id: count, interval: waterTimer });
+
+  const pruneTimer = setInterval(
+    () => prunePlant(req.user.email, newPlant.commonName), dayInMilliseconds * newPlant.prune_frequency
+  );
+  pruneSchedule.push({ id: count, interval: pruneTimer });
+
+  const rotateTimer = setInterval(
+    () => rotatePlant(req.user.email, newPlant.commonName), dayInMilliseconds * newPlant.rotate_frequency
+  );
+  rotateSchedule.push({ id: count, interval: rotateTimer });
+
+  const repotTimer = setInterval(
+    () => repotPlant(req.user.email, newPlant.commonName), dayInMilliseconds * newPlant.repot_frequency
+  );
+  repotSchedule.push({ id: count, interval: repotTimer });
+
+});
