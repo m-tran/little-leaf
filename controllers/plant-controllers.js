@@ -11,7 +11,6 @@ let newPlant;
 module.exports = {
 
   createPlant: async (req, res) => {
-    console.log(req.user)
       try {
          newPlant = await db.Plant.create({
           commonName: req.body.commonName,
@@ -36,16 +35,28 @@ module.exports = {
 
 
   getPlant: async (req, res) => {
-    db.Plant.findOne({
-      where: {
-        id: req.params.id,
-      },
-      include: [db.Plant],
-    }).then((Plant) => res.send(Plant));
+    if(req.room){
+      try {
+        const onePlant = await db.Plant.findOne({
+          where: {
+            id: req.plant.id
+          },
+          include: [db.Plant, ],
+        });
+        res.send(onePlant);
+      } catch (err) {
+        res.send({ err_message: err})
+      }
+    } else res.send("error");
+   
   },
 
   getAllPlants: async (req, res) => {
+    console.log("hi")
+    if (req.room){
+      console.log(req.room)
     try {
+      console.log("hi")
       const allPlants = await db.Plant.findAll({ where: { RoomId: req.room.id,
       },
       });
@@ -53,8 +64,11 @@ module.exports = {
     } catch (err) {
       res.send({ err_message: err})
     }
+    } else {
+      res.redirect('/');
+    }
   },
-   
+  
   deletePlant: async (req,res) => {    
     db.Plants.destroy({
       where: { id: req.params.id },
