@@ -136,6 +136,11 @@
   margin-right: auto;
 }
 
+#success img {
+  height: 30vh;
+  top: 35%;
+}
+
 #loader img {
   display: inline-block;
   height: 30vh;
@@ -181,10 +186,9 @@
   100% {opacity:0; transform: rotate(-10deg);}
 }
 
-.active {
-  background-color: rgba(0, 128, 0, 0.562);
+#loginForm, #registerForm {
+  padding-left: 0;
 }
-
 
 /* li{
   text-decoration: none;

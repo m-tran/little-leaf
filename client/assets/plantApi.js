@@ -250,7 +250,11 @@ $(document).ready(function () {
             console.log(plant);
             $("#results").html("");
             $("#results").append(`
-                <div class="col s12">
+                <div class="col s12" id="success" style="display: flex; justify-content: center;">
+                    <img src="https://blush.ly/UAM1-2D9k/p">
+                    <br>
+                </div>
+                <div class="col s12" id="success">
                     <h1 style="text-align: center">Plant Added!</h1>
                 </div>
             `);
