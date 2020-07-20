@@ -1,13 +1,21 @@
 
   .input {
-   background-color: rgb(167, 240, 182);
+   background-color: rgb(168, 206, 175);
     height: 50px;
-    width: 400px;
+    width: 80%;
+   margin-left: 60px;
+
 
   }
-  
+
+.left-align {
+  margin-left: 60px;
+}
+
+
 .col {
 height: 60px;
+align-items: center;
 }
 
   html, body{
@@ -28,9 +36,9 @@ body:not(.plants) {
 
   }
   .content {
-    padding: 20px;
+    padding: 10px;
     min-height: 100%;
-    margin: 0 auto -50px;
+ 
   }
 
 
@@ -42,15 +50,3 @@ body:not(.plants) {
   .footer,.push{
       height: 100px;
   }
-
-img{
-  height: 200px;
-  width: 200px;
-}
-
-/* plant page styling */
-#search {
-  border: 1px solid black;
-  border-radius: 25px;
-  padding: 0 1rem 0 1rem;
-}
