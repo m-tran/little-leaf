@@ -9,7 +9,6 @@ module.exports = (sequelize, DataTypes) => {
         },
         water_amount: {
             type: DataTypes.INTEGER,
-            allowNull: false,
             defaultValue: 0.5,
         },
         water_frequency: {

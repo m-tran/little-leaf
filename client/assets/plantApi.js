@@ -6,12 +6,8 @@ $(document).ready(function () {
     let index;
     let commonName = "";
     let allPlants = [];
-
-    const waterFrequency;
-    const pruneFrequency;
-    const rotateFrequency;
-    const createdDate;
-    const repotFrequency;
+    let userRooms = [];
+    let userRoomsList = [];
 
     $("#search").on("keydown", function (e) {
         if (e.keyCode === 13) { //checks whether the pressed key is "Enter"
@@ -35,13 +31,15 @@ $(document).ready(function () {
 
     $(document).on("click", "#submitBtn", function (e) {
         e.preventDefault();
-        let room = 1; // need to change to get correct room based on name
+        let room = document.getElementById("roomListContainer");
+        let roomVal = room.options[room.selectedIndex].value;
         let name = commonName;
-        let plantSize = $(`input[name="size"]:checked`).val();
+        let plantSize = parseInt($(`input[name="size"]:checked`).val());
+        console.log(plantSize);
         let frequency = $("#waterFrequency").val();
         let prune = $(`input[name="prune"]:checked`).val();
-        addPlant(room, name, plantSize, frequency, prune);
-    });git
+        addPlant(roomVal, name, plantSize, frequency, prune);
+    });
 
     $(document).on("click", "#viewPlants", function(e) {
         e.preventDefault();
@@ -117,69 +115,102 @@ $(document).ready(function () {
     }
 
     function createAddPlantOptions() {
-        $("#results")
-        .append(`
-        <div class="card horizontal">
-            <div class="card-stacked">
-                <div class="card-content">
-                    <form>
-                        <p>What room are you adding this to?</p>
-                        <div class="row">
+        $.ajax({
+            type: "GET",
+            url: "/rooms", 
+        })
+        .then((res) => {
+            console.log(res);
+            userRooms = res;
+            userRooms.forEach((result, i) => {
+                userRoomsList.push({name: result.name, id: result.id});
+            });
+            console.log(userRoomsList);
+        })
+        .then(() => {
+            $("select").formSelect();
+            $("#results")
+            .append(`
+            <div class="card horizontal">
+                <div class="card-stacked">
+                    <div class="card-content">
+                        <form>
+                            <p>What room are you adding this to?</p>
                             <div class="input-field col s12">
-                                <textarea id="roomId" class="materialize-textarea"></textarea>
-                                <label for="roomId">Enter Room</label>
+                                <select id="roomListContainer">
+                                    <option value="" disabled selected>Choose your room</option>
+                                </select>
                             </div>
-                        </div>
-                        <p>What is the plant size?</p>
-                        <p>
-                            <label>
-                                <input name="size" type="radio"/>
-                                <span>Small</span>
-                            </label>
-                        </p>
-                        <p>
-                            <label>
-                                <input name="size" type="radio"/>
-                                <span>Medium</span>
-                            </label>
-                        </p>
-                        <p>
-                            <label>
-                                <input name="size" type="radio"/>
-                                <span>Large</span>
-                            </label>
-                        </p>
-                        <br>
-                        <br>
-                        <p>How often do you need to water your plant?</p>
-                        <div class="row">
-                            <div class="input-field col s12">
-                                <textarea id="waterFrequency" class="materialize-textarea"></textarea>
-                                <label for="waterFrequency">Enter water frequency in days</label>
-                            </div>
-                        </div>
-                        <p>Do you need to prune your plant?</p>
-                        <p>
-                            <label>
-                                <input name="prune" type="radio" checked/>
-                                <span>Yes</span>
-                            </label>
-                        </p>
-                        <p>
-                            <label>
-                                <input name="prune" type="radio"/>
-                                <span>No</span>
-                            </label>
-                        </p>
-                        <br>
-                        <br>
-                        <button class="btn waves-effect waves-light" type="submit" name="action" id="submitBtn">Submit
-                            <i class="material-icons right">send</i>
-                        </button>
-                    </form>
+                            <br>
+                            <br>
+                            <p id="anchorSize">What is the plant size?</p>
+                        </form>
+                    </div>
                 </div>
-            </div>
-        </div>`);
+            </div>`);
+        })
+        .then(() => {
+            $("select").formSelect();
+            let selectContainer = $("#roomListContainer");
+            for(let i=0; i < userRoomsList.length; i++) {
+                let opt = userRoomsList[i].name;
+                let optValue = userRoomsList[i].id;
+                let el = document.createElement("option");
+                el.textContent = opt;
+                el.value = optValue;
+                selectContainer.append(el);
+            }
+        })
+        .then(() => {
+            $("select").formSelect();
+            $("#anchorSize").append(`
+                <p>
+                    <label>
+                        <input name="size" type="radio" value="1"/>
+                        <span>Small</span>
+                    </label>
+                </p>
+                <p>
+                    <label>
+                        <input name="size" type="radio" value="2"/>
+                        <span>Medium</span>
+                    </label>
+                </p>
+                <p>
+                    <label>
+                        <input name="size" type="radio" value="3"/>
+                        <span>Large</span>
+                    </label>
+                </p>
+                <br>
+                <br>
+                <p>How often do you need to water your plant?</p>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <textarea id="waterFrequency" class="materialize-textarea"></textarea>
+                        <label for="waterFrequency">Enter water frequency in days</label>
+                    </div>
+                </div>
+                <p>Do you need to prune your plant?</p>
+                <p>
+                    <label>
+                        <input name="prune" type="radio" value="true" checked/>
+                        <span>Yes</span>
+                    </label>
+                </p>
+                <p>
+                    <label>
+                        <input name="prune" value="false" type="radio"/>
+                        <span>No</span>
+                    </label>
+                </p>
+                <br>
+                <br>
+                <button class="btn waves-effect waves-light" type="submit" name="action" id="submitBtn">Submit
+                    <i class="material-icons right">send</i>
+                </button>
+            `);
+        });
     }
 
     function addPlant(room, name, plantSize, frequency, prune) {
@@ -193,11 +224,7 @@ $(document).ready(function () {
                 prune: prune,
             }
         }).then((plant) => {
-            waterFrequency = plant.water_frequency;
-            pruneFrequency = plant.prune_frequency;
-            rotateFrequency = plant.rotate_frequency;
-            repotFrequency = plant.repot_frequency;
-            createdDate = plant.createdAt;
+            console.log(plant);
         });
     }
 

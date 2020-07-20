@@ -4,9 +4,6 @@ $(document).ready(function () {
     //     renderRooms(allRooms);
     // });
 
-
-
-
     // const name = $('#roomName');
     // const size = $('#roomSize');
     // const numPlant = $('#plantNum');
@@ -141,8 +138,9 @@ $(document).ready(function () {
                     url: "/room/new",
                     data: { name: roomText, size: roomSize, numPlants: plantNum, sunlight: true },
                 }).then((response) => {
+
                     $("#questions").empty();
-                    console.log(response)
+                    console.log(response);
                     // getRooms()
                     //     .then((allRooms) => renderRooms(allRooms))
                     //     .catch((err) => console.log(err));
@@ -150,37 +148,27 @@ $(document).ready(function () {
                     $('#newRoom').append(
                         `<div class="col s12 m2">
                     <div class="card horizontal">
-                      <div class="card-image">
-                        <img src="https://cdn.vox-cdn.com/thumbor/QRC-K6S73KSM0XVNvrQhicj9g_E=/0x0:2000x1333/1200x800/filters:focal(840x507:1160x827)/cdn.vox-cdn.com/uploads/chorus_image/image/65377475/BT7B0071.7.jpg">
-                      </div>
-                      <div class="card-stacked">
-                        <div class="card-content">
-                          <p>${response.name}</p>
-                          <p> size:  ${response.size}</p> 
-                          <p>number of plants:  ${response.numPlants}</p>
+                        <div class="card-image">
+                            <img src="https://cdn.vox-cdn.com/thumbor/QRC-K6S73KSM0XVNvrQhicj9g_E=/0x0:2000x1333/1200x800/filters:focal(840x507:1160x827)/cdn.vox-cdn.com/uploads/chorus_image/image/65377475/BT7B0071.7.jpg">
                         </div>
-                        <div class="card-action">
-                          <a href="/myplants">view schedule</a>
+                        <div class="card-stacked">
+                            <div class="card-content">
+                            <p>${response.name}</p>
+                            <p> size:  ${response.size}</p> 
+                            <p>number of plants:  ${response.numPlants}</p>
+                            </div>
+                            <div class="card-action">
+                            <a href="/myplants">view schedule</a>
+                            </div>
                         </div>
-                      </div>
-                    </div>
-                  </div>`
+                        </div>
+                    </div>`
                     );
                 });
-
-
-
-
-
             }
-
             getInputValue();
         });
-
-
     })
-
-
 });
 
 const getRooms = () => {
@@ -189,10 +177,10 @@ const getRooms = () => {
             type: "GET",
             url: "/rooms",
         })
-            .then((res) => {
-                resolve(res);
-            })
-            .catch((err) => reject(err));
+        .then((res) => {
+            resolve(res);
+        })
+        .catch((err) => reject(err));
     });
 };
 
@@ -202,21 +190,21 @@ getRooms().then((res) => {
         $('#newRoom').append(
             `<div class="col s12 m2">
         <div class="card horizontal">
-          <div class="card-image">
-            <img src="https://cdn.vox-cdn.com/thumbor/QRC-K6S73KSM0XVNvrQhicj9g_E=/0x0:2000x1333/1200x800/filters:focal(840x507:1160x827)/cdn.vox-cdn.com/uploads/chorus_image/image/65377475/BT7B0071.7.jpg">
-          </div>
-          <div class="card-stacked">
-            <div class="card-content">
-              <p>${room.name}</p>
-              <p> size:  ${room.size}</p> 
-              <p>number of plants:  ${room.numPlants}</p>
+            <div class="card-image">
+                <img src="https://cdn.vox-cdn.com/thumbor/QRC-K6S73KSM0XVNvrQhicj9g_E=/0x0:2000x1333/1200x800/filters:focal(840x507:1160x827)/cdn.vox-cdn.com/uploads/chorus_image/image/65377475/BT7B0071.7.jpg">
             </div>
-            <div class="card-action">
-              <a href="/myplants">view schedule</a>
+            <div class="card-stacked">
+                <div class="card-content">
+                <p>${room.name}</p>
+                <p> size:  ${room.size}</p> 
+                <p>number of plants:  ${room.numPlants}</p>
+                </div>
+                <div class="card-action">
+                <a href="/myplants">view schedule</a>
+                </div>
             </div>
-          </div>
-        </div>
-      </div>`
+            </div>
+        </div>`
         );
     });
 });
