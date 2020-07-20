@@ -236,6 +236,12 @@ $(document).ready(function () {
             }
         }).then((plant) => {
             console.log(plant);
+            $("#results").html("");
+            $("#results").append(`
+                <div class="col s12">
+                    <h1 style="text-align: center">Plant Added!</h1>
+                </div>
+            `);
         });
     }
 
@@ -248,7 +254,6 @@ $(document).ready(function () {
             for (let i=0; i < res.length; i++) {
                 $("#loadAllPlants")
                 .append(`
-                    <h2>My Plants!</h2>
                     <div class="card horizontal data-id=${i}">
                         <div class="card-stacked">
                             <div class="card-content">
