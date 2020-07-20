@@ -41,7 +41,7 @@ $(document).ready(function () {
         let frequency = $("#waterFrequency").val();
         let prune = $(`input[name="prune"]:checked`).val();
         addPlant(room, name, plantSize, frequency, prune);
-    });
+    });git
 
     $(document).on("click", "#viewPlants", function(e) {
         e.preventDefault();
@@ -219,6 +219,10 @@ $(document).ready(function () {
                     <div class="card-stacked">
                         <div class="card-content">
                             <h2>${result.commonName}</h2>
+                            <p><span class="new badge" data-badge-caption="water"></span>${result.water_frequency} days</p>
+                            <p><span class="new badge" data-badge-caption="prune"></span>${result.prune}</p>
+                            <p><span class="new badge" data-badge-caption="rotate"></span>${result.rotate_frequency} days</p>
+                            <p><span class="new badge" data-badge-caption="repot"></span>${result.repot_frequency} repot</p>
                         </div>
                     </div>
                 </div>
