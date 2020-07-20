@@ -93,7 +93,7 @@ const waterPlant = (email, plantName) => {
           html: 'Embedded image: <img src="cid:unique4@kreata.ee"/>',
           attachments: [{
               filename: 'transfer.png',
-              path: "./assets/transfer.png",
+              path: "./controllers/pics/transfer.png",
               cid: 'unique4@kreata.ee' //same cid value as in the html img src
           }]
         
@@ -128,7 +128,7 @@ const waterPlant = (email, plantName) => {
             html: 'Embedded image: <img src="cid:unique3@kreata.ee"/>',
             attachments: [{
                 filename: 'plant.png',
-                path: "./assets/plant.png",
+                path: "./controllers/pics/plant.png",
                 cid: 'unique3@kreata.ee' //same cid value as in the html img src
             }]
           
