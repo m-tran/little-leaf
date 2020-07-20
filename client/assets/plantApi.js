@@ -29,7 +29,6 @@ $(document).ready(function () {
 
     $(document).on("click", "#submitBtn", function (e) {
         e.preventDefault();
-        console.log("clicked");
         let room = 1; // need to change to get correct room based on name
         let name = commonName;
         let plantSize = $(`input[name="size"]:checked`).val();
@@ -39,7 +38,8 @@ $(document).ready(function () {
     });
 
     $(document).on("click", "#viewPlants", function(e) {
-
+        e.preventDefault();
+        renderAllPlants();
     });
 
     function loadSearch(e) {
