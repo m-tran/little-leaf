@@ -128,6 +128,7 @@ $(document).ready(function () {
                             <br>
                             <i>${res.scientific_name}</i>
                             <br>
+                    
                             <br>
                             <a class="waves-effect waves-light btn" id="addPlant"><i class="material-icons left">add</i>add plant</a>
                         </div>
@@ -275,7 +276,7 @@ $(document).ready(function () {
                                 <h3>${res[i].commonName}</h3>
                                 <p><span class="new badge" data-badge-caption="water"></span>${res[i].water_frequency} days</p>
                                 <br>
-                                <p><span class="new badge" data-badge-caption="prune"></span>${res[i].prune}</p>
+                                <p><span class="new badge" data-badge-caption="prune"></span>${res[i].prune_frequency} days</p>
                                 <br>
                                 <p><span class="new badge" data-badge-caption="rotate"></span>${res[i].rotate_frequency} days</p>
                                 <br>
