@@ -45,7 +45,7 @@ $(document).ready(function () {
 
     $(document).on("click", "#viewPlants", function(e) {
         e.preventDefault();
-        renderAllPlants();
+        renderAllPlants(room);
     });
 
     function loadSearch(e) {
@@ -201,7 +201,7 @@ $(document).ready(function () {
         });
     }
 
-    function renderAllPlants() {
+    function renderAllPlants(room) {
         $.ajax({
             type: "GET",
             url: `/plant/all/${room}`,
