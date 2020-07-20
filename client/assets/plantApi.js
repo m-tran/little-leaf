@@ -5,6 +5,13 @@ $(document).ready(function () {
     let id;
     let index;
     let commonName = "";
+    let allPlants = [];
+
+    const waterFrequency;
+    const pruneFrequency;
+    const rotateFrequency;
+    const createdDate;
+    const repotFrequency;
 
     $("#search").on("keydown", function (e) {
         if (e.keyCode === 13) { //checks whether the pressed key is "Enter"
@@ -28,13 +35,17 @@ $(document).ready(function () {
 
     $(document).on("click", "#submitBtn", function (e) {
         e.preventDefault();
-        console.log("clicked");
         let room = 1; // need to change to get correct room based on name
         let name = commonName;
         let plantSize = $(`input[name="size"]:checked`).val();
         let frequency = $("#waterFrequency").val();
         let prune = $(`input[name="prune"]:checked`).val();
         addPlant(room, name, plantSize, frequency, prune);
+    });
+
+    $(document).on("click", "#viewPlants", function(e) {
+        e.preventDefault();
+        renderAllPlants();
     });
 
     function loadSearch(e) {
@@ -81,7 +92,7 @@ $(document).ready(function () {
         $("#results").html("");
         $.ajax({
             type: "GET",
-            url: "http://localhost:3005/search/plant",
+            url: "/search/plant",
             data: {
                 id: selected,
             }
@@ -181,8 +192,41 @@ $(document).ready(function () {
                 water_frequency: frequency,
                 prune: prune,
             }
+        }).then((plant) => {
+            waterFrequency = plant.water_frequency;
+            pruneFrequency = plant.prune_frequency;
+            rotateFrequency = plant.rotate_frequency;
+            repotFrequency = plant.repot_frequency;
+            createdDate = plant.createdAt;
+        });
+    }
+
+    function renderAllPlants() {
+        $.ajax({
+            type: "GET",
+            url: `/plant/all/${room}`,
         }).then((res) => {
             console.log(res);
+            // create cards for each plant
+            allPlants = res;
+            allPlants.forEach((result, i) => {
+                const card = document.createElement("div");
+                card.classList = "plant-body";
+            
+
+            const content = `
+                <div class="card horizontal data-id=${i}">
+                    <div class="card-stacked">
+                        <div class="card-content">
+                            <h2>${result.commonName}</h2>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            container.html += content;
+
+            });
         });
     }
 
