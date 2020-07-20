@@ -86,7 +86,7 @@ $(document).ready(function () {
         $("#results").html("");
         $.ajax({
             type: "GET",
-            url: "http://localhost:3005/search/plant",
+            url: "/search/plant",
             data: {
                 id: selected,
             }
