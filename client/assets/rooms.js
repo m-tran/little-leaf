@@ -142,9 +142,8 @@ $(document).ready(function () {
                         </div>
                         <div class="card-stacked">
                             <div class="card-content">
-                            <p>${response.name}</p>
-                            <p> size:  ${response.size}</p> 
-                            <p>number of plants:  ${response.numPlants}</p>
+                            <p>room name: ${response.name}</p>
+                            <p>size: ${response.size} sq ft</p> 
                             </div>
                             <div class="card-action">
                             <a href="/myplants">view schedule</a>
@@ -204,9 +203,8 @@ $(document).ready(function () {
               </div>
               <div class="card-stacked">
                   <div class="card-content">
-                  <p>${room.name}</p>
-                  <p> size:  ${room.size}</p> 
-                  <p>number of plants:  ${room.numPlants}</p>
+                  <p>room name: ${room.name}</p>
+                  <p> size: ${room.size} sq ft</p> 
                   </div>
                   <div class="card-action">
                   <a href="/myschedule">view schedule</a>
@@ -240,9 +238,8 @@ $(document).ready(function () {
                       </div>
                       <div class="card-stacked">
                           <div class="card-content">
-                          <p>${room.name}</p>
-                          <p> size:  ${room.size}</p> 
-                          <p>number of plants:  ${room.numPlants}</p>
+                          <p>room name: ${room.name}</p>
+                          <p> size: ${room.size} sq ft</p> 
                           </div>
                           <div class="card-action">
                           <a href="/myschedule">view schedule</a>
