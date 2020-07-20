@@ -31,7 +31,7 @@ const getPlants = () => {
 getPlants().then((res) => {
     console.log(res)
     res.forEach((plant) => {
-    res.send(plant.water_frequency, plant.prune_frequency, plant.rotate_frequency, plant.rotate_frequency)
+    res.send(plant.createdAt, plant.water_frequency, plant.prune_frequency, plant.rotate_frequency, plant.rotate_frequency)
 
     });
 });
