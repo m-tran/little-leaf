@@ -1,8 +1,15 @@
 $(document).ready(function () {
 
-    const name = $('#roomName');
-    const size = $('#roomSize');
-    const numPlant = $('#plantNum');
+    // getRooms().then((allRooms) => {
+    //     renderRooms(allRooms);
+    // });
+
+
+
+
+    // const name = $('#roomName');
+    // const size = $('#roomSize');
+    // const numPlant = $('#plantNum');
 
     $('#start').on('click', function () {
         $('#questions').append(
@@ -11,7 +18,7 @@ $(document).ready(function () {
             <div class="card green lighten-5">
                 <div class="card-content white-text">
                     <span class="card-title" style="color: gray;">room name</span>
-                    <form action="#">
+                    <form>
                         <div class="row">
                             <div class="input-field col s6">
                                 <input value="" id="roomName" type="text" class="validate">
@@ -91,13 +98,32 @@ $(document).ready(function () {
     </button>
        `
         );
+
+        // $("#btnSubmit").on("click", () => {
+        //     const roomText = $("#newRoom").val();
+        //     $("#newRoom").val("");
+
+        //     $.ajax({
+        //         type: "POST",
+        //         url: "/room/new",
+        //         data: { text: roomText },
+        //     }).then(() => {
+        //         getRooms()
+        //             .then((allRooms) => renderRooms(allRooms))
+        //             .catch((err) => console.log(err));
+        //     });
+        // });
+
         $("#btnSubmit").on("click", function () {
             function getInputValue() {
 
 
+                const roomText = $("#roomName").val();
+                $("#roomName").val("");
 
                 let roomSize = document.getElementById('roomSize').value;
                 let plantNum = document.getElementById('plantNum').value;
+                console.log(roomText, roomSize, plantNum)
                 if (roomSize <= 100 && plantNum <= 1) {
                     console.log('small room');
 
@@ -108,28 +134,46 @@ $(document).ready(function () {
                     console.log('large room');
 
                 }
-                $('#newRoom').append(
-                    `<div class="col s12 m2">
-                <div class="card horizontal">
-                  <div class="card-image">
-                    <img src="https://cdn.vox-cdn.com/thumbor/QRC-K6S73KSM0XVNvrQhicj9g_E=/0x0:2000x1333/1200x800/filters:focal(840x507:1160x827)/cdn.vox-cdn.com/uploads/chorus_image/image/65377475/BT7B0071.7.jpg">
-                  </div>
-                  <div class="card-stacked">
-                    <div class="card-content">
-                      <p>${roomName.value}</p>
-                      <p> size:  ${roomSize}</p> 
-                      <p>number of plants:  ${plantNum}</p>
-                    </div>
-                    <div class="card-action">
-                      <a href="./plants.html">view schedule</a>
-                    </div>
-                  </div>
-                </div>
-              </div>`
-                );
 
-                $("#questions").empty();
+
+                $.ajax({
+                    type: "POST",
+                    url: "/room/new",
+                    data: { name: roomText, size: roomSize, numPlants: plantNum, sunlight: true },
+                }).then((response) => {
+                    $("#questions").empty();
+                    console.log(response)
+                    // getRooms()
+                    //     .then((allRooms) => renderRooms(allRooms))
+                    //     .catch((err) => console.log(err));
+
+                    $('#newRoom').append(
+                        `<div class="col s12 m2">
+                    <div class="card horizontal">
+                      <div class="card-image">
+                        <img src="https://cdn.vox-cdn.com/thumbor/QRC-K6S73KSM0XVNvrQhicj9g_E=/0x0:2000x1333/1200x800/filters:focal(840x507:1160x827)/cdn.vox-cdn.com/uploads/chorus_image/image/65377475/BT7B0071.7.jpg">
+                      </div>
+                      <div class="card-stacked">
+                        <div class="card-content">
+                          <p>${response.name}</p>
+                          <p> size:  ${response.size}</p> 
+                          <p>number of plants:  ${response.numPlants}</p>
+                        </div>
+                        <div class="card-action">
+                          <a href="/myplants">view schedule</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>`
+                    );
+                });
+
+
+
+
+
             }
+
             getInputValue();
         });
 
@@ -139,15 +183,89 @@ $(document).ready(function () {
 
 });
 
-const addRoom = (name, size, numPlant) => {
-    const roomData = {
-        name,
-        size,
-        numPlant
-    }
-    console.log(roomData);
+const getRooms = () => {
+    return new Promise((resolve, reject) => {
+        $.ajax({
+            type: "GET",
+            url: "/rooms",
+        })
+            .then((res) => {
+                resolve(res);
+            })
+            .catch((err) => reject(err));
+    });
+};
 
-}
+getRooms().then((res) => {
+    console.log(res)
+    res.forEach((room) => {
+        $('#newRoom').append(
+            `<div class="col s12 m2">
+        <div class="card horizontal">
+          <div class="card-image">
+            <img src="https://cdn.vox-cdn.com/thumbor/QRC-K6S73KSM0XVNvrQhicj9g_E=/0x0:2000x1333/1200x800/filters:focal(840x507:1160x827)/cdn.vox-cdn.com/uploads/chorus_image/image/65377475/BT7B0071.7.jpg">
+          </div>
+          <div class="card-stacked">
+            <div class="card-content">
+              <p>${room.name}</p>
+              <p> size:  ${room.size}</p> 
+              <p>number of plants:  ${room.numPlants}</p>
+            </div>
+            <div class="card-action">
+              <a href="/myplants">view schedule</a>
+            </div>
+          </div>
+        </div>
+      </div>`
+        );
+    });
+});
+
+// const renderRooms = (arr) => {
+//     $("#card-container").html("");
+//     arr.forEach(() => {
+
+//         $('#newRoom').append(
+//             `<div class="col s12 m2">
+//         <div class="card horizontal">
+//           <div class="card-image">
+//             <img src="https://cdn.vox-cdn.com/thumbor/QRC-K6S73KSM0XVNvrQhicj9g_E=/0x0:2000x1333/1200x800/filters:focal(840x507:1160x827)/cdn.vox-cdn.com/uploads/chorus_image/image/65377475/BT7B0071.7.jpg">
+//           </div>
+//           <div class="card-stacked">
+//             <div class="card-content">
+//               <p>${roomName.value}</p>
+//               <p> size:  ${roomSize}</p> 
+//               <p>number of plants:  ${plantNum}</p>
+//             </div>
+//             <div class="card-action">
+//               <a href="./plants.l">view schedule</a>
+//             </div>
+//           </div>
+//         </div>
+//       </div>`
+//         );
+//     });
+// };
+
+
+
+// $(document).on("click", "#plants", function () {
+//     window.location.href = `/plant/all`;
+// });
+
+// $(document).on("click", "#rooms", function () {
+//     window.location.href = `/rooms`;
+// });
+
+// const addRoom = (name, size, numPlant) => {
+//     const roomData = {
+//         name,
+//         size,
+//         numPlant
+//     }
+//     console.log(roomData);
+
+// }
 
 // $.ajax({
 //     type: "POST",
