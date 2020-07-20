@@ -128,24 +128,25 @@ const plantIntervals = ((req, res) => {
   // res.send(userPlants);
 
 
-  var dayInMilliseconds = 86400000;
+  // var dayInMilliseconds = 86400000;
+  var dayInMilliseconds = 2000;
   const waterTimer = setInterval(
-    () => waterPlant(req.user.email, newPlant.commonName), (dayInMilliseconds * newPlant.water_frequency)
+    () => waterPlant(req.user.email, newPlant.commonName), (Math.min((dayInMilliseconds * newPlant.water_frequency), Math.pow(2,31)-1))
   );
   waterSchedule.push({ id: count, interval: waterTimer });
 
   const pruneTimer = setInterval(
-    () => prunePlant(req.user.email, newPlant.commonName), (dayInMilliseconds * newPlant.prune_frequency)
+    () => prunePlant(req.user.email, newPlant.commonName), (Math.min((dayInMilliseconds * newPlant.prune_frequency), Math.pow(2,31)-1))
   );
   pruneSchedule.push({ id: count, interval: pruneTimer });
 
   const rotateTimer = setInterval(
-    () => rotatePlant(req.user.email, newPlant.commonName), (dayInMilliseconds * newPlant.rotate_frequency)
+    () => rotatePlant(req.user.email, newPlant.commonName), (Math.min((dayInMilliseconds * newPlant.rotate_frequency), Math.pow(2,31)-1))
   );
   rotateSchedule.push({ id: count, interval: rotateTimer });
 
   const repotTimer = setInterval(
-    () => repotPlant(req.user.email, newPlant.commonName), (dayInMilliseconds * newPlant.repot_frequency)
+    () => repotPlant(req.user.email, newPlant.commonName), (Math.min((dayInMilliseconds * newPlant.repot_frequency), Math.pow(2,31)-1))
   );
   repotSchedule.push({ id: count, interval: repotTimer });
 

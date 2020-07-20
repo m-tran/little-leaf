@@ -71,6 +71,32 @@
   animation: swing 3s infinite ease-in-out;
 }
 
+.sign-up {
+  width: 100%;
+}
+
+#memberPage .card-image img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+#memberPage .card-image {
+  height: 300px;
+  width: auto;
+  overflow: hidden;
+}
+
+#signup-img img {
+  z-index: 5;
+  height: 70vh;
+  top: 10%;
+  right: 5%;
+  width: auto;
+  overflow: hidden;
+  position: absolute;
+}
+
 @keyframes swing {
   0%, 100% { transform: rotate(-10deg);}
   20% {transform: scale(.98);}

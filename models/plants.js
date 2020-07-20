@@ -30,7 +30,7 @@ module.exports = (sequelize, DataTypes) => {
         },
         repot_frequency: {
             type: DataTypes.INTEGER,
-            defaultValue: 365,
+            defaultValue: 56,
         },
     });
     Plant.associate = (models) => {
