@@ -9,6 +9,8 @@ $(document).ready(function () {
     let userRooms = [];
     let userRoomsList = [];
     let roomId;
+    let clicked = false;
+    let clickedSubmit = false;
 
     $("#search").on("keydown", function (e) {
         if (e.keyCode === 13) { //checks whether the pressed key is "Enter"
@@ -27,7 +29,10 @@ $(document).ready(function () {
         e.preventDefault();
         index = $(this).attr("data-id");
         id = resultId[index];
-        createAddPlantOptions();
+        if (clicked === false) {
+            createAddPlantOptions();
+        }
+        clicked = true;
     });
 
     $(document).on("click", "#submitBtn", function (e) {
@@ -38,19 +43,25 @@ $(document).ready(function () {
         let plantSize = parseInt($(`input[name="size"]:checked`).val());
         let frequency = $("#waterFrequency").val();
         let prune = $(`input[name="prune"]:checked`).val();
-        addPlant(roomVal, name, plantSize, frequency, prune);
+        if (clickedSubmit === false) {
+            addPlant(roomVal, name, plantSize, frequency, prune);
+        }
+        clickedSubmit = true;
     });
 
     $(document).on("click", "#viewPlants", function(e) {
         roomId = $(this).attr("data-id");
+        roomName = $(this).attr("data");
         localStorage.setItem("room", roomId);
+        localStorage.setItem("name", roomName);
     });
 
     function pageLoad() {
         if (window.location.pathname=="/myplants") {
             roomId = localStorage.getItem("room");
+            roomName = localStorage.getItem("name");
             console.log(roomId);
-            renderAllPlants(roomId);
+            renderAllPlants(roomId,roomName);
         }
     }
 
@@ -245,12 +256,13 @@ $(document).ready(function () {
         });
     }
 
-    function renderAllPlants(room) {
+    function renderAllPlants(room, name) {
         $.ajax({
             type: "GET",
             url: `/plant/all/${room}`,
         }).then((res) => {
             console.log(res);
+            $("#loadAllPlants").append(`<h2>Plants for ${name}</h2>`)
             for (let i=0; i < res.length; i++) {
                 $("#loadAllPlants")
                 .append(`
