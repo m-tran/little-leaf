@@ -7,6 +7,12 @@ $(document).ready(function () {
     let commonName = "";
     let allPlants = [];
 
+    const waterFrequency;
+    const pruneFrequency;
+    const rotateFrequency;
+    const createdDate;
+    const repotFrequency;
+
     $("#search").on("keydown", function (e) {
         if (e.keyCode === 13) { //checks whether the pressed key is "Enter"
             loadSearch(e);
@@ -186,8 +192,12 @@ $(document).ready(function () {
                 water_frequency: frequency,
                 prune: prune,
             }
-        }).then((res) => {
-            console.log(res);
+        }).then((plant) => {
+            waterFrequency = plant.water_frequency;
+            pruneFrequency = plant.prune_frequency;
+            rotateFrequency = plant.rotate_frequency;
+            repotFrequency = plant.repot_frequency;
+            createdDate = plant.createdAt;
         });
     }
 
