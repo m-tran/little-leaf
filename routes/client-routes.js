@@ -11,6 +11,13 @@ require("dotenv").config();
 
 router.get("/", (req, res) => {
   if (req.user) {
+    res.redirect("/");
+  }
+  res.sendFile(path.join(__dirname, "../client/landing.html"));
+});
+
+router.get("/signup", (req, res) => {
+  if (req.user) {
     res.redirect("/members");
   }
   res.sendFile(path.join(__dirname, "../client/signup.html"));
@@ -24,12 +31,25 @@ router.get("/myrooms", (req, res) => {
   }
 });
 
+
+// client side route to info page page
+router.get("/myschedule", isAuthenticated, (req, res) => {
+  res.sendFile(path.join(__dirname, "../client/schedule.html"));
+});
+
+
 // client side route to login page
 router.get("/login", (req, res) => {
   if (req.user) {
     res.redirect("/members");
   }
   res.sendFile(path.join(__dirname, "../client/login.html"));
+});
+
+
+// client side route to info page page
+router.get("/facts", isAuthenticated, (req, res) => {
+  res.sendFile(path.join(__dirname, "../client/facts.html"));
 });
 
 router.get("/register", (req, res) => {
@@ -47,11 +67,6 @@ router.get("/members", isAuthenticated, (req, res) => {
 // client side route to myplants page
 router.get("/myplants", isAuthenticated, (req, res) => {
   res.sendFile(path.join(__dirname, "../client/plants.html"));
-});
-
-// client side route to facts page
-router.get("/facts", isAuthenticated, (req, res) => {
-  res.sendFile(path.join(__dirname, "../client/facts.html"));
 });
 
 // client side route to search page

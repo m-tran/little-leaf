@@ -9,7 +9,6 @@ module.exports = (sequelize, DataTypes) => {
         },
         water_amount: {
             type: DataTypes.INTEGER,
-            allowNull: false,
             defaultValue: 0.5,
         },
         water_frequency: {
@@ -31,7 +30,7 @@ module.exports = (sequelize, DataTypes) => {
         },
         repot_frequency: {
             type: DataTypes.INTEGER,
-            defaultValue: 365,
+            defaultValue: 56,
         },
     });
     Plant.associate = (models) => {

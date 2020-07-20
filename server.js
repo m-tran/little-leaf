@@ -6,8 +6,10 @@ const db = require("./models");
 const PORT = process.env.PORT || 3005;
 const cors = require('cors');
 const path = require('path');
+const config = require("./config/config");
 
 require("dotenv").config();
+
 
 app.use(cors());
 
@@ -18,7 +20,7 @@ app.use(express.static(path.join(__dirname, "./client")));
 
 app.use(
   session({
-    secret: process.env.SECRET,
+    secret: "supersecret",
     resave: true,
     saveUninitialized: true,
   })

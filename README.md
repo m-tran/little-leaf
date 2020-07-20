@@ -2,10 +2,12 @@
 
 # Little Leaf
 
-* App that helps you give the best care to your house plants. Creates a schedule and sends reminders for when you need to water, prune, rotate your plants.
+* An app that helps you give the best care to your house plants. Create rooms and add plants to your rooms. Once a plant is created it automatically sends reminders for when you need to water, prune, rotate your plants.
+
+![demo](client/assets/littleleaf.gif)
 
 
-![layout](https://github.com/m-tran/little-leaf/blob/master/client/assets/img/layout.png?raw=true)
+
 
 ## Application Requirements
 
