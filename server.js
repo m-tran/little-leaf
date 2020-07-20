@@ -7,6 +7,10 @@ const PORT = process.env.PORT || 3005;
 const cors = require('cors');
 const path = require('path');
 
+app.use(
+  session({ secret: "keyboard cat", resave: true, saveUninitialized: true })
+);
+
 require("dotenv").config();
 
 app.use(cors());
