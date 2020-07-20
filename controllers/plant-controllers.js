@@ -72,6 +72,20 @@ module.exports = {
     }
   },
 
+  getAllUserPlants: async (req, res) => {
+    if (req.user) {
+      try {
+        const allUserPlants = await db.Plant.findAll({
+        });
+        res.send(allUserPlants);
+      } catch (err) {
+        res.send({ err_message: err })
+      }
+    } else {
+      res.redirect('/');
+    }
+  },
+
   deletePlant: async (req, res) => {
     if (req.user) {
       db.Plants.destroy({
