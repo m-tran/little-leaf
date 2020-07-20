@@ -201,6 +201,7 @@ getRooms().then((res) => {
                 </div>
                 <div class="card-action">
                 <a href="/myplants">view schedule</a>
+                <a href="/myplants" id="viewPlants" data-id="${room.id}">view plants</a>
                 </div>
             </div>
             </div>
