@@ -136,6 +136,11 @@
   margin-right: auto;
 }
 
+#success img {
+  height: 30vh;
+  top: 35%;
+}
+
 #loader img {
   display: inline-block;
   height: 30vh;
@@ -181,10 +186,13 @@
   100% {opacity:0; transform: rotate(-10deg);}
 }
 
-.pic {
-  height: 150px;
-}
 
+
+
+
+#loginForm, #registerForm {
+  padding-left: 0;
+}
 
 
 /* li{

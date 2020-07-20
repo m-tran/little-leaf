@@ -250,12 +250,31 @@ $(document).ready(function () {
             console.log(plant);
             $("#results").html("");
             $("#results").append(`
-                <div class="col s12">
+                <div class="col s12" id="success" style="display: flex; justify-content: center;">
+                    <img src="https://blush.ly/UAM1-2D9k/p">
+                    <br>
+                </div>
+                <div class="col s12" id="success">
                     <h1 style="text-align: center">Plant Added!</h1>
                 </div>
             `);
         });
     }
+
+    function getRandomColor() {
+        var letters = '0123456789ABCDEF';
+        var color = '#';
+        for (var i = 0; i < 6; i++) {
+          color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+    }
+
+    // <div class="card-image">
+    //     <img src="https://blush.ly/6kwxcfnn5/p?bg=ffbd1d">
+    // </div>
+
+    let randomColor;
 
     function renderAllPlants(room, name) {
         $.ajax({
@@ -265,14 +284,12 @@ $(document).ready(function () {
             console.log(res);
             $("#loadAllPlants").append(`<h2>Plants for ${name}</h2>`)
             for (let i=0; i < res.length; i++) {
+                randomColor = getRandomColor();
                 $("#loadAllPlants")
                 .append(`
                     <div class="card horizontal data-id=${i}">
-                        <div class="card-image">
-                            <img src="https://blush.ly/6kwxcfnn5/p?bg=ffbd1d">
-                        </div>
-                        <div class="card-stacked">
-                            <div class="card-content">
+                        <div class="card-stacked" style="background-color: ${randomColor}">
+                            <div class="card-content white-text">
                                 <h3>${res[i].commonName}</h3>
                                 <p><span class="new badge" data-badge-caption="water"></span>${res[i].water_frequency} days</p>
                                 <br>
