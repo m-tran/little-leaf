@@ -4,6 +4,14 @@ $(document).ready(function () {
     let resultId = [];
     let id;
     let index;
+    let commonName = "";
+    let allPlants = [];
+
+    const waterFrequency;
+    const pruneFrequency;
+    const rotateFrequency;
+    const createdDate;
+    const repotFrequency;
 
     $("#search").on("keydown", function (e) {
         if (e.keyCode === 13) { //checks whether the pressed key is "Enter"
@@ -23,7 +31,22 @@ $(document).ready(function () {
         index = $(this).attr("data-id");
         id = resultId[index];
         createAddPlantOptions();
-    })
+    });
+
+    $(document).on("click", "#submitBtn", function (e) {
+        e.preventDefault();
+        let room = 1; // need to change to get correct room based on name
+        let name = commonName;
+        let plantSize = $(`input[name="size"]:checked`).val();
+        let frequency = $("#waterFrequency").val();
+        let prune = $(`input[name="prune"]:checked`).val();
+        addPlant(room, name, plantSize, frequency, prune);
+    });git
+
+    $(document).on("click", "#viewPlants", function(e) {
+        e.preventDefault();
+        renderAllPlants(room);
+    });
 
     function loadSearch(e) {
         let search = $("#search").val();
@@ -57,7 +80,6 @@ $(document).ready(function () {
                             <br>
                             <br>
                             <a class="waves-effect waves-light btn" id="selectPlant" data-id=${i}>view details</a>
-                            <a class="waves-effect waves-light btn" id="addPlant" data-id=${i}><i class="material-icons left">add</i>add plant</a>
                         </div>
                     </div>
                 </div>`);
@@ -70,12 +92,13 @@ $(document).ready(function () {
         $("#results").html("");
         $.ajax({
             type: "GET",
-            url: "http://localhost:3005/search/plant",
+            url: "/search/plant",
             data: {
                 id: selected,
             }
         }).then((res) => {
             console.log(res);
+            commonName = res.common_name;
             $("#results")
                 .append(`
                 <div class="card horizontal">
@@ -86,7 +109,7 @@ $(document).ready(function () {
                             <i>${res.scientific_name}</i>
                             <br>
                             <br>
-                            <a class="waves-effect waves-light btn"><i class="material-icons left">add</i>add plant</a>
+                            <a class="waves-effect waves-light btn" id="addPlant"><i class="material-icons left">add</i>add plant</a>
                         </div>
                     </div>
                 </div>`);
@@ -99,7 +122,7 @@ $(document).ready(function () {
         <div class="card horizontal">
             <div class="card-stacked">
                 <div class="card-content">
-                    <form action="addPlant">
+                    <form>
                         <p>What room are you adding this to?</p>
                         <div class="row">
                             <div class="input-field col s12">
@@ -110,47 +133,104 @@ $(document).ready(function () {
                         <p>What is the plant size?</p>
                         <p>
                             <label>
-                                <input name="size" type="radio" checked/>
+                                <input name="size" type="radio"/>
                                 <span>Small</span>
                             </label>
                         </p>
                         <p>
                             <label>
-                                <input name="size" type="radio" checked/>
+                                <input name="size" type="radio"/>
                                 <span>Medium</span>
                             </label>
                         </p>
                         <p>
                             <label>
-                                <input name="size" type="radio" checked/>
+                                <input name="size" type="radio"/>
                                 <span>Large</span>
                             </label>
                         </p>
-                        <p>What ?</p>
+                        <br>
+                        <br>
+                        <p>How often do you need to water your plant?</p>
                         <div class="row">
                             <div class="input-field col s12">
-                                <textarea id="roomId" class="materialize-textarea"></textarea>
-                                <label for="roomId">Enter Room</label>
+                                <textarea id="waterFrequency" class="materialize-textarea"></textarea>
+                                <label for="waterFrequency">Enter water frequency in days</label>
                             </div>
                         </div>
+                        <p>Do you need to prune your plant?</p>
+                        <p>
+                            <label>
+                                <input name="prune" type="radio" checked/>
+                                <span>Yes</span>
+                            </label>
+                        </p>
+                        <p>
+                            <label>
+                                <input name="prune" type="radio"/>
+                                <span>No</span>
+                            </label>
+                        </p>
+                        <br>
+                        <br>
+                        <button class="btn waves-effect waves-light" type="submit" name="action" id="submitBtn">Submit
+                            <i class="material-icons right">send</i>
+                        </button>
                     </form>
                 </div>
             </div>
         </div>`);
     }
 
-    function addPlant(room, name, size, frequency, prune) {
+    function addPlant(room, name, plantSize, frequency, prune) {
         $.ajax({
             type: "POST",
             url: `/plant/new/${room}`,
             data: { 
                 commonName: name,
-                size: size,
+                size: plantSize,
                 water_frequency: frequency,
                 prune: prune,
             }
+        }).then((plant) => {
+            waterFrequency = plant.water_frequency;
+            pruneFrequency = plant.prune_frequency;
+            rotateFrequency = plant.rotate_frequency;
+            repotFrequency = plant.repot_frequency;
+            createdDate = plant.createdAt;
+        });
+    }
+
+    function renderAllPlants(room) {
+        $.ajax({
+            type: "GET",
+            url: `/plant/all/${room}`,
         }).then((res) => {
             console.log(res);
+            // create cards for each plant
+            allPlants = res;
+            allPlants.forEach((result, i) => {
+                const card = document.createElement("div");
+                card.classList = "plant-body";
+            
+
+            const content = `
+                <div class="card horizontal data-id=${i}">
+                    <div class="card-stacked">
+                        <div class="card-content">
+                            <h2>${result.commonName}</h2>
+                            <p><span class="new badge" data-badge-caption="water"></span>${result.water_frequency} days</p>
+                            <p><span class="new badge" data-badge-caption="prune"></span>${result.prune}</p>
+                            <p><span class="new badge" data-badge-caption="rotate"></span>${result.rotate_frequency} days</p>
+                            <p><span class="new badge" data-badge-caption="repot"></span>${result.repot_frequency} repot</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            container.html += content;
+
+            });
         });
     }
 
