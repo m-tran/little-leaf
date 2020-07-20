@@ -181,6 +181,9 @@
   100% {opacity:0; transform: rotate(-10deg);}
 }
 
+.pic {
+  height: 150px;
+}
 
 
 

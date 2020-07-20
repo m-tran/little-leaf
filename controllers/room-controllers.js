@@ -64,11 +64,10 @@ module.exports = {
       db.Room.destroy({
         where: { 
           id: req.params.id,
-          UserId: req.body.id,
+          // UserId: req.body.id,
         },
       })
-      .then(deletedRoom => {
-        console.log(`Has the room been deleted? 1 means yes, 0 means no: ${deletedRoom}`);
+      .then(() => {
         res.send("deleted");
       }).catch((err) => res.send(err))
     }  else {
