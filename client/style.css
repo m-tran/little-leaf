@@ -128,8 +128,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  -webkit-animation: load-out 3s;
-  animation: load-out 3s;
+  -webkit-animation: load-out 6s;
+  animation: load-out 6s;
   -webkit-animation-fill-mode: forwards;
   animation-fill-mode: forwards;
   margin-left: auto;
@@ -141,13 +141,17 @@
   height: 30vh;
   top: 35%;
   right: 50%;
+  -webkit-animation: wiggle 6s;
+  animation: wiggle 6s;
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
 }
 
 @-webkit-keyframes load-out {
   0% {opacity:1;}
   20% {opacity:1;}
   50% {opacity:1;}
-  80% {opacity:0.5;}
+  80% {opacity:0.5;} 
   100% {opacity:0;}
 }
 
@@ -155,8 +159,24 @@
   0% {opacity:1;}
   20% {opacity:1;}
   50% {opacity:1;}
-  80% {opacity:0.5;}
+  80% {opacity:0.5;} 
   100% {opacity:0;}
+}
+
+@-webkit-keyframes wiggle {
+  0% {opacity:1; transform: rotate(-10deg);}
+  20% {opacity:1; transform: scale(.98);}
+  50% {opacity:1; transform: rotate(10deg);}
+  80% {opacity:0.5; transform: scale(.98);} 
+  100% {opacity:0; transform: rotate(-10deg);}
+}
+
+@keyframes wiggle {
+  0% {opacity:1; transform: rotate(-10deg);}
+  20% {opacity:1; transform: scale(.98);}
+  50% {opacity:1; transform: rotate(10deg);}
+  80% {opacity:0.5; transform: scale(.98);} 
+  100% {opacity:0; transform: rotate(-10deg);}
 }
 
 
