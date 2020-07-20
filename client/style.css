@@ -1,26 +1,38 @@
-html, body{
-    height: 100%;
-    margin: 0;
-}
+  html, body{
+      height: 100%;
+      margin: 0;
+  }
 
-body:not(.plants) {
-    display: flex;
-    min-height: 100vh;
-    flex-direction: column;
-    background-image: url("https://cdn.imgbin.com/1/1/23/imgbin-leaf-background-decoration-material-9ibEQ3WCQWQbRDgFpT1d06Y7a.jpg");
-    height: 100px;
-  background-position: center; 
-  background-repeat: no-repeat;
-  background-size: cover; 
+  body:not(.plants, .landing) {
+      display: flex;
+      min-height: 100vh;
+      flex-direction: column;
+      background-image: url("https://cdn.imgbin.com/1/1/23/imgbin-leaf-background-decoration-material-9ibEQ3WCQWQbRDgFpT1d06Y7a.jpg");
+      height: 100px;
+      background-position: center; 
+      background-repeat: no-repeat;
+      background-size: cover; 
 
 
   }
-  .content {
+
+  .landing main{
+    min-height:80vh;
+  }
+
+  .content:not(#home-landing) {
     padding: 20px;
     min-height: 100%;
     margin: 0 auto -50px;
+    position: relative;
   }
 
+  #home-landing {
+    top: 35%;
+    position: absolute;
+    left: 10%;
+    z-index: 100;
+  }
 
   main {
     flex: 1 0 auto;
@@ -31,9 +43,31 @@ body:not(.plants) {
       height: 100px;
   }
 
-img{
-  height: 200px;
-  width: 200px;
+  img:not(#landing-img img) {
+    height: 200px;
+    width: 200px;
+  }
+
+.color-block {
+  width: 65vh;
+  height: 60vh;
+  right: 2%;
+  top: 20%;
+  position: absolute;
+  background-color: rgb(255, 230, 234);
+  z-index: 0;
+}
+
+#landing-img img {
+  z-index: 5;
+  right: 5%;
+  top: 25%;
+  width: 70vh;
+  height: auto;
+  position: absolute;
+  overflow: hidden;
+  transform: rotate(45deg);
+  -webkit-filter: drop-shadow(10px 10px 10px #c5c5c5);
 }
 
 /* plant page styling */
@@ -41,6 +75,13 @@ img{
   border: 1px solid black;
   border-radius: 25px;
   padding: 0 1rem 0 1rem;
+}
+
+#footer-landing, #home-nav, #home-nav .brand-logo, nav #home-nav ul a  {
+  background-color: white;
+  color: black;
+  align-items: center;
+  z-index: 5;
 }
 
 
