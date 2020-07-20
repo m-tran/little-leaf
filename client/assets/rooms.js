@@ -121,16 +121,7 @@ clicked = true;
           console.log("large room");
         }
 
-        // var random_images_array = ["pic1.png", "pic2.png", "pic3.png", "pic4.png", "BT7B0071.png"];
-
-        // function getRandomImage(imgAr, path) {
-        //     // path ='./pictures/'; // default path here
-        //     var num = Math.floor( Math.random() * imgAr.length );
-        //     var img = imgAr[ num ];
-        //     var imgStr = '<img src="' + path + img + '" alt = "">';
-        //     document.write(imgStr); document.close();
-        // }
-
+        
         $.ajax({
           type: "POST",
           url: "/room/new",
@@ -177,19 +168,9 @@ clicked = true;
   });
 
   // Button to remove room
-  $("#newRoom").on("click", ".buttondelete", deleteRoom);
+$("#newRoom").on("click", ".buttondelete", deleteRoom);
 
-  // $(".buttonDelete").on("click", function(e) {
-  //     console.log("clicked");
-  //     event.stopPropagation();
-  //     var id = $(this).data("data-id");
-  //     $.ajax({
-  //       method: "DELETE",
-  //       url: "/room/delete/" + id
-  //     }).then(getRooms);
-  // })
 
-  
   const getRooms = () => {
     return new Promise((resolve, reject) => {
       $.ajax({
@@ -202,6 +183,18 @@ clicked = true;
         .catch((err) => reject(err));
     });
   };
+
+
+// var random_images_array = ["pic1.png", "pic2.png", "pic3.png", "pic4.png", "BT7B0071.png"];
+
+//         function getRandomImage(imgAr, path) {
+//             // path ='./pictures/'; // default path here
+//             var num = Math.floor( Math.random() * imgAr.length );
+//             var img = imgAr[ num ];
+//             var imgStr = '<img src="' + path + img + '" alt = "">';
+//             document.write(imgStr); document.close();
+//         }
+
 
 
   getRooms().then((res) => {
@@ -231,6 +224,7 @@ clicked = true;
     });
   });
 
+  //function to delete a room
   function deleteRoom(event) {
     console.log("clicked");
     event.stopPropagation();

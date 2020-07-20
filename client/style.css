@@ -146,11 +146,12 @@
   height: 30vh;
   top: 35%;
   right: 50%;
-  -webkit-animation: wiggle 4s;
-  animation: wiggle 4s;
+  -webkit-animation: wiggle 3s;
+  animation: wiggle 3s;
   -webkit-animation-fill-mode: forwards;
   animation-fill-mode: forwards;
 }
+
 
 @-webkit-keyframes load-out {
   0% {opacity:1;}
