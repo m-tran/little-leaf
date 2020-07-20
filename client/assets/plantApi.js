@@ -5,6 +5,7 @@ $(document).ready(function () {
     let id;
     let index;
     let commonName = "";
+    let allPlants = [];
 
     $("#search").on("keydown", function (e) {
         if (e.keyCode === 13) { //checks whether the pressed key is "Enter"
@@ -35,6 +36,10 @@ $(document).ready(function () {
         let frequency = $("#waterFrequency").val();
         let prune = $(`input[name="prune"]:checked`).val();
         addPlant(room, name, plantSize, frequency, prune);
+    });
+
+    $(document).on("click", "#viewPlants", function(e) {
+
     });
 
     function loadSearch(e) {
@@ -183,6 +188,35 @@ $(document).ready(function () {
             }
         }).then((res) => {
             console.log(res);
+        });
+    }
+
+    function renderAllPlants() {
+        $.ajax({
+            type: "GET",
+            url: `/plant/all/${room}`,
+        }).then((res) => {
+            console.log(res);
+            // create cards for each plant
+            allPlants = res;
+            allPlants.forEach((result, i) => {
+                const card = document.createElement("div");
+                card.classList = "plant-body";
+            
+
+            const content = `
+                <div class="card horizontal data-id=${i}">
+                    <div class="card-stacked">
+                        <div class="card-content">
+                            <h2>${result.commonName}</h2>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            container.html += content;
+
+            });
         });
     }
 
