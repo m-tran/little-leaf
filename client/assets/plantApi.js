@@ -259,8 +259,11 @@ $(document).ready(function () {
                             <div class="card-content">
                                 <h2>${res[i].commonName}</h2>
                                 <p><span class="new badge" data-badge-caption="water"></span>${res[i].water_frequency} days</p>
+                                <br>
                                 <p><span class="new badge" data-badge-caption="prune"></span>${res[i].prune}</p>
+                                <br>
                                 <p><span class="new badge" data-badge-caption="rotate"></span>${res[i].rotate_frequency} days</p>
+                                <br>
                                 <p><span class="new badge" data-badge-caption="repot"></span>${res[i].repot_frequency} repot</p>
                             </div>
                         </div>

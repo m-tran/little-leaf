@@ -118,6 +118,47 @@
   z-index: 5;
 }
 
+#loader {
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  position: absolute;
+  z-index: 150;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  -webkit-animation: load-out 3s;
+  animation: load-out 3s;
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#loader img {
+  display: inline-block;
+  height: 30vh;
+  top: 35%;
+  right: 50%;
+}
+
+@-webkit-keyframes load-out {
+  0% {opacity:1;}
+  20% {opacity:1;}
+  50% {opacity:1;}
+  80% {opacity:0.5;}
+  100% {opacity:0;}
+}
+
+@keyframes load-out {
+  0% {opacity:1;}
+  20% {opacity:1;}
+  50% {opacity:1;}
+  80% {opacity:0.5;}
+  100% {opacity:0;}
+}
+
 
 
 
