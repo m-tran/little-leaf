@@ -18,7 +18,7 @@ app.use(express.static(path.join(__dirname, "./client")));
 
 app.use(
   session({
-    secret: supersecret,
+    secret: "supersecret",
     resave: true,
     saveUninitialized: true,
   })
