@@ -56,6 +56,7 @@ module.exports = {
   },
 
   getAllPlants: async (req, res) => {
+<<<<<<< HEAD
     if (req.user) {
       try {
         const allPlants = await db.Plant.findAll({
@@ -67,36 +68,51 @@ module.exports = {
       } catch (err) {
         res.send({ err_message: err })
       }
+=======
+    if (req.user){
+    try {
+      const allPlants = await db.Plant.findAll({ where: { RoomId: req.params.RoomId,
+      },
+      });
+      res.send(allPlants);
+    } catch (err) {
+      res.send({ err_message: err})
+    }
+>>>>>>> 1216695d31994f4af66d32ab1a15f37036f49e80
     } else {
       res.redirect('/');
     }
   },
 
   deletePlant: async (req, res) => {
-    db.Plants.destroy({
-      where: { id: req.params.id },
-    })
-      .then(deletedPlant => {
-        console.log(`Has the plant been deleted? 1 means yes, 0 means no: ${deletedPlant}`);
-      }).then(() => {
-        console.log(req.body.id);
-        const intervalToStop = waterSchedule.find((obj) => obj.id == req.body.id);
-        clearInterval(intervalToStop.interval);
-        console.log(intervalToStop);
-
-        const intervalToStop2 = pruneSchedule.find((obj) => obj.id == req.body.id);
-        clearInterval(intervalToStop2.interval);
-        console.log(intervalToStop2);
-
-        const intervalToStop3 = rotateSchedule.find((obj) => obj.id == req.body.id);
-        clearInterval(intervalToStop3.interval);
-        console.log(intervalToStop3);
-
-        const intervalToStop4 = repotSchedule.find((obj) => obj.id == req.body.id);
-        clearInterval(intervalToStop4.interval);
-        console.log(intervalToStop4);
-        res.send("yay!!");
+    if (req.user){
+      db.Plants.destroy({
+        where: { id: req.params.id },
       })
+        .then(deletedPlant => {
+          console.log(`Has the plant been deleted? 1 means yes, 0 means no: ${deletedPlant}`);
+        }).then(() => {
+          console.log(req.body.id);
+          const intervalToStop = waterSchedule.find((obj) => obj.id == req.body.id);
+          clearInterval(intervalToStop.interval);
+          console.log(intervalToStop);
+  
+          const intervalToStop2 = pruneSchedule.find((obj) => obj.id == req.body.id);
+          clearInterval(intervalToStop2.interval);
+          console.log(intervalToStop2);
+  
+          const intervalToStop3 = rotateSchedule.find((obj) => obj.id == req.body.id);
+          clearInterval(intervalToStop3.interval);
+          console.log(intervalToStop3);
+  
+          const intervalToStop4 = repotSchedule.find((obj) => obj.id == req.body.id);
+          clearInterval(intervalToStop4.interval);
+          console.log(intervalToStop4);
+          res.send("yay!!");
+        })
+    } else {
+      res.send("error");
+    }
   }
 
 };
@@ -110,24 +126,24 @@ const plantIntervals = ((req, res) => {
   // res.send(userPlants);
 
 
-  var dayInMilliseconds = 1000 * 60 * 60 * 24;
+  var dayInMilliseconds = 86400000;
   const waterTimer = setInterval(
-    () => waterPlant(req.user.email, newPlant.commonName), dayInMilliseconds * newPlant.water_frequency
+    () => waterPlant(req.user.email, newPlant.commonName), (dayInMilliseconds * newPlant.water_frequency)
   );
   waterSchedule.push({ id: count, interval: waterTimer });
 
   const pruneTimer = setInterval(
-    () => prunePlant(req.user.email, newPlant.commonName), dayInMilliseconds * newPlant.prune_frequency
+    () => prunePlant(req.user.email, newPlant.commonName), (dayInMilliseconds * newPlant.prune_frequency)
   );
   pruneSchedule.push({ id: count, interval: pruneTimer });
 
   const rotateTimer = setInterval(
-    () => rotatePlant(req.user.email, newPlant.commonName), dayInMilliseconds * newPlant.rotate_frequency
+    () => rotatePlant(req.user.email, newPlant.commonName), (dayInMilliseconds * newPlant.rotate_frequency)
   );
   rotateSchedule.push({ id: count, interval: rotateTimer });
 
   const repotTimer = setInterval(
-    () => repotPlant(req.user.email, newPlant.commonName), dayInMilliseconds * newPlant.repot_frequency
+    () => repotPlant(req.user.email, newPlant.commonName), (dayInMilliseconds * newPlant.repot_frequency)
   );
   repotSchedule.push({ id: count, interval: repotTimer });
 

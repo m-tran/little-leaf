@@ -49,6 +49,11 @@ router.get("/myplants", isAuthenticated, (req, res) => {
   res.sendFile(path.join(__dirname, "../client/plants.html"));
 });
 
+// client side route to facts page
+router.get("/facts", isAuthenticated, (req, res) => {
+  res.sendFile(path.join(__dirname, "../client/facts.html"));
+});
+
 // client side route to search page
 router.get("/search", (req, res) => {
   let searchName = req.query.plant;
