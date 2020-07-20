@@ -9,8 +9,6 @@
 
 
 
-![layout](https://github.com/m-tran/little-leaf/blob/master/client/assets/img/layout.png?raw=true)
-
 ## Application Requirements
 
 * Must use a Node and Express server
