@@ -31,6 +31,7 @@ router.get("/myrooms", (req, res) => {
   }
 });
 
+
 // client side route to info page page
 router.get("/myschedule", isAuthenticated, (req, res) => {
   res.sendFile(path.join(__dirname, "../client/schedule.html"));
