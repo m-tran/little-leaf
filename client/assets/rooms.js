@@ -8,7 +8,10 @@ $(document).ready(function () {
     // const size = $('#roomSize');
     // const numPlant = $('#plantNum');
 
+    let clicked = false;
+
     $('#start').on('click', function () {
+        if (clicked === false) {
         $('#questions').append(
             `<div class="row">
         <div class="col s12 m6">
@@ -95,6 +98,8 @@ $(document).ready(function () {
     </button>
        `
         );
+        }
+        clicked = true;
 
         // $("#btnSubmit").on("click", () => {
         //     const roomText = $("#newRoom").val();
