@@ -1,7 +1,19 @@
 $(document).ready(function () {
-  $("#start").on("click", function () {
-    $("#questions").append(
-      `<div class="row">
+
+    // getRooms().then((allRooms) => {
+    //     renderRooms(allRooms);
+    // });
+
+    // const name = $('#roomName');
+    // const size = $('#roomSize');
+    // const numPlant = $('#plantNum');
+
+    let clicked = false;
+
+    $('#start').on('click', function () {
+        if (clicked === false) {
+        $('#questions').append(
+            `<div class="row">
         <div class="col s12 m6">
             <div class="card green lighten-5">
                 <div class="card-content white-text">
@@ -86,7 +98,8 @@ $(document).ready(function () {
     </button>
        `
     );
-
+}
+clicked = true;
     $("#btnSubmit").on("click", function () {
       function getInputValue() {
         const roomText = $("#roomName").val();
