@@ -66,8 +66,16 @@
   height: auto;
   position: absolute;
   overflow: hidden;
-  transform: rotate(45deg);
+  /* transform: rotate(45deg); */
   -webkit-filter: drop-shadow(10px 10px 10px #c5c5c5);
+  animation: swing 3s infinite ease-in-out;
+}
+
+@keyframes swing {
+  0%, 100% { transform: rotate(-10deg);}
+  20% {transform: scale(.98);}
+  50% {transform: rotate(10deg);}
+  80% {transform: scale(.98);}
 }
 
 /* plant page styling */
