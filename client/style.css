@@ -186,9 +186,14 @@
   100% {opacity:0; transform: rotate(-10deg);}
 }
 
+
+
+
+
 #loginForm, #registerForm {
   padding-left: 0;
 }
+
 
 /* li{
   text-decoration: none;
