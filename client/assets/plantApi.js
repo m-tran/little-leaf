@@ -8,6 +8,7 @@ $(document).ready(function () {
     let allPlants = [];
     let userRooms = [];
     let userRoomsList = [];
+    let roomId;
 
     $("#search").on("keydown", function (e) {
         if (e.keyCode === 13) { //checks whether the pressed key is "Enter"
@@ -35,17 +36,26 @@ $(document).ready(function () {
         let roomVal = room.options[room.selectedIndex].value;
         let name = commonName;
         let plantSize = parseInt($(`input[name="size"]:checked`).val());
-        console.log(plantSize);
         let frequency = $("#waterFrequency").val();
         let prune = $(`input[name="prune"]:checked`).val();
         addPlant(roomVal, name, plantSize, frequency, prune);
     });
 
     $(document).on("click", "#viewPlants", function(e) {
-        e.preventDefault();
-        renderAllPlants(room);
+        roomId = $(this).attr("data-id");
+        localStorage.setItem("room", roomId);
     });
 
+    function pageLoad() {
+        if (window.location.pathname=="/myplants") {
+            roomId = localStorage.getItem("room");
+            console.log(roomId);
+            renderAllPlants(roomId);
+        }
+    }
+
+    pageLoad();
+    
     function loadSearch(e) {
         let search = $("#search").val();
         renderPlantResults(search);
@@ -54,6 +64,7 @@ $(document).ready(function () {
 
     function renderPlantResults(plantSearch) {
         $("#results").html("");
+        $("#loadAllPlants").html("");
         let updatedSearch = plantSearch.split(' ').join('_');
         $.ajax({
             type: "GET",
@@ -234,30 +245,23 @@ $(document).ready(function () {
             url: `/plant/all/${room}`,
         }).then((res) => {
             console.log(res);
-            // create cards for each plant
-            allPlants = res;
-            allPlants.forEach((result, i) => {
-                const card = document.createElement("div");
-                card.classList = "plant-body";
-            
-
-            const content = `
-                <div class="card horizontal data-id=${i}">
-                    <div class="card-stacked">
-                        <div class="card-content">
-                            <h2>${result.commonName}</h2>
-                            <p><span class="new badge" data-badge-caption="water"></span>${result.water_frequency} days</p>
-                            <p><span class="new badge" data-badge-caption="prune"></span>${result.prune}</p>
-                            <p><span class="new badge" data-badge-caption="rotate"></span>${result.rotate_frequency} days</p>
-                            <p><span class="new badge" data-badge-caption="repot"></span>${result.repot_frequency} repot</p>
+            for (let i=0; i < res.length; i++) {
+                $("#loadAllPlants")
+                .append(`
+                    <h2>My Plants!</h2>
+                    <div class="card horizontal data-id=${i}">
+                        <div class="card-stacked">
+                            <div class="card-content">
+                                <h2>${res[i].commonName}</h2>
+                                <p><span class="new badge" data-badge-caption="water"></span>${res[i].water_frequency} days</p>
+                                <p><span class="new badge" data-badge-caption="prune"></span>${res[i].prune}</p>
+                                <p><span class="new badge" data-badge-caption="rotate"></span>${res[i].rotate_frequency} days</p>
+                                <p><span class="new badge" data-badge-caption="repot"></span>${res[i].repot_frequency} repot</p>
+                            </div>
                         </div>
                     </div>
-                </div>
-            `;
-            
-            container.html += content;
-
-            });
+                `);
+            }
         });
     }
 
