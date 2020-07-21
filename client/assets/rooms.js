@@ -138,28 +138,7 @@ clicked = true;
           //     .then((allRooms) => renderRooms(allRooms))
           //     .catch((err) => console.log(err));
 
-          $("#newRoom").append(
-            `<div class="col s12 m2">
-                    <div class="card horizontal">
-                        <div class="card-image">
-                        <img src="https://cdn.vox-cdn.com/thumbor/QRC-K6S73KSM0XVNvrQhicj9g_E=/0x0:2000x1333/1200x800/filters:focal(840x507:1160x827)/cdn.vox-cdn.com/uploads/chorus_image/image/65377475/BT7B0071.7.jpg">
-                        </div>
-                        <div class="card-stacked">
-                            <div class="card-content">
-                            <p>room name: ${response.name}</p>
-                            <p>size: ${response.size} sq ft</p> 
-                            </div>
-                            <div class="card-action">
-                            <a href="/myplants">view schedule</a>
-                            <a href="/myplants" id="viewPlants" data="${response.name}" data-id="${response.id}">view plants</a>
-                            <a href = "#" class = "buttondelete" data="${response.name}" data-id="${response.id}">delete room</a>
-                            </div>
-                        </div>
-                        </div>
-                    </div>`
-
-
-                    
+          $("#newRoom").append(makeCard(response.name, response.size, response.id)       
           );
         });
       }
@@ -201,25 +180,8 @@ $("#newRoom").on("click", ".buttondelete", deleteRoom);
     console.log(res);
     res.forEach((room) => {
         $("#newRoom").empty();
-      $("#newRoom").append(
-        `<div class="col s12 m2">
-          <div class="card horizontal">
-              <div class="card-image">
-                  <img src="https://cdn.vox-cdn.com/thumbor/QRC-K6S73KSM0XVNvrQhicj9g_E=/0x0:2000x1333/1200x800/filters:focal(840x507:1160x827)/cdn.vox-cdn.com/uploads/chorus_image/image/65377475/BT7B0071.7.jpg">
-              </div>
-              <div class="card-stacked">
-                  <div class="card-content">
-                  <p>room name: ${room.name}</p>
-                  <p> size: ${room.size} sq ft</p> 
-                  </div>
-                  <div class="card-action">
-                  <a href="/myschedule">view schedule</a>
-                  <a href="/myplants" id="viewPlants" data="${room.name}" data-id="${room.id}">view plants</a>
-                  <a href = "#" class = "buttondelete" data="${room.name}" data-id="${room.id}">delete room</a>
-                  </div>
-              </div>
-              </div>
-          </div>`
+      $("#newRoom").append(makeCard(room.name, room.size, room.id)
+    
       );
     });
   });
@@ -232,33 +194,37 @@ $("#newRoom").on("click", ".buttondelete", deleteRoom);
     $.ajax({
       method: "DELETE",
       url: "/room/delete/" + id,
-    }).then((res) =>{
+    }).then(() => {
         getRooms().then((res) => {
             console.log(res);
             res.forEach((room) => {
                 $("#newRoom").empty();
-              $("#newRoom").append(
-                `<div class="col s12 m2">
-                  <div class="card horizontal">
-                      <div class="card-image">
-                          <img src="https://cdn.vox-cdn.com/thumbor/QRC-K6S73KSM0XVNvrQhicj9g_E=/0x0:2000x1333/1200x800/filters:focal(840x507:1160x827)/cdn.vox-cdn.com/uploads/chorus_image/image/65377475/BT7B0071.7.jpg">
-                      </div>
-                      <div class="card-stacked">
-                          <div class="card-content">
-                          <p>room name: ${room.name}</p>
-                          <p> size: ${room.size} sq ft</p> 
-                          </div>
-                          <div class="card-action">
-                          <a href="/myschedule">view schedule</a>
-                          <a href="/myplants" id="viewPlants" data="${room.name}" data-id="${room.id}">view plants</a>
-                          <a href = "#" class = "buttondelete" data="${room.name}" data-id="${room.id}">delete room</a>
-                          </div>
-                      </div>
-                      </div>
-                  </div>`
+              $("#newRoom").append(makeCard(room.name, room.size, room.id)
               );
             });
           });
     });
   }
 });
+
+
+function makeCard(name, size, id) {
+  return  `<div class="col s12 m2">
+  <div class="card horizontal">
+      <div class="card-image">
+          <img src="https://cdn.vox-cdn.com/thumbor/QRC-K6S73KSM0XVNvrQhicj9g_E=/0x0:2000x1333/1200x800/filters:focal(840x507:1160x827)/cdn.vox-cdn.com/uploads/chorus_image/image/65377475/BT7B0071.7.jpg">
+      </div>
+      <div class="card-stacked">
+          <div class="card-content">
+          <p>room name: ${name}</p>
+          <p> size: ${size} sq ft</p> 
+          </div>
+          <div class="card-action">
+          <a href="/myschedule">view schedule</a>
+          <a href="/myplants" id="viewPlants" data="${name}" data-id="${id}">view plants</a>
+          <a href = "#" class = "buttondelete" data="${name}" data-id="${id}">delete room</a>
+          </div>
+      </div>
+      </div>
+  </div>`
+}
