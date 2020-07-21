@@ -1,12 +1,5 @@
 $(document).ready(function () {
 
-    // getRooms().then((allRooms) => {
-    //     renderRooms(allRooms);
-    // });
-
-    // const name = $('#roomName');
-    // const size = $('#roomSize');
-    // const numPlant = $('#plantNum');
 
     let clicked = false;
 
@@ -134,10 +127,6 @@ clicked = true;
         }).then((response) => {
           $("#questions").empty();
           console.log(response);
-          // getRooms()
-          //     .then((allRooms) => renderRooms(allRooms))
-          //     .catch((err) => console.log(err));
-
           $("#newRoom").append(makeCard(response.name, response.size, response.id)       
           );
         });
@@ -179,12 +168,14 @@ $("#newRoom").on("click", ".buttondelete", deleteRoom);
   getRooms().then((res) => {
     console.log(res);
     res.forEach((room) => {
-        $("#newRoom").empty();
+        // $("#newRoom").empty();
       $("#newRoom").append(makeCard(room.name, room.size, room.id)
     
       );
-    });
-  });
+    }).then(() => {
+      window.location.href = window.location.href
+    })
+  })
 
   //function to delete a room
   function deleteRoom(event) {
@@ -198,14 +189,16 @@ $("#newRoom").on("click", ".buttondelete", deleteRoom);
         getRooms().then((res) => {
             console.log(res);
             res.forEach((room) => {
-                $("#newRoom").empty();
+                // $("#newRoom").empty();
               $("#newRoom").append(makeCard(room.name, room.size, room.id)
               );
-            });
+            }).then(() => {
+              location.reload()
+            })
           });
     });
   }
-});
+}); //end of document.ready
 
 
 function makeCard(name, size, id) {
