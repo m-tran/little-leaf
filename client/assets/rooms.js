@@ -132,7 +132,9 @@ clicked = true;
         });
       }
       getInputValue();
-    });
+    }).then(() => {
+      clicked = false;
+    })
   });
 
   // Button to remove room
@@ -167,33 +169,29 @@ $("#newRoom").on("click", ".buttondelete", deleteRoom);
 
   getRooms().then((res) => {
     console.log(res);
+    $("#newRoom").empty();
     res.forEach((room) => {
-        // $("#newRoom").empty();
       $("#newRoom").append(makeCard(room.name, room.size, room.id)
     
       );
-    }).then(() => {
-      window.location.href = window.location.href
     })
   })
 
   //function to delete a room
-  function deleteRoom(event) {
+  function deleteRoom() {
     console.log("clicked");
-    event.stopPropagation();
+    // event.stopPropagation();
     var id = $(this).data("id");
     $.ajax({
       method: "DELETE",
       url: "/room/delete/" + id,
     }).then(() => {
         getRooms().then((res) => {
-            console.log(res);
+          $("#newRoom").empty();
             res.forEach((room) => {
-                // $("#newRoom").empty();
+
               $("#newRoom").append(makeCard(room.name, room.size, room.id)
               );
-            }).then(() => {
-              location.reload()
             })
           });
     });
