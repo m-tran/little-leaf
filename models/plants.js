@@ -22,15 +22,15 @@ module.exports = (sequelize, DataTypes) => {
         },
         prune_frequency: {
             type: DataTypes.INTEGER,
-            defaultValue: 56,
+            defaultValue: 20,
         },
         rotate_frequency: {
             type: DataTypes.INTEGER,
-            defaultValue: 56,
+            defaultValue: 20,
         },
         repot_frequency: {
             type: DataTypes.INTEGER,
-            defaultValue: 56,
+            defaultValue: 20,
         },
     });
     Plant.associate = (models) => {

@@ -67,7 +67,7 @@
   position: absolute;
   overflow: hidden;
   /* transform: rotate(45deg); */
-  -webkit-filter: drop-shadow(10px 10px 10px #c5c5c5);
+  filter: drop-shadow(10px 10px 10px #c5c5c5);
   animation: swing 3s infinite ease-in-out;
 }
 
@@ -195,6 +195,14 @@
   padding-left: 0;
 }
 
+
+#plantName {
+  display: inline;
+}
+
+.card-stacked {
+  opacity: .5;
+}
 
 /* li{
   text-decoration: none;

@@ -18,6 +18,10 @@ $(document).ready(function () {
         }
     });
 
+      // Button to delete plant
+$("#loadAllPlants").on("click", ".deleteBtn", deletePlant);
+
+
     $(document).on("click", "#selectPlant", function (e) {
         e.preventDefault();
         index = $(this).attr("data-id");
@@ -289,8 +293,8 @@ $(document).ready(function () {
                 .append(`
                     <div class="card horizontal data-id=${i}">
                         <div class="card-stacked" style="background-color: ${randomColor}">
-                            <div class="card-content white-text">
-                                <h3>${res[i].commonName}</h3>
+                            <div class="card-content white-text card-action">
+                                <h3 id= "plantName">${res[i].commonName}</h3><a href = "#" class = "deleteBtn white-text" data="${name}" data-id="${id}">	delete plant</a>
                                 <p><span class="new badge" data-badge-caption="water"></span>${res[i].water_frequency} days</p>
                                 <br>
                                 <p><span class="new badge" data-badge-caption="prune"></span>${res[i].prune_frequency} days</p>
@@ -306,15 +310,17 @@ $(document).ready(function () {
         });
     }
 
-    // $.ajax({
-    //     type: "POST",
-    //     url: "/plant/new",
-    // }).then((plant) => {
-    //     console.log(plant);
-    //     const waterFrequency = plant.water_frequency;
-    //     const pruneFrequency = plant.prune_frequency;
-    //     const rotateFrequency = plant.rotate_frequency;
-    //     const createdDate = plant.createdAt;
-    // });
+
+    function deletePlant() {
+        console.log("clicked")
+        var id = $(this).data("id");
+        $.ajax({
+            method: "DELETE",
+            url: "/plant/delete/" + id,
+        }).then(() => {
+        location.reload();
+        });
+    }
+
 
 });
