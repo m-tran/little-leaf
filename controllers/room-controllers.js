@@ -69,7 +69,8 @@ module.exports = {
       })
       .then(() => {
         res.send("deleted");
-      }).catch((err) => res.send(err))
+      }).catch((err) => console.log(err))
+      // console.log(err)
     }  else {
       res.send("error");
     }
