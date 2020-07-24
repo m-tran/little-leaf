@@ -286,7 +286,7 @@ $("#loadAllPlants").on("click", ".deleteBtn", deletePlant);
             url: `/plant/all/${room}`,
         }).then((res) => {
             console.log(res);
-            $("#loadAllPlants").append(`<h2>Plants for ${name}</h2>`)
+            $("#loadAllPlants").append(`<h3>Plants for ${name}</h3>`)
             for (let i=0; i < res.length; i++) {
                 randomColor = getRandomColor();
                 $("#loadAllPlants")
@@ -294,14 +294,11 @@ $("#loadAllPlants").on("click", ".deleteBtn", deletePlant);
                     <div class="card horizontal data-id=${i}">
                         <div class="card-stacked" style="background-color: ${randomColor}">
                             <div class="card-content white-text card-action">
-                                <h3 id= "plantName">${res[i].commonName}</h3><a href = "#" class = "deleteBtn white-text" data="${name}" data-id="${id}">	delete plant</a>
-                                <p><span class="new badge" data-badge-caption="water"></span>${res[i].water_frequency} days</p>
+                                <h4 id= "plantName">${res[i].commonName}</h4><a href = "#" class = "deleteBtn white-text" data="${name}" data-id="${id}">delete plant</a>
                                 <br>
-                                <p><span class="new badge" data-badge-caption="prune"></span>${res[i].prune_frequency} days</p>
                                 <br>
-                                <p><span class="new badge" data-badge-caption="rotate"></span>${res[i].rotate_frequency} days</p>
-                                <br>
-                                <p><span class="new badge" data-badge-caption="repot"></span>${res[i].repot_frequency} repot</p>
+                                <h5>frequencies</h5>
+                                <p> water ${res[i].water_frequency} days, prune ${res[i].prune_frequency} days, rotate ${res[i].rotate_frequency} days, repot ${res[i].repot_frequency} days  </p>
                             </div>
                         </div>
                     </div>
