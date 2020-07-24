@@ -100,25 +100,25 @@ module.exports = {
           .then(() => {
             console.log("here");
             const intervalToStop = waterSchedule.find(
-              (obj) => obj.id == req.body.id
+              (obj) => obj.id == req.params.id
             );
             clearInterval(intervalToStop.interval);
             console.log(intervalToStop);
 
             const intervalToStop2 = pruneSchedule.find(
-              (obj) => obj.id == req.body.id
+              (obj) => obj.id == req.params.id
             );
             clearInterval(intervalToStop2.interval);
             console.log(intervalToStop2);
 
             const intervalToStop3 = rotateSchedule.find(
-              (obj) => obj.id == req.body.id
+              (obj) => obj.id == req.params.id
             );
             clearInterval(intervalToStop3.interval);
             console.log(intervalToStop3);
 
             const intervalToStop4 = repotSchedule.find(
-              (obj) => obj.id == req.body.id
+              (obj) => obj.id == req.params.id
             );
             clearInterval(intervalToStop4.interval);
             console.log(intervalToStop4);
@@ -142,7 +142,7 @@ const plantIntervals = (req, res) => {
     prune_frequency: req.body.prune_frequency,
     rotate_frequency: req.body.rotate_frequency,
     repot_frequency: req.body.repot_frequency,
-    id: count,
+    id: newPlant.dataValues.id,
   };
   userPlants.push(Plant1);
   // res.send(userPlants);
@@ -153,23 +153,23 @@ const plantIntervals = (req, res) => {
     () => waterPlant(req.user.email, newPlant.commonName),
     Math.min(dayInMilliseconds * newPlant.water_frequency, Math.pow(2, 31) - 1)
   );
-  waterSchedule.push({ id: count, interval: waterTimer });
+  waterSchedule.push({ id: newPlant.dataValues.id, interval: waterTimer });
 
   const pruneTimer = setInterval(
     () => prunePlant(req.user.email, newPlant.commonName),
     Math.min(dayInMilliseconds * newPlant.prune_frequency, Math.pow(2, 31) - 1)
   );
-  pruneSchedule.push({ id: count, interval: pruneTimer });
+  pruneSchedule.push({ id: newPlant.dataValues.id, interval: pruneTimer });
 
   const rotateTimer = setInterval(
     () => rotatePlant(req.user.email, newPlant.commonName),
     Math.min(dayInMilliseconds * newPlant.rotate_frequency, Math.pow(2, 31) - 1)
   );
-  rotateSchedule.push({ id: count, interval: rotateTimer });
+  rotateSchedule.push({ id: newPlant.dataValues.id, interval: rotateTimer });
 
   const repotTimer = setInterval(
     () => repotPlant(req.user.email, newPlant.commonName),
     Math.min(dayInMilliseconds * newPlant.repot_frequency, Math.pow(2, 31) - 1)
   );
-  repotSchedule.push({ id: count, interval: repotTimer });
+  repotSchedule.push({ id: newPlant.dataValues.id, interval: repotTimer });
 };

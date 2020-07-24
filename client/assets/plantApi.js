@@ -286,15 +286,16 @@ $("#loadAllPlants").on("click", ".deleteBtn", deletePlant);
             url: `/plant/all/${room}`,
         }).then((res) => {
             console.log(res);
+            $("#loadAllPlants").empty();
             $("#loadAllPlants").append(`<h3>Plants for ${name}</h3>`)
             for (let i=0; i < res.length; i++) {
                 randomColor = getRandomColor();
                 $("#loadAllPlants")
                 .append(`
-                    <div class="card horizontal data-id=${i}">
+                    <div class="card horizontal data-id=${res[i].id}">
                         <div class="card-stacked" style="background-color: ${randomColor}">
                             <div class="card-content white-text card-action">
-                                <h4 id= "plantName">${res[i].commonName}</h4><a href = "#" class = "deleteBtn white-text" data="${name}" data-id="${id}">delete plant</a>
+                                <h4 id= "plantName">${res[i].commonName}</h4><a href = "#" class = "deleteBtn white-text" data="${name}" data-id="${res[i].id}">delete plant</a>
                                 <br>
                                 <br>
                                 <h5>frequencies</h5>
@@ -315,7 +316,7 @@ $("#loadAllPlants").on("click", ".deleteBtn", deletePlant);
             method: "DELETE",
             url: "/plant/delete/" + id,
         }).then(() => {
-        location.reload();
+      pageLoad();
         });
     }
 
