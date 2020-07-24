@@ -204,6 +204,10 @@
   opacity: .5;
 }
 
+.roomImage {
+  height: 200px;
+}
+
 /* li{
   text-decoration: none;
   list-style: none;
