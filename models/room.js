@@ -29,12 +29,11 @@ module.exports = (sequelize, DataTypes) => {
     Room.associate = (models) => {
         Room.belongsTo(models.User, {
         foreignKey: {allowNull: false},
+        onDelete: "cascade",
         });
     }
     Room.associate = (models) => {
-        Room.hasMany(models.Plant, {
-        onDelete: "cascade",
-            });
+        Room.hasMany(models.Plant);
         
     };
     
