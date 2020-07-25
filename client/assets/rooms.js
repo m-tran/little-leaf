@@ -155,16 +155,17 @@ $("#newRoom").on("click", ".buttondelete", deleteRoom);
   };
 
 
-// var random_images_array = ["pic1.png", "pic2.png", "pic3.png", "pic4.png", "BT7B0071.png"];
+var random_images_array = ["pic1.png", "pic2.png", "pic3.png", "pic4.png", "BT7B0071.png"];
 
-//         function getRandomImage(imgAr, path) {
-//             // path ='./pictures/'; // default path here
-//             var num = Math.floor( Math.random() * imgAr.length );
-//             var img = imgAr[ num ];
-//             var imgStr = '<img src="' + path + img + '" alt = "">';
-//             document.write(imgStr); document.close();
-//         }
-
+function getRandomImage() {
+  var path ='http://localhost:3006/assets/pictures/'; // default path here
+  var num = Math.floor( Math.random() * random_images_array.length );
+  var img = random_images_array[ num ];
+  var imgStr = path + img;
+   //document.write(imgStr); document.close();
+   console.log(imgStr);
+  return imgStr;
+}
 
 
   getRooms().then((res) => {
@@ -196,26 +197,29 @@ $("#newRoom").on("click", ".buttondelete", deleteRoom);
           });
     });
   }
+
+
+  function makeCard(name, size, id) {
+    return  `<div class="col s12 m2">
+    <div class="card horizontal">
+        <div class="card-image">
+        <img src="${getRandomImage()}" />
+        <div class="card-stacked">
+            <div class="card-content">
+            <p>room name: ${name}</p>
+            <p> size: ${size} sq ft</p> 
+            </div>
+            <div class="card-action">
+            <a href="/myschedule">view schedule</a>
+            <a href="/myplants" id="viewPlants" data="${name}" data-id="${id}">view plants</a>
+            <a href = "#" class = "buttondelete" data="${name}" data-id="${id}">delete room</a>
+            </div>
+        </div>
+        </div>
+    </div>`
+  }
+
+
 }); //end of document.ready
 
 
-function makeCard(name, size, id) {
-  return  `<div class="col s12 m2">
-  <div class="card horizontal">
-      <div class="card-image">
-          <img src="https://cdn.vox-cdn.com/thumbor/QRC-K6S73KSM0XVNvrQhicj9g_E=/0x0:2000x1333/1200x800/filters:focal(840x507:1160x827)/cdn.vox-cdn.com/uploads/chorus_image/image/65377475/BT7B0071.7.jpg">
-      </div>
-      <div class="card-stacked">
-          <div class="card-content">
-          <p>room name: ${name}</p>
-          <p> size: ${size} sq ft</p> 
-          </div>
-          <div class="card-action">
-          <a href="/myschedule">view schedule</a>
-          <a href="/myplants" id="viewPlants" data="${name}" data-id="${id}">view plants</a>
-          <a href = "#" class = "buttondelete" data="${name}" data-id="${id}">delete room</a>
-          </div>
-      </div>
-      </div>
-  </div>`
-}
