@@ -155,10 +155,10 @@ $("#newRoom").on("click", ".buttondelete", deleteRoom);
   };
 
 
-var random_images_array = ["pic1.png", "pic2.png", "pic3.png", "pic4.png", "BT7B0071.png"];
+var random_images_array = ["pic1.png", "pic2.png", "pic3.png", "pic4.png", "pic5.png"];
 
 function getRandomImage() {
-  var path ='http://localhost:3006/assets/pictures/'; // default path here
+  var path ='/assets/pictures/'; // default path here
   var num = Math.floor( Math.random() * random_images_array.length );
   var img = random_images_array[ num ];
   var imgStr = path + img;
@@ -200,10 +200,11 @@ function getRandomImage() {
 
 
   function makeCard(name, size, id) {
-    return  `<div class="col s12 m2">
+    return  `<div class="col s12 m7">
     <div class="card horizontal">
         <div class="card-image">
         <img src="${getRandomImage()}" />
+        </div>
         <div class="card-stacked">
             <div class="card-content">
             <p>room name: ${name}</p>
@@ -215,7 +216,7 @@ function getRandomImage() {
             <a href = "#" class = "buttondelete" data="${name}" data-id="${id}">delete room</a>
             </div>
         </div>
-        </div>
+        
     </div>`
   }
 
