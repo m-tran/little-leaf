@@ -161,8 +161,9 @@ function getRandomImage() {
   var path ='http://localhost:3006/assets/pictures/'; // default path here
   var num = Math.floor( Math.random() * random_images_array.length );
   var img = random_images_array[ num ];
-  var imgStr = '<img src="' + path + img + '" alt = "">';
+  var imgStr = path + img;
    //document.write(imgStr); document.close();
+   console.log(imgStr);
   return imgStr;
 }
 
@@ -202,7 +203,7 @@ function getRandomImage() {
     return  `<div class="col s12 m2">
     <div class="card horizontal">
         <div class="card-image">
-        <img src="${getRamdomImage()}" />
+        <img src="${getRandomImage()}" />
         <div class="card-stacked">
             <div class="card-content">
             <p>room name: ${name}</p>
